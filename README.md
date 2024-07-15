@@ -4,11 +4,15 @@ Ce site regroupe l'ensemble des documents que j'utilise dans mes cours.
 
 ## IUT Paris Rives de Seine - Département Science des Données
 
-- [BUT SD 3ème année - Parcours VCOD - NoSQL](but3--vcod--fa--nosql)
+- **BUT SD 2ème année - Parcours VCOD** :
+    - [Collecte automatisée de données web - FI](but2--vcod--collecte-fi)
+    - [Collecte automatisée de données web - FA](but2--vcod--collecte-fa)
 
-- [BUT SD 3ème année - Parcours EMS - NoSQL](but3--ems--fa--nosql)
+- **BUT SD 3ème année - Parcours VCOD** :
+    - [Programmation web pour la visualisation](but3--vcod--dataviz-web)
 
-- [DU Analyste Data Science - Python et MongoDB](du-ads--python-mongo)
+- **DU Analyste Data Science** :
+    - [Python et MongoDB](du-ads--python-mongo)
 
 ## UFR Math-Info - Master Informatique - Parcours DCI
 
@@ -24,6 +28,10 @@ Ce site regroupe l'ensemble des documents que j'utilise dans mes cours.
 
 - [Initiation à la Statistique]()
 - [Analyse de données]()
+
+## IUT de Cherbourg
+
+- [BUT TC 2ème année - Statistiques](cherbourg--but2-tc--stats)
 
 
 <!--
@@ -52,9 +60,6 @@ Ce site regroupe l'ensemble des documents que j'utilise dans mes cours pour l'an
 - [Mastère Science des Données - Ingénierie des Données](insa--m2-esd--ml)
 
 
-## IUT de Cherbourg
-
-- [BUT TC 2ème année - Statistiques](cherbourg--but2-tc--stats)
 
 > EN CONSTRUCTION
 -->
