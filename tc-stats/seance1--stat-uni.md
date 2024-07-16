@@ -229,12 +229,12 @@ $$
     f_j^{cum} = \sum_{k=1}^j f_k
 $$
 
-- Frénque cumulée : \\(m_1\\) et \\(m_j\\)
+- Fréquence cumulée : somme des fréquences des modalités de \\(m_1\\) à \\(m_j\\)
 $$
-    truc = \frac{bidule}{machin}
+    n_j^{cum} = \sum_{k=1}^j n_k
 $$
 $$
-    autre = chose \times plein
+    f_j^{cum} = \sum_{k=1}^j f_k
 $$
 
 ---
