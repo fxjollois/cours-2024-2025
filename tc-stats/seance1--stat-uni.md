@@ -10,7 +10,7 @@ class: title, inverse, center, middle
 
 ---
 
-## Qu'est-ce que la statistique ?
+# Qu'est-ce que la statistique ?
 
 - Ensemble de méthodes permettant de décrire et d'analyser des observations (communément appelées **données** de nos jours)
 
@@ -23,23 +23,6 @@ class: title, inverse, center, middle
   - ...
 
 - Essor important avec le développement des outils informatiques et du web
-
-
----
-
-## Données `tips`
-
-Serveur notant des infos sur chaque table dont le pourboire
-
-- Exemple utilisé dans ce document
-- 10 premières lignes
-
-```{r donnees}
-data = read_delim("tips.csv", delim = ",")
-kable(data %>% slice(1:10)) %>%
-  kable_styling(position = "center")
-```
-
 
 ---
   
@@ -55,7 +38,6 @@ kable(data %>% slice(1:10)) %>%
   - Chaque ligne représente un individu
   - Chaque colonne représente une variable (ou attribut)
   - C'est ce qu'on fait classiquement dans un tableur de type Excel
-
 
 ---
 
@@ -145,6 +127,12 @@ On parle de **Statistique descriptive** ou **exploratoire**
 
 ---
 
+class: inverse, middle, center
+
+# Variable quantitative
+
+---
+
 ## Variable quantitative
   
 - Moyenne $\bar{x}$
@@ -174,31 +162,6 @@ $$
 $$
   - Quartiles $Q1$ et $Q3$ : respectivement 25% et 75% (utilisés dans les boîtes à moustaches)
   - Quantiles usuels : $.01$ (1%), $.1$ (10%), $.9$ (90%) et $.99$ (99%)
-  
-
----
-
-## Variable quantitative
-
-Exemple : montant payé par table
-
-### Représentation numérique
-
-```{r qt-num}
-x = data$total_bill
-tib = tibble(
-  Statistique = c("Moyenne", "Ecart-Type", "Variance", "Médiane", "Minimum", "Maximum"),
-  Valeur = sapply(c(mean, sd, var, median, min, max), function(f) { f(x, na.rm = TRUE) })
-)
-kable(tib, digits = 2) %>%
-  kable_styling(position = "center")
-```
-
-### A regarder aussi :
-
-- Si divergence moyenne et médiane, valeurs extrêmes présentes
-  - Déséquilibre de la répartition des valeurs 
-- Présence de valeurs aberrantes (nommés **outliers**)
 
 ---
 
@@ -208,15 +171,55 @@ kable(tib, digits = 2) %>%
   
 Histogramme 
 
-```{r qt-graph-hist}
-ggplot(data, aes(total_bill)) + 
-  geom_histogram(fill = "steelblue") + 
-  geom_vline(xintercept = mean(data$total_bill), alpha = .5) +
-  annotate("text", x = mean(data$total_bill), y = 20, label = "Moyenne", hjust = -.1, size = 7) +
-  labs(y = "", x = "") +
-  theme_minimal() + 
-  theme(text = element_text(size = 25))
-```
+<?xml version="1.0"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="361.35" height="289.08" viewBox="0,0,361.35,289.08">
+<desc>R SVG Plot!</desc>
+<rect width="100%" height="100%" style="fill:#FFFFFF"/>
+<line x1="29.12" y1="264.08" x2="340.56" y2="264.08" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="29.12" y1="264.08" x2="29.12" y2="268.25" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="81.03" y1="264.08" x2="81.03" y2="268.25" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="132.94" y1="264.08" x2="132.94" y2="268.25" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="184.84" y1="264.08" x2="184.84" y2="268.25" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="236.75" y1="264.08" x2="236.75" y2="268.25" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="288.65" y1="264.08" x2="288.65" y2="268.25" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="340.56" y1="264.08" x2="340.56" y2="268.25" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<text transform="translate(24.96,279.91) "  style="font-size:10" >-3</text>
+<text transform="translate(76.45,279.91) "  style="font-size:10" >-2</text>
+<text transform="translate(128.35,279.91) "  style="font-size:10" >-1</text>
+<text transform="translate(182.09,279.91) "  style="font-size:10" >0</text>
+<text transform="translate(234.00,279.91) "  style="font-size:10" >1</text>
+<text transform="translate(285.90,279.91) "  style="font-size:10" >2</text>
+<text transform="translate(337.81,279.91) "  style="font-size:10" >3</text>
+<line x1="16.67" y1="264.08" x2="16.67" y2="35.73" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="16.67" y1="264.08" x2="12.50" y2="264.08" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="16.67" y1="218.41" x2="12.50" y2="218.41" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="16.67" y1="172.74" x2="12.50" y2="172.74" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="16.67" y1="127.07" x2="12.50" y2="127.07" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="16.67" y1="81.40" x2="12.50" y2="81.40" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<line x1="16.67" y1="35.73" x2="12.50" y2="35.73" style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+<text transform="translate(9.17,266.83)  rotate(-90)"  style="font-size:10" >0</text>
+<text transform="translate(9.17,221.16)  rotate(-90)"  style="font-size:10" >5</text>
+<text transform="translate(9.17,178.24)  rotate(-90)"  style="font-size:10" >10</text>
+<text transform="translate(9.17,132.57)  rotate(-90)"  style="font-size:10" >15</text>
+<text transform="translate(9.17,86.90)  rotate(-90)"  style="font-size:10" >20</text>
+<text transform="translate(9.17,41.23)  rotate(-90)"  style="font-size:10" >25</text>
+<polygon points="29.12 , 264.08 29.12 , 254.95 55.08 , 254.95 55.08 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="55.08 , 264.08 55.08 , 245.81 81.03 , 245.81 81.03 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="81.03 , 264.08 81.03 , 218.41 106.98 , 218.41 106.98 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="106.98 , 264.08 106.98 , 154.47 132.94 , 154.47 132.94 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="132.94 , 264.08 132.94 , 172.74 158.89 , 172.74 158.89 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="158.89 , 264.08 158.89 , 90.54 184.84 , 90.54 184.84 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="184.84 , 264.08 184.84 , 17.47 210.79 , 17.47 210.79 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="210.79 , 264.08 210.79 , 145.34 236.75 , 145.34 236.75 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="236.75 , 264.08 236.75 , 209.28 262.70 , 209.28 262.70 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="262.70 , 264.08 262.70 , 227.54 288.65 , 227.54 288.65 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="288.65 , 264.08 288.65 , 264.08 314.61 , 264.08 314.61 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polygon points="314.61 , 264.08 314.61 , 254.95 340.56 , 254.95 340.56 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#ADD8E6;stroke-opacity:1.000000;fill-opacity:1.000000" />
+<polyline points="16.67 , 264.08 353.02 , 264.08 353.02 , 8.33 16.67 , 8.33 16.67 , 264.08 " style="stroke-width:1;stroke:#000000;fill:#000000;stroke-opacity:1.000000;fill-opacity:0.000000"/>
+</svg>
+
+[Par Jkv — Travail personnel, Domaine public](https://commons.wikimedia.org/w/index.php?curid=1886663)
+
 
 ---
 
@@ -226,14 +229,21 @@ ggplot(data, aes(total_bill)) +
   
 Boîte à moustaches
 
-```{r qt-graph-box}
-ggplot(data, aes(total_bill, "")) + 
-  geom_boxplot(fill = "steelblue", outlier.alpha = 0.5) + 
-  labs(y = "", x = "") +
-  theme_minimal() + 
-  theme(text = element_text(size = 25))
-```
+![](https://upload.wikimedia.org/wikipedia/commons/9/99/Boite_a_moustaches.png)
 
+- Moustache au min et au max OU à 1.5 fois la distance interquartile ($Q1-Q3$) des quantiles $Q1$ et $Q3$
+
+[Par HB sur Wikipédia français — Transféré de fr.wikipedia à Commons par Korrigan utilisant CommonsHelper., Domaine public](https://commons.wikimedia.org/w/index.php?curid=4861114)
+
+---
+
+## Variable quantitative
+
+A quoi doit-on faire attention :
+
+- Si divergence moyenne et médiane, valeurs extrêmes présentes
+  - Déséquilibre de la répartition des valeurs 
+- Présence de valeurs aberrantes (nommés **outliers**)
 
 ---
 
