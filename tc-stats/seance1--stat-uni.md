@@ -1,0 +1,604 @@
+---
+layout: slides
+---
+
+class: title, inverse, center, middle
+
+# Rappel de Statistique
+## FX Jollois
+### BUT TC - 2ème année
+
+---
+
+## Qu'est-ce que la statistique ?
+
+- Ensemble de méthodes permettant de décrire et d'analyser des observations (communément appelées **données** de nos jours)
+
+- Utilisé maintenant dans tous les secteurs d'activités
+  - Economie et finance : marketing, sondages...
+  - Industrie : fiabilité, contrôle qualité...
+  - Santé : recherche médicale, gestion des hôpitaux...
+  - Environnement : prévisions climatiques et météorologiques, pollution...
+  - Web : réseaux, publicité...
+  - ...
+
+- Essor important avec le développement des outils informatiques et du web
+
+
+---
+
+## Données `tips`
+
+Serveur notant des infos sur chaque table dont le pourboire
+
+- Exemple utilisé dans ce document
+- 10 premières lignes
+
+```{r donnees}
+data = read_delim("tips.csv", delim = ",")
+kable(data %>% slice(1:10)) %>%
+  kable_styling(position = "center")
+```
+
+
+---
+  
+## Définitions de base
+  
+- **Population** : ensemble d'entités (personnes, objets, \ldots) étudiées
+- **Individu** (ou *unité statistique*) : entité étudiée
+- **Variable** : caractéristique étudiée sur chaque individu
+- **Observation** : mesure 
+- **Série statistique** : série d'observations recueillies sur les individus
+- **Tableau de données** : stockage de la série statistique
+  - Individus croisant des variables 
+  - Chaque ligne représente un individu
+  - Chaque colonne représente une variable (ou attribut)
+  - C'est ce qu'on fait classiquement dans un tableur de type Excel
+
+
+---
+
+## Type de variables
+  
+### Variable quantitative
+  
+- Caractéristiques numériques : opérations de type somme ayant un sens
+
+### Continue
+  
+- Mesurable
+- Ex : taille, poids, durée...
+
+### Discrète
+  
+- Dénombrable ou mesurable en espace fini
+- Ex : âge, quantité en stock...
+
+---
+
+## Type de variables
+  
+### Variable qualitative
+  
+- Caractéristiques non numériques : opérations de type somme n'ayant pas de sens
+- Valeurs possibles : **Modalités** (ou catégories)
+
+### Nominale
+
+- Modalités n'ayant pas de lien entre elles (Ex : couleur des yeux, sexe...)
+- Cas particulier *Binaire* : 2 valeurs possibles uniquement (Ex : oui/non, présence/absence...)
+
+### Ordinale 
+
+- Modalités devant être triées dans un ordre spécifique (Ex : mois, sentiment...)
+
+
+---
+
+## Transformation de variable
+  
+### Quantitative en qualitative
+  
+- Courant de transformer une variable **quantitative** en variable **qualitative ordinale**
+- Ex : Catégorie d'âge, Nombre d'enfants du foyer, ...
+
+- Différents problèmes se posent
+- Combien de modalités (*intervalles* ici) ? 
+  - Taille identique des intervalles ou variable (*amplitude*) ?
+  - Seuils des intervalles ?
+  
+  
+---
+
+## Transformation de variable
+  
+### Standardisation ou normalisation d'une variable quantitative
+  
+- Obligatoire pour l'utilisation de certaines méthodes statistiques
+
+- 2 opérations sont réalisées :
+  - Centrage : on retire la moyenne à chaque valeur
+  - Réduction : on divise par la variance
+$$
+  x_{norm} = \frac{x - \bar{x}}{\sigma^2}
+$$
+
+
+---
+
+## Premier problème : décrire les données
+
+On parle de **Statistique descriptive** ou **exploratoire**
+
+### Objectifs 
+
+- Résumer l'information contenue dans les données
+- Faire ressortir des éléments intéressants
+- Poser des hypothèses sur des phénomènes potentiellement existant dans les données
+
+### Outils
+  
+- Description numérique (moyenne, occurrences, corrélation...)
+- Description graphique (histogramme, diagramme en barres, nuage de points...)
+
+
+---
+
+## Variable quantitative
+  
+- Moyenne $\bar{x}$
+$$
+  \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i
+$$
+  
+- Variance (et écart-type $\sigma(x)$)
+$$
+  \sigma^2(x) = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2
+$$
+  
+---
+
+## Variable quantitative
+  
+- Médiane $med(x)$ : valeur permettant de séparer les observations ordonnées prises par $x$ en 2 groupes de même taille
+$$
+  med(x) = m | P(x \le m) = .5
+$$
+  - si $n$ est impair : $med(x) = x_{(n + 1) / 2}$
+  - si $n$ est pair : $med(x) = \frac{x_{n/2} + x_{n/2 + 1}}{2}$
+  
+- Quantile $q_p(x)$ : valeur pour laquelle une proportion $p$ d'observations sont inférieures
+$$
+  q_p(x) = q | P(x \le q) = p
+$$
+  - Quartiles $Q1$ et $Q3$ : respectivement 25% et 75% (utilisés dans les boîtes à moustaches)
+  - Quantiles usuels : $.01$ (1%), $.1$ (10%), $.9$ (90%) et $.99$ (99%)
+  
+
+---
+
+## Variable quantitative
+
+Exemple : montant payé par table
+
+### Représentation numérique
+
+```{r qt-num}
+x = data$total_bill
+tib = tibble(
+  Statistique = c("Moyenne", "Ecart-Type", "Variance", "Médiane", "Minimum", "Maximum"),
+  Valeur = sapply(c(mean, sd, var, median, min, max), function(f) { f(x, na.rm = TRUE) })
+)
+kable(tib, digits = 2) %>%
+  kable_styling(position = "center")
+```
+
+### A regarder aussi :
+
+- Si divergence moyenne et médiane, valeurs extrêmes présentes
+  - Déséquilibre de la répartition des valeurs 
+- Présence de valeurs aberrantes (nommés **outliers**)
+
+---
+
+## Variable quantitative
+  
+### Représentation graphique 
+  
+Histogramme 
+
+```{r qt-graph-hist}
+ggplot(data, aes(total_bill)) + 
+  geom_histogram(fill = "steelblue") + 
+  geom_vline(xintercept = mean(data$total_bill), alpha = .5) +
+  annotate("text", x = mean(data$total_bill), y = 20, label = "Moyenne", hjust = -.1, size = 7) +
+  labs(y = "", x = "") +
+  theme_minimal() + 
+  theme(text = element_text(size = 25))
+```
+
+---
+
+## Variable quantitative
+  
+### Représentation graphique 
+  
+Boîte à moustaches
+
+```{r qt-graph-box}
+ggplot(data, aes(total_bill, "")) + 
+  geom_boxplot(fill = "steelblue", outlier.alpha = 0.5) + 
+  labs(y = "", x = "") +
+  theme_minimal() + 
+  theme(text = element_text(size = 25))
+```
+
+
+---
+
+## Variable qualitative
+  
+### Nominale
+  
+- Modalités de la variable $x$ : $m_j$ (avec $j=1,...,p$)
+- Effectif (ou occurrences) d'une modalité $n_j$ : nombre d'individus ayant la modalité $m_j$
+  - Fréquence d'une modalité $f_j$
+$$
+f_j = \frac{n_j}{n}
+$$
+
+### Ordinale
+
+- Effectif cumulé $n_j^{cum}$ : nombre d'individus ayant une modalité entre $n_1$ et $n_j$
+  - Fréquence cumulée
+
+$$n_j^{cum} = \sum_{k=1}^j n_k \mbox{ and } f_j^{cum} = \sum_{k=1}^j f_k$$
+  
+---
+
+## Variable qualitative
+  
+Exemple : Jour de la semaine (*ordinale* de plus)
+
+### Représentation numérique
+
+```{r ql-num}
+tab = table(data$day, useNA = "ifany")
+tib = tibble(
+  Modalités = labels(tab)[[1]],
+  Effectifs = tab,
+  "Eff. cum." = cumsum(tab),
+  Fréquences = as.numeric(prop.table(tab)),
+  "Fréq. cum." = cumsum(prop.table(tab))
+)
+kable(tib, digits = 2) %>%
+  kable_styling(position = "center")
+```
+
+### A regarder aussi :
+  
+- Différence entre les proportions 
+- Si modalités peu fréquentes, regroupement de modalités à envisager
+
+---
+
+## Variable qualitative
+  
+### Représentation graphique
+  
+Diagramme en barres
+
+```{r ql-graph-bar}
+ggplot(data, aes(day, fill = day)) +
+  geom_bar(show.legend = FALSE) +
+  theme_minimal() +
+  theme(text = element_text(size = 25))
+```
+
+---
+
+## Quantitative vs quantitative
+  
+- Covariance
+$$
+  cov(x,y) = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x}) (y_i - \bar{y})
+$$
+  - Problème : non bornée et donc non exploitable
+
+- Coefficient de corrélation linéaire (de *Pearson*)
+$$
+  \rho(x,y) = \frac{cov(x,y)}{\sigma^2(x) \sigma^2(y)}
+$$
+  - Covariance des variables normalisées
+- Valeurs comprises entre -1 et 1
+  - $0$ : pas de lien linéaire (autre type de lien possible)
+  - $1$ : lien positif fort (si $x$ augmente, $y$ augmente)
+  - $-1$ : lien négatif fort (si $x$ augmente, $y$ diminue)
+
+---
+
+## Quantitative vs quantitative
+  
+Exemple : Montant de la table et Pourboire
+
+### Représentation numérique
+
+```{r qtqt-num}
+x = data$total_bill
+y = data$tip
+tib = tibble(
+  Statistique = c("Covariance", "Corrélation"),
+  Valeur = sapply(c(cov, cor), function(f) { f(x, y) })
+)
+kable(tib, digits = 2) %>%
+  kable_styling(position = "center")
+```
+
+### A regarder aussi :
+  
+- Présence d'**outliers** avec un comportement atypique
+
+---
+
+## Quantitative vs quantitative
+
+### Représentation graphique 
+Nuage de points
+
+```{r qtqt-graph}
+ggplot(data, aes(total_bill, tip)) + 
+  geom_point(color = "steelblue") + theme_minimal() +
+  theme(text = element_text(size = 25))
+```
+
+---
+
+## Anscombe
+
+La visualisation est aussi importante (voire plus) que la représentation numérique !
+
+Entre ces quatre séries :
+
+- même moyenne et même variance pour $x$ et $y$
+- même coefficient de corrélation entre les deux
+
+```{r anscombe-tab}
+a = lapply(1:4, function (i) { 
+  anscombe %>% 
+    select(ends_with(as.character(i))) %>% 
+    rename_with(function (n) { substr(n, 1, 1)}) %>%
+    mutate(id = i)
+  })
+c = sapply(a, function(df) {
+  res = c(m_x = mean(df$x), m_y = mean(df$y),
+          s_x = sd(df$x), s_y = sd(df$y),
+          cov = cov(df$x, df$y), cor = cor(df$x, df$y))
+})
+rownames(c) = c("Moyenne(x)", "Moyenne(y)", "Ecart-type(x)", "Ecart-type(y)", "Covariance", "Corrélation")
+colnames(c) = 1:4
+kable(c, digits = 2) %>%
+  kable_styling(position = "center")
+```
+
+---
+
+## Anscombe
+
+```{r anscombe-graph}
+b = Reduce(rbind, a)
+ggplot(b, aes(x, y)) +
+  geom_point(size = 4) +
+  facet_wrap(~ id) +
+  theme_minimal() +
+  theme(text = element_text(size = 25))
+```
+
+---
+
+## Qualitative vs qualitative
+
+- Table de contingence
+  - Croisement des 2 ensembles de modalités, avec le nombre d'individus ayant chaque couple de modalités
+- $n_{ij}$ : Nombre d'observations ayant la modalité $i$ pour $x$ et $j$ pour $y$
+  - $n_{i.}$ : Effectif marginal (nombre d'observations ayant la modalité $i$ pour $x$)
+- $n_{.j}$ : Effectif marginal (nombre d'observations ayant la modalité $j$ pour $y$)
+
+|      | 1 | \ldots | $j$ | \ldots | $\ell$ | Total |
+|------|---|--------|-----|--------|--------|-------|
+|    1 |
+|\ldots|
+| $i$  |   |        | $n_{ij}$ |   |        | $n_{i.}$ |
+|\ldots|
+| $k$  |
+|Total |   |        | $n_{.j}$ |   |        | $n_{..}=n$ |
+
+---
+
+## Qualitative vs qualitative
+
+- Profils lignes et colonnes
+  - Distribution d'une variable conditionnellement aux modalités de l'autre
+  
+- Profil ligne
+  - Pour une ligne $i$ : $\frac{n_{ij}}{n_{i.}}$
+  - Somme des valeurs en lignes = 100%
+
+-Profil colonne
+  - Pour une colonne $j$ : $\frac{n_{ij}}{n_{.j}}$
+  - Somme des valeurs en colonnes = 100%
+
+---
+
+## Qualitative vs qualitative
+
+Exemple : Jour de la semaine et Présence de fumeur
+
+### Représentation numérique
+
+```{r qlql-num}
+mat = table(data$day, data$smoker)
+tib = tibble(as.data.frame.matrix(mat) %>% rownames_to_column("color"))
+kable(tib) %>%
+  kable_styling(position = "center")
+```
+
+### A regarder aussi :
+
+- Couple de modalités très peu pris
+- Ici aussi, regroupement de modalités à envisager éventuellement
+
+---
+
+## Qualitative vs qualitative
+
+### Représentation graphique 
+
+```{r qtql-graph}
+ggplot(data, aes(day, fill = smoker)) +
+  geom_bar(position = "dodge", color = "black") +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() +
+  labs(y = "") +
+  theme(text = element_text(size = 25))
+```
+
+
+---
+
+## Qualitative vs qualitative
+
+### Représentation numérique
+
+Profils colonnes ici (sommes en colonnes = 100%)
+
+```{r qlql-num-2}
+matcol = prop.table(mat, margin = 2)
+tib = tibble(as.data.frame.matrix(matcol) %>% rownames_to_column("color"))
+kable(tib, digits = 2) %>%
+  kable_styling(position = "center")
+```
+
+---
+
+## Qualitative vs qualitative
+
+### Représentation graphique 
+
+Profils colonnes
+
+```{r qtql-graph-2}
+ggplot(data, aes(smoker, fill = day)) +
+  geom_bar(position = "fill", color = "black") +
+  theme_minimal() +
+  theme(text = element_text(size = 25))
+```
+
+---
+
+## Qualitative vs qualitative
+
+### Représentation numérique
+
+Profils lignes ici (sommes en lignes = 100%)
+
+```{r qlql-num-3}
+matlig = prop.table(mat, margin = 1)
+tib = tibble(as.data.frame.matrix(matlig) %>% rownames_to_column("color"))
+kable(tib, digits = 2) %>%
+  kable_styling(position = "center")
+```
+
+---
+
+## Qualitative vs qualitative
+
+### Représentation graphique 
+
+Profils lignes
+
+```{r qtql-graph-3}
+ggplot(data, aes(day, fill = smoker)) +
+  geom_bar(position = "fill", color = "black") +
+  scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() +
+  theme(text = element_text(size = 25))
+```
+
+
+---
+
+## Qualitative vs quantitative
+
+- Soit $Y$ la variable qualitative à $m$ modalités, et $X$ la variable quantitative
+- Sous-populations déterminées par les modalités de $Y$
+- Indicateurs calculés pour chaque modalité k
+
+
+$$\bar{x_j} = \frac{1}{n_j} \sum_{i | y_i = j} x_i$$
+
+$$\sigma^2(x_j) = \frac{1}{n_j} \sum {}_{i | y_i = j} (x_i - \bar{x_j})^2$$
+
+---
+
+## Qualitative vs quantitative
+
+Exemple : Montant payé et Jour de la semaine
+
+### Représentation numérique
+
+```{r qlqt-num}
+tib = data %>% 
+  group_by(day) %>% 
+  summarise(Moyenne = mean(total_bill), 
+            "Ecart-type" = sd(total_bill), 
+            "Médiane" = median(total_bill))
+kable(tib, digits = 2) %>%
+  kable_styling(position = "center")
+```
+
+### A regarder aussi :
+
+- Outliers
+
+---
+
+## Qualitative vs quantitative
+
+### Représentation graphique 
+Boîte à moustaches
+
+```{r qlqt-graph}
+ggplot(data, aes(day, total_bill, fill = day)) +
+  geom_boxplot() +
+  #scale_fill_brewer(palette = "Dark2") +
+  theme_minimal() +
+  theme(text = element_text(size = 25))
+```
+
+
+
+---
+
+## Deuxième problème : Extrapoler à partir de données
+
+On parle alors de **statistique inférentielle**
+
+### Cadre
+
+- Données issues d'un échantillon d'une population
+- Modèle probabiliste sur la population 
+- Méthodes d'échantillonnage pour choisir au mieux l'échantillon
+
+### Objectifs 
+
+- Etendre les conclusions faites sur l'échantillon à toute la population
+- Valider des hypothèses faites sur la population en analysant l'échantillon
+
+### Outils
+
+- Estimation : approximer des paramètres de la population
+- Test : valider les hypothèses
+- Modélisation : rechercher des liens entre variables
+
+
