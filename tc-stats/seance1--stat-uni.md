@@ -230,12 +230,12 @@ $$
 $$
 
 - Fréquence cumulée : somme des fréquences des modalités de \\(m_1\\) à \\(m_j\\)
-
-
 $$
-    n_j^{cum} = \sum_{k=1}^j n_k\\
+    n_j^{cum} = \sum_{k=1}^j n_k
+$$
+
+    <br>
     f_j^{cum} = \sum_{k=1}^j f_k
-$$
 
 ---
 
