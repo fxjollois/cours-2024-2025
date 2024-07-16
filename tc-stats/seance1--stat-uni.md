@@ -5,7 +5,7 @@ title: Statistique univarié
 
 class: title, inverse, center, middle
 
-# Rappel de Statistique
+# Rappel de Statistique - Univarié
 ## FX Jollois
 ### BUT TC - 2ème année
 
