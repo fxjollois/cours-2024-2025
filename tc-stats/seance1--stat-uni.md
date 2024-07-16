@@ -161,7 +161,7 @@ $$
   q_p(x) = q | P(x \le q) = p
 $$
   - Quartiles \\(Q1\\) et \\(Q3\\) : respectivement 25% et 75% (utilisés dans les boîtes à moustaches)
-  - Quantiles usuels : \\(.01 (1%), .1 (10%), .9 (90%), .99 (99%)\\)
+  - Quantiles usuels : \\(.01\\) (1%), \\(.1\\) (10%), \\(.9\\) (90%), \\(.99\\) (99%)\\)
 
 ---
 
@@ -187,7 +187,7 @@ $$
 
 ## Variable quantitative
   
-### A quoi doit-on faire attention :
+### A quoi doit-on faire attention ?
 
 - Si divergence moyenne et médiane, valeurs extrêmes présentes
   - Déséquilibre de la répartition des valeurs 
@@ -211,6 +211,10 @@ $$
     f_j = \frac{n_j}{n}
 $$
 
+---
+
+## Variable qualitative
+  
 ### Ordinale
 
 Effectif cumulé \\(n_j^{cum}\\) : nombre d'individus ayant une modalité entre \\(m_1\\) et \\(m_j\\) inclus
@@ -218,7 +222,10 @@ Effectif cumulé \\(n_j^{cum}\\) : nombre d'individus ayant une modalité entre 
 - N'a de sens que s'il y a un ordre naturel entre les modalités
 - Fréquence cumulée : somme des fréquences des modalités entre \\(m_1\\) et \\(m_j\\)
 $$
-    n_j^{cum} = \sum_{k=1}^j n_k \mbox{ and } f_j^{cum} = \sum_{k=1}^j f_k
+    n_j^{cum} = \sum_{k=1}^j n_k 
+$$
+$$
+    f_j^{cum} = \sum_{k=1}^j f_k
 $$
   
 ---
@@ -228,6 +235,8 @@ $$
 ### Diagramme en barres
 
 <svg id="monsvg" width="730" height="244"><g transform="translate(40,10)"><g transform="translate(0,204)" fill="none" font-size="10" font-family="sans-serif" text-anchor="middle"><path class="domain" stroke="currentColor" d="M0.5,6V0.5H660.5V6"></path><g class="tick" opacity="1" transform="translate(110.00000000000003,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">Fri</text></g><g class="tick" opacity="1" transform="translate(256.6666666666667,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">Sat</text></g><g class="tick" opacity="1" transform="translate(403.33333333333337,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">Sun</text></g><g class="tick" opacity="1" transform="translate(550,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">Thur</text></g></g><g fill="none" font-size="10" font-family="sans-serif" text-anchor="end"><path class="domain" stroke="currentColor" d="M-6,204.5H0.5V0.5H-6"></path><g class="tick" opacity="1" transform="translate(0,204.5)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">0</text></g><g class="tick" opacity="1" transform="translate(0,184.95977011494253)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">10</text></g><g class="tick" opacity="1" transform="translate(0,165.41954022988506)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">20</text></g><g class="tick" opacity="1" transform="translate(0,145.8793103448276)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">30</text></g><g class="tick" opacity="1" transform="translate(0,126.33908045977012)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">40</text></g><g class="tick" opacity="1" transform="translate(0,106.79885057471263)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">50</text></g><g class="tick" opacity="1" transform="translate(0,87.25862068965516)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">60</text></g><g class="tick" opacity="1" transform="translate(0,67.71839080459768)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">70</text></g><g class="tick" opacity="1" transform="translate(0,48.178160919540225)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">80</text></g><g class="tick" opacity="1" transform="translate(0,28.637931034482747)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">90</text></g><g class="tick" opacity="1" transform="translate(0,9.09770114942527)"><line stroke="currentColor" x2="-6"></line><text fill="currentColor" x="-9" dy="0.32em">100</text></g></g><rect x="73.33333333333337" width="73.33333333333333" y="166.8735632183908" height="37.126436781609186" fill="steelblue"></rect><rect x="220.00000000000003" width="73.33333333333333" y="33.99999999999999" height="170" fill="steelblue"></rect><rect x="366.6666666666667" width="73.33333333333333" y="55.49425287356321" height="148.5057471264368" fill="steelblue"></rect><rect x="513.3333333333334" width="73.33333333333333" y="82.85057471264368" height="121.14942528735632" fill="steelblue"></rect><text x="110.00000000000003" y="161.8735632183908" text-anchor="middle" fill="steelblue">19</text><text x="256.6666666666667" y="28.999999999999993" text-anchor="middle" fill="steelblue">87</text><text x="403.33333333333337" y="50.49425287356321" text-anchor="middle" fill="steelblue">76</text><text x="550" y="77.85057471264368" text-anchor="middle" fill="steelblue">62</text></g></svg>
+
+- Attention à l'ordre des barres si celui-ci a une importance
 
 ---
 
@@ -243,7 +252,7 @@ $$
 
 ## Variable qualitative
 
-### A quoi doit-on faire attention :
+### A quoi doit-on faire attention ?
   
 - Différence entre les proportions 
 - Si modalités trop peu fréquentes, regroupement de modalités à envisager
