@@ -213,7 +213,7 @@ $$
 
 ### Ordinale
 
-Effectif cumulé \( n_j^{cum} \) : nombre d'individus ayant une modalité entre \(m_1\) et \(m_j\) inclus
+Effectif cumulé \( n_j^{cum} \) : nombre d'individus ayant une modalité entre $m_1$ et \(m_j\) inclus
 
 - N'a de sens que s'il y a un ordre naturel entre les modalités
 - Fréquence cumulée : somme des fréquences des modalités entre \(m_1\) et \(m_j\)
