@@ -135,12 +135,12 @@ class: inverse, middle, center
 
 ## Variable quantitative
   
-- Moyenne \(\bar{x}\)
+- Moyenne \\(\bar{x}\\)
 $$
   \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i
 $$
   
-- Variance (et écart-type \(\sigma(x)\))
+- Variance (et écart-type \\(\sigma(x)\\))
 $$
   \sigma^2(x) = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2
 $$
@@ -149,19 +149,19 @@ $$
 
 ## Variable quantitative
   
-- Médiane \(med(x)\) : valeur permettant de séparer les observations ordonnées prises par \(x\) en 2 groupes de même taille
+- Médiane \\(med(x)\\) : valeur permettant de séparer les observations ordonnées prises par \\(x\\) en 2 groupes de même taille
 $$
   med(x) = m | P(x \le m) = .5
 $$
-  - si \(n\) est impair : \(med(x) = x_{(n + 1) / 2}\)
-  - si \(n\) est pair : \(med(x) = \frac{x_{n/2} + x_{n/2 + 1}}{2}\)
+  - si \\(n\\) est impair : \\(med(x) = x_{(n + 1) / 2}\\)
+  - si \\(n\\) est pair : \\(med(x) = \frac{x_{n/2} + x_{n/2 + 1}}{2}\\)
   
-- Quantile \(q_p(x)\) : valeur pour laquelle une proportion \(p\) d'observations sont inférieures
+- Quantile \\(q_p(x)\\) : valeur pour laquelle une proportion \\(p\\) d'observations sont inférieures
 $$
   q_p(x) = q | P(x \le q) = p
 $$
-  - Quartiles \(Q1\) et \(Q3\) : respectivement 25% et 75% (utilisés dans les boîtes à moustaches)
-  - Quantiles usuels : .01 (1%), .1 (10%), .9 (90%) et .99 (99%)
+  - Quartiles \\(Q1\\) et \\(Q3\\) : respectivement 25% et 75% (utilisés dans les boîtes à moustaches)
+  - Quantiles usuels : \\(.01 (1%), .1 (10%), .9 (90%), .99 (99%)\\)
 
 ---
 
@@ -181,7 +181,7 @@ $$
 
 <svg id="monsvg" width="730" height="244"><g transform="translate(40,10)"><g transform="translate(0,204)" fill="none" font-size="10" font-family="sans-serif" text-anchor="middle"><path class="domain" stroke="currentColor" d="M0.5,6V0.5H660.5V6"></path><g class="tick" opacity="1" transform="translate(27.182027649769587,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">5</text></g><g class="tick" opacity="1" transform="translate(96.30645161290322,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">10</text></g><g class="tick" opacity="1" transform="translate(165.43087557603684,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">15</text></g><g class="tick" opacity="1" transform="translate(234.5552995391705,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">20</text></g><g class="tick" opacity="1" transform="translate(303.6797235023041,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">25</text></g><g class="tick" opacity="1" transform="translate(372.8041474654378,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">30</text></g><g class="tick" opacity="1" transform="translate(441.9285714285714,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">35</text></g><g class="tick" opacity="1" transform="translate(511.052995391705,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">40</text></g><g class="tick" opacity="1" transform="translate(580.1774193548387,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">45</text></g><g class="tick" opacity="1" transform="translate(649.3018433179724,0)"><line stroke="currentColor" y2="6"></line><text fill="currentColor" y="9" dy="0.71em">50</text></g></g><line x1="0" x2="514.6658986175114" y1="112" y2="112" stroke="black"></line><rect x="142.08525345622118" y="61" width="149.03225806451613" height="102" stroke="black" style="fill: steelblue;"></rect><line x1="0" x2="0" y1="61" y2="163" stroke="black"></line><line x1="203.57142857142858" x2="203.57142857142858" y1="61" y2="163" stroke="black"></line><line x1="514.6658986175114" x2="514.6658986175114" y1="61" y2="163" stroke="black"></line><circle cx="624.8847926267281" cy="112" r="2.04"></circle><circle cx="569.9999999999999" cy="112" r="2.04"></circle><circle cx="527.0046082949308" cy="112" r="2.04"></circle><circle cx="623.5023041474655" cy="112" r="2.04"></circle><circle cx="660" cy="112" r="2.04"></circle><circle cx="584.516129032258" cy="112" r="2.04"></circle><circle cx="518.1566820276497" cy="112" r="2.04"></circle><circle cx="553.5483870967741" cy="112" r="2.04"></circle><circle cx="625.7142857142857" cy="112" r="2.04"></circle></g></svg>
 
-- Moustache au min et max OU à 1.5 fois la distance interquartile (\(Q1-Q3\)) des quantiles \(Q1\) et \(Q3\)
+- Moustache au min et max OU à 1.5 fois la distance interquartile (\\(Q1-Q3\\)) des quantiles \\(Q1\\) et \\(Q3\\)
 
 ---
 
@@ -204,19 +204,19 @@ class: inverse, middle, center
   
 ### Nominale
   
-- Modalités de la variable \(x\) : \(m_j\) (avec \(j=1,...,p\))
-- Effectif (ou occurrences) d'une modalité \(n_j\) : nombre d'individus ayant la modalité \(m_j\)
-  - Fréquence d'une modalité \(f_j\)
+- Modalités de la variable \\(x\\) : \\(m_j\\) (avec \\(j=1,...,p\\))
+- Effectif (ou occurrences) d'une modalité \\(n_j\\) : nombre d'individus ayant la modalité \\(m_j\\)
+  - Fréquence d'une modalité \\(f_j\\)
 $$
     f_j = \frac{n_j}{n}
 $$
 
 ### Ordinale
 
-Effectif cumulé \( n_j^{cum} \) : nombre d'individus ayant une modalité entre $m_1$ et \\(m_j\\) inclus
+Effectif cumulé \\(n_j^{cum}\\) : nombre d'individus ayant une modalité entre \\(m_1\\) et \\(m_j\\) inclus
 
 - N'a de sens que s'il y a un ordre naturel entre les modalités
-- Fréquence cumulée : somme des fréquences des modalités entre \(m_1\) et \(m_j\)
+- Fréquence cumulée : somme des fréquences des modalités entre \\(m_1\\) et \\(m_j\\)
 $$
     n_j^{cum} = \sum_{k=1}^j n_k \mbox{ and } f_j^{cum} = \sum_{k=1}^j f_k
 $$
