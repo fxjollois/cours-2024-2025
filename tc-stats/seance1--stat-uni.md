@@ -222,13 +222,21 @@ Effectif cumulé \\(n_j^{cum}\\) : nombre d'individus ayant une modalité entre 
 
 - N'a de sens que s'il y a un ordre naturel entre les modalités
 - Fréquence cumulée : somme des fréquences des modalités entre \\(m_1\\) et \\(m_j\\)
-\\[
+\[
     n_j^{cum} = \sum_{k=1}^j n_k 
-\\]
+\]
 $$
     f_j^{cum} = \sum_{k=1}^j f_k
 $$
-  
+
+- Frénque cumulée : \\(m_1\\) et \\(m_j\\)
+$$
+    truc = \frac{bidule}{machin}
+$$
+$$
+    autre = chose \times plein
+$$
+
 ---
 
 ## Variable qualitative
