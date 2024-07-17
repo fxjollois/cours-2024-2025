@@ -50,6 +50,24 @@ Refondre totalement le cours en faisant 30 minutes de cours + 1h d'application �
 
 ## BUT SD Paris
 
+### Collecte de données
+
+### Programmation web pour la visualisation
+
+- streamlit ou pas ? javascript ou pas ?
+- 10 séances de 3h :
+    1. ??
+    1. ??
+    1. ??
+    1. ??
+    1. ??
+    1. ??
+    1. ??
+    1. ??
+    1. ??
+    1. Evaluation finale
+
+<!--
 ### NoSQL / SAE : organisation à revoir
 
 - TRAVAIL SUR DE GROSSES BASES DE DONNEES A PREVOIR (au moins pour test)
@@ -71,7 +89,8 @@ Refondre totalement le cours en faisant 30 minutes de cours + 1h d'application �
     - Séance 8 (RES) : TP Intégration dans un process dashboard
     - Séance 9 (RES) : TP noté 2
     - Séance 10 (SAE) : NoSQL -> SQL
-     
+-->
+
 ## INTECHMER
 
 - Horaires prévus
