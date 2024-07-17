@@ -1,6 +1,4 @@
-# Statistiques descriptives sur tableur
-
-## Bivarié
+# Statistiques descriptives sur tableur - Bivarié
 
 Nous allons continuer de travailler sur les données contenu dans le fichier `tips`, dont voici les versions initiales si besoin :
 
@@ -115,4 +113,4 @@ Nous ne pouvons malheureusement pas faire de boîtes à moustaches. Toutefois, n
 
 ## Compléments
 
-Compléter l'analyse à chaque variable pas encore analysée et regarder tous les liens possibles avec le montant d'une part, et avec le pourboire d'autre part.
+Regarder tous les liens possibles avec le montant d'une part, et avec le pourboire d'autre part.
