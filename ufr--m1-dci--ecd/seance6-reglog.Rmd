@@ -1,0 +1,629 @@
+---
+title: "Extraction de connaissances à partir de données structurées et non structurées"
+subtitle: "Séance 6 : Modélisation supervisée via régression"
+output: 
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "../remarkjs-v2.css"]
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, fig.align = "center", message = FALSE, warning = FALSE)
+library(kableExtra)
+library(tidyverse)
+```
+
+
+## Introduction
+
+- Modèle linéaire
+  - Régression multiple
+
+- Modèle linéaire général
+  - Limites du modèle linéaire
+  - Solution adoptée
+
+- Régression logistique
+  - Pourquoi ?
+  
+
+---
+class: center, middle, section
+## Régression linéraire
+
+---
+### But de la régression
+
+- Corrélation : liaison *symétrique* entre deux variables
+
+- Rôle pas forcément symétrique (entre taille et poids, par exemple)
+  - Poids : variable **dépendante** (dénommée souvent $Y$)
+  - Âge : variable **explicative** (dénommée souvent $X$)
+  - Le poids est fonction de l'âge (et non l'inverse)
+
+- Quelle est la relation de dépendance de $Y$ par rapport à $X$ ?
+
+- Recherche d'une **régression** de $Y$ en fonction de $X$
+
+
+---
+### Exemple
+
+```{r exemple-lm}
+x = runif(100)
+y = 3 * x - 2 + rnorm(100, sd = .5)
+
+ggplot(data = NULL, aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  theme_minimal()
+```
+
+
+
+---
+### Description
+
+- Trois fonctions essentielles de la régression
+  - Décrire la façon dont $Y$ est liée à $X$
+	- Tester l'existence de cette liaison
+	- Estimer une valeur de $Y$ pour une valeur de $X$ donnée
+
+- Obtenir les valeurs de l'équation $Y = bX + a$
+	- $b$ : pente de la droite
+	- $a$ : ordonnée à l'origine
+
+- Minimisation de la somme des carrés des distances entre les points et la droite
+
+
+---
+### Calcul et test
+
+- *Droite des moindres carrés* appelée aussi droite de régression
+
+- Pente $b$ fournie par le rapport $\frac{cov(XY)}{var(X)} = \frac{\sum xy}{\sum x^2}$
+- Coordonnée à l'origine $a$ obtenue avec $\mu_y - b \hat \mu_x X$
+- Passe par le point $(\mu_x, \mu_y)$ (point moyen)
+
+- Si $X$ et $Y$ non liée, droite horizontale avec pente nulle - $b = 0$
+
+- Sous $H_0$, le rapport $\frac{|b - 0|}{\sigma_b}$ suit une loi $T$ de Student - $ddl = n-2$
+
+- Test de nullité de la pente $b$ et de $R^2$	
+
+- Estimation d'une valeur de $Y$ obtenue grâce à la formule $bx + a$ (avec un intervalle de confiance)
+
+
+---
+### Exemple
+
+```{r exemple-lm123-graph}
+df = data.frame(x = x, y1 = y, y2 = -2 * x + 1 + rnorm(100, sd = .5), y3 = rnorm(100))
+ggplot(data = pivot_longer(df, cols = starts_with("y")), aes(x, value, col = name)) +
+  geom_point(show.legend = FALSE) +
+  geom_smooth(method = "lm", se = FALSE, show.legend = FALSE) +
+  facet_wrap(~ name) +
+  theme_minimal() +
+  labs(x = "", y = "")
+```
+
+
+---
+### Exemple
+
+
+```{r exemple-lm123-tab}
+m1 = lm(y1 ~ x, data = df)
+m2 = lm(y2 ~ x, data = df)
+m3 = lm(y3 ~ x, data = df)
+
+res = t(sapply(list(m1, m2, m3), function(m) {
+  s = summary(m)
+  res = c(a = s$coefficients[1,1], b = s$coefficients[2,1], r2 = s$r.squared)
+  return (res)
+}))
+res = data.frame(res)
+row.names(res) = paste0("y", 1:3, " = x")
+DT::datatable(res, options = list(paging = FALSE, seaching = FALSE, ordering = FALSE)) %>%
+  DT::formatSignif(columns = colnames(res), digits = 2)
+```
+
+
+
+---
+### Avec plus de deux variables
+
+- Obtenir la fonction $f$ tel que $Y = f(X_1, X_2, X_3, \ldots, X_p)$
+
+- Plusieurs variables *explicatives*
+
+- Exemple avec $p=2$ : $Y = b_0 + b_1 X_1 + b_2 X_2$
+
+- Recherche de l'hyper-plan minimisant la distance entre les points et celui-ci
+
+- Evaluer la force de la liaison entre $Y$ et chacun des $X_i$
+
+- Etablir une *hiérarchie* entre ces différentes liaisons
+
+
+---
+### Régression multiple
+
+- Utilisation de la régression multiple
+  - Eliminer le biais éventuellement créé par d'autre variables
+	- Améliorer l'estimation de nouvelles valeurs en réduisant les intervalles de confiance
+
+- Ajustement au sens des moindres carrés
+
+- Test de nullité du coefficient pour chaque variable explicative
+
+- Test de nullité du coefficient de corrélation globale $R^2$
+
+
+---
+### Exemple - données `wine`
+
+```{r wine-import}
+# url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data"
+# wine = read_csv(url, col_names = c("class", "Alcohol", "Malic acid", "Ash", "Alcalinity of ash", "Magnesium", 
+#                 "Total phenols", "Flavanoids", "Nonflavanoid phenols", "Proanthocyanins", 
+#                 "Color intensity", "Hue", "OD280/OD315 of diluted wines", "Proline"))
+load("wine.RData")
+DT::datatable(wine, rownames = FALSE, options = list(
+  pageLength = 5, ordering = FALSE, scrollX = TRUE, searching = FALSE
+))
+```
+
+
+---
+### Exemple - données `wine`
+
+- Modèle cherché :
+$$ Alcohol = a + b_1 \times MalicAcid + b_2 \times ColorIntensity + b_3 \times Magnesium $$
+
+```{r wine-model1}
+m = lm(Alcohol ~ `Malic acid` + `Color intensity` + Magnesium, data = wine)
+temp = summary(m)$coefficients
+rownames(temp) = gsub("`", "", rownames(temp))
+DT::datatable(temp, options = list(paging = FALSE, searching = FALSE, ordering = FALSE)) %>%
+  DT::formatSignif(columns = c(1, 2, 3, 4), digits = 3)
+```
+
+- Qualité du modèle : $R^2$ = `r summary(m)$r.squared`
+
+---
+### Exemple - données `wine`
+
+```{r wine-model1-pred-obs}
+ggplot(data = NULL, aes(wine$Alcohol, m$fitted.values)) +
+  geom_point() +
+  geom_abline(slope = 1, intercept = 0, col = "gray50", lty = 2) +
+  theme_minimal() +
+  labs(x = "Valeurs observées", y = "Valeurs prédites")
+```
+
+
+---
+### Suppression de facteurs
+
+- Importance des facteurs différents
+
+- Si coefficient $b_i$ considéré comme nul, enlever $X_i$
+
+- Faire aussi intervenir la connaissance métier
+
+- Omission de variables exogènes entraînant du biais
+  - Tirage aléatoire
+
+- Exemple avec suppression des variables avec un coefficient $b_i$ nul
+
+
+---
+### Choix du *bon* modèle
+
+- Obtenir le modèle le plus proche de la réalité
+  - $R^2$ le plus proche de 1 possible
+	- Simple à interpréter (pas trop de variables)
+
+- Critère de choix du modèle ( $AIC$ par exemple - d'autres existent)
+
+$$ AIC(m) = -2L(m) + 2 \nu(m) $$
+
+- Plusieurs possibilités pour optimiser le critère à chaque étape
+  - **Entrée** (ou *forward*) : ajout de variable
+	- **Sortie** (ou *backward*) : suppression de variable
+	- **Pas à pas** (ou *stepwise*) : ajout et suppression de variables jusqu'à stabilisation
+
+
+---
+### Exemple - données `wine`
+
+- Modèle complet (en enlevant la variable `class` bien évidemment)
+
+```{r wine-model2}
+m = lm(Alcohol ~ ., data = subset(wine, select = c(Alcohol, `Malic acid`, Ash, `Alcalinity of ash`, Magnesium,
+                                                   `Total phenols`, Flavanoids, `Nonflavanoid phenols`,
+                                                   Proanthocyanins, `Color intensity`, Hue, Proline,
+                                                   `OD280/OD315 of diluted wines`)))
+temp = summary(m)$coefficients
+rownames(temp) = gsub("`", "", rownames(temp))
+DT::datatable(temp, options = list(pageLength = 5, searching = FALSE, ordering = FALSE)) %>%
+  DT::formatSignif(columns = c(1, 2, 3, 4), digits = 3)
+```
+
+
+---
+### Exemple - données `wine`
+
+- Modèle obtenu après sélection pas à pas
+
+```{r wine-model2-step}
+r = step(m, trace = FALSE)
+temp = summary(r)$coefficients
+rownames(temp) = gsub("`", "", rownames(temp))
+DT::datatable(temp, options = list(paging = FALSE, searching = FALSE, ordering = FALSE)) %>%
+  DT::formatSignif(columns = c(1, 2, 3, 4), digits = 3)
+```
+
+
+
+
+---
+### Modèle linéaire
+
+- Régression multiple
+
+- Interprétation des coefficients $b_i$
+  - Variation de $Y$ = $b_i$ $\times$ Variation de $X_i$
+	- *Toute chose étant égale par ailleurs*
+
+- Colinéarité
+  - Corrélation (très) importante entre deux variables explicatives
+  - Coefficients des varaibles impactées entre eux
+  - Faire attention et à éviter au maximum
+
+- Interaction
+  - Prise en compte des effets conjoints
+  - Pas facile à interpréter mais potentiellement avec un effet très important
+
+
+---
+### Modèle linéaire général
+
+- Limitations du modèle linéaire
+  - Non prise en compte de variables qualitatives
+	- Possibilité si ordinale = considérée comme quantitative
+	  - mais peut mener à des conclusions erronées
+
+- Solution adoptée
+  - Introduction de variables muettes (0-1)
+	- Prise en compte dans le calcul
+	- Pour $X_i=1$, variation de $b_i$
+
+---
+### Variable muette
+
+- Variable muette $D$ = variable binaire (prenant la valeur 0 ou 1)
+
+- Equation de la droite de régression inchangée
+$$ Y = b_0 + b_1 X + b_2 D $$
+
+- Variation lorsque $D=1$ de $b_2$
+  - Les valeurs de $Y$ pour les objets pour lesquels $D=1$ sont globalement différente d'un niveau $b_2$ par rapport à celles des objets pour lesquels $D=0$
+	- Deux droites de régression (parallèles)
+
+- Pour le groupe $D=0$ : $Y = b_0 + b_1 X$
+- Pour le groupe $D=1$ : $Y = (b_0 + b_2) + b_1 X$
+
+
+---
+### Variable muette à plusieurs catégories
+
+- Binaire : traitement vs absence de traitement
+- Ternaire : traitement 1, traitement 2 et absence de traitement
+
+- Créer deux variables muettes $D_1$ et $D_2$
+  - $D_1=1$ si Traitement 1 et $D_1=0$ sinon
+	- $D_2=1$ si Traitement 2 et $D_2=0$ sinon
+
+- Codage disjonctif partiel
+
+- Equation : $Y = b_0 + b_1 X + b_2 D_1 + b_3 D_2$
+
+- Pour le groupe $D=0$ : $Y = b_0 + b_1 X$
+- Pour le groupe $D=1$ : $Y = (b_0 + b_2) + b_1 X$
+- Pour le groupe $D=2$ : $Y = (b_0 + b_3) + b_1 X$
+
+
+---
+### Pentes différentes
+
+- Extension au cas de droites avec des pentes différentes
+
+- Variable muette pas suffisante (droites non parallèles)
+
+- Introduction de la variable $D \times X$ (interaction)
+
+- Equation de la droite de régression
+$$ Y = b_0 + b_1 X + b_2 D + b_3 D X $$
+
+- Pour le groupe $D=0$ : $Y = b_0 + b_1 X$
+- Pour le groupe $D=1$ : $Y = (b_0 + b_2) + (b_1 + b_3) X$
+
+---
+### Non-linéarité et logarithmes
+
+- Pourquoi ?
+  - Modèle linéaire valable si linéarité en $b$
+
+- Modèle multiplicatif
+
+- Exemple de modèle
+	$$ Y = b_0 {X_1}^{b_1} {X_2}^{b_2}$$
+
+- Transformation de l'équation pour la rendre linéaire en $b$
+$$ log(Y) = log(b_0) + b_1 log(X_1) + b_2 log(X_2) $$
+
+---
+class: center, middle, section
+## Régression logistique
+
+---
+### Régression logistique
+
+- Pourquoi ?
+  - Adaptation aux variables expliquées qualitatives
+
+- Cas d'une variable binaire $Y$
+
+- Recherche de la probabilité $\pi$ que $Y=1$ (comprise entre 0 et 1)
+
+- Modèle linéaire inutilisable dans un tel cas (car valeur pouvant être en dehors de $[0;1]$)
+
+- Transformation la plus utilisée : fonction logit
+$$ logit(\pi) = log \left( \frac{\pi}{1-\pi} \right) = b_0 + b_1 X_1 + \ldots + b_p X_p $$
+$$ \pi(X_1,\ldots,X_p) = \frac{exp(b_0 + b_1 X_1 + \ldots + b_p X_p)}{1 + exp(b_0 + b_1 X_1 + \ldots + b_p X_p)}$$
+
+---
+### Régression logistique
+
+- Alors que $logit(\pi)$ peut prendre n'importe quelle valeur, $\pi \in [0,1]$ toujours
+
+- A partir du coefficient $b_i$, calcul de l'odd-ratio $exp(b_i)$
+  - Odd-ratio : *chance* que $Y$ prenne la valeur 1 lorsque $X_i$ augmente de 1
+	- *Toute chose étant égale par ailleurs*
+
+- Estimation par le maximum de vraisemblance
+$$ L = \prod_j P(Y(j) = 1 / X(j))^{Y(j)} \times (1 - P(Y(j) = 1 / X(j)))^{1 - Y(j)} $$
+
+- Affectation de la valeur 1 si $P(Y/X) > 0.5$
+- Modulation possible en fonction des probabilités a priori des modalités
+
+---
+### Apprentissage supervisé
+
+- Cadre globale, dans lequel se place la régression (entre autres)
+
+- Plusieurs exemples
+- Apprendre les règles d'estimation de la valeur d'une variable (qualitative ou quantitative)
+- *Professeur* indiquant les erreurs, pour permettre de s'améliorer
+
+- But : élargir ces règles sur de nouvelles données
+  - Ne pas apprendre par coeur
+  - Vérification des résultats sur d'autres données
+
+- Variables quantitatives : erreurs ( $R^2$ )
+- Variables qualitatives : matrice de confusion (taux d'erreur)
+
+
+---
+### Exemple - données `adult`
+
+- Niveau de salaire (plus ou moins de 50K$) en fonction du nombre d’heures par semaine
+
+```{r adult-import}
+# url = "http://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data"
+# adult = read_csv(url, col_names = c("age", "workclass", "fnlwgt", "education", "education_num", "marital_status",
+#                                     "occupation", "relationship", "race", "sex", "capital_gain", "capital_loss",
+#                                     "hours_per_week", "native_country", "class"))
+# save(adult, file = "adult.RData")
+load("adult.RData")
+DT::datatable(head(adult, 100), rownames = FALSE, options = list(
+  pageLength = 5, ordering = FALSE, scrollX = TRUE, searching = FALSE
+))
+```
+
+---
+### Exemple - données `adult`
+
+- Niveau de salaire (plus ou moins de 50K$) en fonction du nombre d’heures par semaine
+
+```{r adult-model1}
+m = glm(formula = (class == ">50K") ~ hours_per_week, family = binomial(), data = adult)
+DT::datatable(summary(m)$coefficients, options = list(paging = FALSE, searching = FALSE, ordering = FALSE)) %>%
+  DT::formatSignif(columns = c(1, 2, 3, 4), digits = 3)
+```
+
+---
+### Exemple - données `adult`
+
+
+- Matrice de confusion, (avec seuil de décision à 0.5)
+  - prédit en lignes et observé en colonnes
+
+```{r adult-model1-confusion}
+tab = table(m$fitted.values > 0.5, adult$class)
+df = pivot_wider(as.data.frame(tab), id_cols = "Var1", names_from = "Var2", values_from = "Freq")
+colnames(df)[1] = "Prédit"
+colnames(df)[2:3] = paste0("Observé: ", colnames(df)[2:3])
+
+DT::datatable(df, options = list(paging = FALSE, searching = FALSE, ordering = FALSE))
+```
+
+---
+### Exemple - données `adult`
+
+- Et avec le modèle complet
+
+```{r adult-model2}
+m = glm(formula = (class == ">50K") ~ age + workclass + education + marital_status + occupation +
+                                      relationship + race + sex + capital_gain + capital_loss +
+                                      hours_per_week + native_country, family = binomial(), data = adult)
+DT::datatable(summary(m)$coefficients, options = list(pageLength = 5, searching = FALSE, ordering = FALSE)) %>%
+  DT::formatSignif(columns = c(1, 2, 3, 4), digits = 3)
+```
+
+---
+### Exemple - données `adult`
+
+
+- Matrice de confusion, (avec seuil de décision à 0.5)
+  - prédit en lignes et observé en colonnes
+
+```{r adult-model2-confusion}
+tab = table(m$fitted.values > 0.5, adult$class)
+df = pivot_wider(as.data.frame(tab), id_cols = "Var1", names_from = "Var2", values_from = "Freq")
+colnames(df)[1] = "Prédit"
+colnames(df)[2:3] = paste0("Observé: ", colnames(df)[2:3])
+
+DT::datatable(df, options = list(paging = FALSE, searching = FALSE, ordering = FALSE))
+```
+
+
+---
+### Vrai/faux positifs/négatifs
+
+| | Observé = 0 | Observé = 1 |
+|-|:-:|:-:|
+| Prédit = 0 | $n_{VN}$ | $n_{FN}$ |
+| Prédit = 1 | $n_{FP}$ | $n_{VP}$ |
+
+#### Détail
+
+- $VN$ : Vrais négatifs (prédit 0 et observé 0)
+- $FN$ : Faux négatifs (prédit 0 et observé 1)
+- $FP$ : Faux positifs (prédit 1 et observé 0)
+- $VP$ : Vrais positifs (prédit 1 et observé 1)
+
+---
+### Précision, Recall, Sensibilité, Spécificité
+
+3 critères de *qualité* de la prédiction
+
+- *Precision* (ou précision)
+  - Proportion de 1 correctement prédit par rapport à tous les 1 prédits
+  - $Precision = \frac{n_{VP}}{n_{VP} + n_{FP}}$
+  - Ce que nous prédisons comme vrai est-il bien vrai ?
+
+- ¨*Sensitivity* ou *Recall* (ou sensibilité)
+  - Proportion de 1 correctement prédit par rapport à tous les 1 observés
+	- $Sensibilite = \frac{n_{VP}}{n_{FN} + n_{VP}}$ 
+	- Prédisons nous bien tous les cas positifs ?
+
+- *Specificity* (ou spécificité)
+  - Proportion de 0 correctement prédit par rapport à tous les 0 observés
+	- $Specificite = \frac{n_{VN}}{n_{VN}+n_{FP}}$
+	- Prédisons nous bien tous les cas négatifs ?
+
+---
+### Précision, Recall, Sensibilité, Spécificité
+
+```{r adult-model2-criteres}
+p = seq(0, 1, by = .1)
+df = data.frame(Seuil = p, Correct = NA, Precision = NA, Recall = NA, Specicity = NA)
+observ = (adult$class == ">50K")
+for (i in 1:length(p)) {
+  pred = (m$fitted.values > p[i])
+  df$Correct[i] = (sum(pred * observ) + sum((1 - pred) * (1 - observ))) / nrow(adult)
+  df$Precision[i] = ifelse(sum(pred) == 0, 0, sum(pred * observ) / sum(pred))
+  df$Recall[i] = sum(pred * observ) / sum(observ) 
+  df$Specicity[i] = sum((1 - pred) * (1 - observ)) / sum(1 - observ)
+}
+DT::datatable(df, rownames = FALSE, options = list(paging = FALSE, searching = FALSE, ordering = FALSE)) %>%
+  DT::formatSignif(columns = colnames(df), digits = 2)
+```
+
+
+---
+### Représentations graphiques
+
+Quelques représentations graphiques usuelles
+
+- ROC
+
+- Precision/Recall
+
+- Sensitivity/Specificity
+
+- Lift
+
+- *Performance*
+
+```{r include=FALSE}
+library(ROCR)
+pred = prediction(m$fitted.values, observ)
+```
+
+---
+### Courbe ROC
+
+- Taux de vrai positif vs Taux de faux positif
+
+```{r adult-model2-ROC}
+perf = performance(pred, measure = "tpr", x.measure = "fpr")
+auc <- performance(pred, measure = "auc")@y.values[[1]]
+
+plot(perf, main = "ROC")
+abline(a = 0, b = 1, lty = 2, col = "gray80")
+text(.75, .25, paste0("AUC=", round(auc, 3)))
+```
+
+
+---
+### Courbe Precision/Recall
+
+- Précision (Nb de vrai positifs sur Nb positifs prédits) vs Taux de vrai positif
+
+```{r adult-model2-PR}
+perf = performance(pred, measure = "prec", x.measure = "rec")
+
+plot(perf, main = "Precision/Recall")
+```
+
+
+---
+### Courbe Sensitivity / Specificity
+
+- Sensibilité vs Spécificité
+  - Taux de vrai positif vs Taux de vrai négatif
+
+```{r adult-model2-sens-spec}
+perf = performance(pred, measure = "sens", x.measure = "spec")
+plot(perf, main = "Sensitivity / Specificity")
+```
+
+---
+### Courbe Lift
+
+- Lift (Taux de vrai positifs sur Taux de prédictions positives) vs Taux de prédictions positives
+
+```{r adult-model2-lift}
+perf = performance(pred, measure = "lift", x.measure = "rpp")
+plot(perf, main = "Lift")
+```
+
+---
+### Courbe de *Performance*
+
+- Taux de vrai positifs vs Taux de prédictions positives
+- Pour 40 % des prédits considérés positifs, on aura 89 % des positifs
+
+```{r wine-model3-perf}
+perf = performance(pred, measure = "tpr", x.measure = "rpp")
+plot(perf, main = "Performance")
+abline(v = .4, lty = 2, col = "gray80")
+abline(h = .89, lty = 2, col = "gray80")
+```
+

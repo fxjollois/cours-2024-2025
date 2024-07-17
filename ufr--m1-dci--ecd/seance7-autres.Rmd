@@ -1,0 +1,620 @@
+---
+title: "Extraction de connaissances à partir de données structurées et non structurées"
+subtitle: "Séance 7 : Modélisation supervisée via autres modèles"
+output: 
+  xaringan::moon_reader:
+    css: ["default", "default-fonts", "../remarkjs-v2.css"]
+    nature:
+      highlightStyle: github
+      countIncrementalSlides: false
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval = FALSE, fig.align = "center")
+library(kableExtra)
+library(tidyverse)
+```
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Arbres de d?cision}
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}      
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Arbres de d?cision}
+\begin{itemize}
+  - Arbres de d?cision
+
+  - Exemple d'arbre
+
+  - Construction de l'arbre
+
+  - Id?e g?n?rale
+
+  - Points importants
+
+  - Algorithme CART
+		\begin{itemize}
+		  - Expansion
+		  - \'Elagage
+		\end{itemize}
+
+  - Conclusion
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Arbres de d?cision}
+\begin{itemize}
+  - Classification supervis?e
+		\begin{itemize}
+		  - Classe d'affection $z_i$ connue pour chaque individu $x_i$
+		  - Apprendre $f$ qui r?duit au maximum l'erreur dans $z_i = f(x_i) + \epsilon$
+		  - Similaire ? la r?gression, mais variable ? expliquer qualitative
+		  - R?utilisation de $f$ sur de nouveaux individus
+		\end{itemize}
+
+  - Statistiques (ex : CART, CHAID)
+  - Apprentissage, Intelligence Artificielle (ex : ID3, C4.5)
+
+  - R?sultats facilement interpr?tables, exploitables et r?utilisables
+
+  - R?gle de d?cision : \textbf{SI \emph{condition} ALORS \emph{d?cision}}
+  - Condition sur un ensemble de variables
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Exemple d'arbre de d?cision}
+\centerline{\includegraphics[width=10cm,height=6.5cm]{exemple.pdf}}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Construction de l'arbre}
+\begin{itemize}
+  - Description d'un arbre de d?cision
+		\begin{itemize}
+		  - N\oe ud de d?part comprenant tous les individus, appel? \emph{racine}
+		  - N\oe ud interm?diaire (ou \emph{n\oe ud de d?cision}) correspondant ? une partie de la population
+		  - Division des n\oe uds en deux \emph{fils} (ou plus selon la m?thode), selon un crit?re sur une variable
+		  - N\oe ud terminal appel? \emph{feuille}
+		  - Classement d'un individu selon le parcours dans l'arbre correspondant ? ses donn?es
+		\end{itemize}
+
+  - Deux phases dans la construction
+		\begin{enumerate}
+		  - Expansion : Obtention d'un arbre avec des feuilles le plus pur possible
+		  - \'Elagage : Simplification de l'arbre dans un but de g?n?ralisation
+		\end{enumerate}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Id?e g?n?rale}
+\begin{itemize}
+  - Diviser r?cursivement et le plus efficacement possible chaque n\oe ud
+
+  - Trois op?rateurs important
+		\begin{itemize}
+		  - D?cider si un n\oe ud est terminal ou non
+				\begin{itemize}
+				  - Tous les individus dans une m?me classe
+				  - Erreur d'affectation raisonnable
+				\end{itemize}
+		  - S?lectionner une division ? un n\oe ud (donc un test)
+				\begin{itemize}
+				  - Al?atoirement
+				  - Crit?res statistiques
+				  - Crit?res IA
+				\end{itemize}
+		  - Affecter une classe ? une feuille
+				\begin{itemize}
+				  - Classe majoritaire
+				  - Prise en compte du co?t ou du risque d'erreur
+				\end{itemize}
+		\end{itemize}
+
+  - Crit?re de s?lection de variable ? utiliser
+  - Crit?re de discrimination ? partir d'une variable
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Points importants}
+\begin{itemize}
+  - Qualit? de l'arbre jug? sur l'erreur de classification globale sur les donn?es d'apprentissage
+
+  - Attention au sur-apprentissage (m?fions-nous du \emph{par c\oe ur})
+
+  - \'Elagage de l'arbre
+		\begin{itemize}
+		  - Suppression des branches peu repr?sentatives et trop sp?cifiques
+		  - Am?lioration des performances de g?n?ralisation des r?gles
+		  - Crit?re d'?lagage ? d?finir
+		\end{itemize}
+
+  - R?gle de d?cision produite pour chaque feuille
+		\centerline{SI \emph{i $\in$ feuille} ALORS \emph{$z_i$ = classe de la feuille}}
+
+  - \emph{Support} : nombre d'individus v?rifiant la condition
+  - \emph{Confiance} : pourcentage d'invidus v?rifant la conclusion
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Notation}
+\begin{center}
+	\begin{tabular}{lp{7cm}}
+	$t$      & arbre \\
+	$p$      & position (ou n\oe ud) \\
+	$pj$     & fils de $p$ correspondant ? la $j$?me branche \\
+	$k$      & classe (modalit? de la variable cible)\\
+	$N(p)$   & Cardinal de l'ensemble des exemples associ? ? $p$\\
+	$N(k/p)$ & Cardinal de l'ensemble des exemples associ? ? $p$ qui sont de classe $k$\\
+	$P(k/p)$ & Proportion d'?l?ments de classe $k$ ? la position $p$\\ % = N(k/p)/N(p)
+	\end{tabular}
+\end{center}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Pr?liminaire}
+\begin{itemize}
+  - D?finition
+		\begin{eqnarray}
+		  Entropie(p) &=& -\sum_{k=1}^s P(k/p) \times log(P(k/p)) \\
+			Gini(p) 	  &=& 1 - \sum_{k=1}^s P(k/p)^2 \nonumber \\
+				  	      &=& 2 \sum_{k < k'} P(k/p)P(k'/p) \nonumber \\
+			Gain(p,test)&=& i(p) - \sum_{j=1}^n P_{pj} \times i(pj) \label{eq:gain}
+	  \end{eqnarray}
+	 \item Choix de l'entropie pour $i$
+	 \item Gain repr?sentant la diff?rence entre l'entropie du n\oe ud p?re et les entropies des n\oe uds fils
+	 \item Recherche ? chaque n\oe ud du test maximisant le gain
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Algorithme CART -- expansion}
+\begin{itemize}
+  - \'Echantillon d?coup? en deux ensembles (apprentissage $A$ pour expansion et test $T$ pour ?lagage)
+  - Utilisation de la fonction de Gini (ou indice d'impuret? de Gini)
+
+  - D?cider si un noeud est terminal 
+		\begin{itemize}
+		  - $Gini(p) \leq i_0$ ou $N(p) \leq n_0$
+		  - $i_0$ et $n_0$ param?tres ? fixer
+		\end{itemize}
+
+  - S?lectionner un test ? un n\oe ud $p$
+		\begin{itemize}
+		  - $p1$ et $p2$ fils de $p$
+		  - $Gain(p,test) = Gini(p) - (P_{p1} \times Gini(p1) + P_{p2} \times Gini(p2))$
+		  - Choix de l'indice de Gini pour $i$ dans l'?quation \ref{eq:gain}
+		\end{itemize}
+
+  - Affecter une classe ? une feuille
+		\begin{itemize}
+		  - Classe majoritaire
+		\end{itemize}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Algorithme CART -- ?lagage}
+\begin{itemize}
+  - Utilisation de l'ensemble de test $T$ pour l'?lagage
+
+  - Construction de la suite des arbres $t = t_0, \ldots, t_p$
+		\begin{itemize}\footnotesize
+		  - $t_0$ : arbre obtenu ? la fin de la phase d'expansion
+		  - $t_r$ : arbre r?duit ? une feuille
+		  - $t_{i+1}$ : arbre ?lagu? de $t_i$
+		\end{itemize}
+
+  - Construction de $t_{i+1}$ ? partir de $t_i$
+		\begin{itemize}\footnotesize
+		  - $\forall p$ de $t_i$, $u_p$ : sous-arbre de $t_i$ avec racine = $p$
+		  - Calcul de $g(p) = \frac{\Delta_{app}(p)}{|u_p|-1}$ avec $\Delta_{app}(p) = \frac{MC(p) - MC(u_p)}{N(p)}$
+		  - $\Delta_{app}(p)$ : variation d'erreur apparente sur $A$ avec $t$ ?lagu? en $p$
+		  - $MC(p)$ et $MC(u_p)$ : nombre de mal-class?s de $A$ en $p$ et par $u_p$ resp.
+		  - Choix de $p$ pour lequel $g(p)$ est minimal
+		  - $t_{i+1}$ : ?lagu? de $t_i$ en $p = arg max_q g(q)$
+		\end{itemize}
+
+  - Choix final 
+		\begin{itemize}\footnotesize
+		  - Calcul de l'erreur apparente sur $T$ pour chaque arbre $t_i$
+		  - Arbre avec l'erreur apparente minimale (estimation de l'erreur r?elle)
+		\end{itemize}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Algorithme CHAID}
+\begin{itemize}
+  - CHisquard Automatic Interaction Detection
+
+  - Utilisation du $\chi^2$ ou du Tschuprow pour d?cider de la variable discriminante ? chaque n\oe ud
+	$$ \chi^2 = \sum_{i=1}^p \sum_{j=1}^d \frac{(f_{ij} - f{i.}f_{.j})^2}{f_{i.}f_{.j}} $$
+	$$ T = \sqrt{\frac{\chi^2}{n \sqrt{(p-1)(d-1)}}} $$
+
+  - Pas de phase d'\'elagage : Limitation de la taille de l'arborescence
+
+  - Fusion des n\oe uds fils ayant une distribution similaire
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Conclusion}
+\begin{itemize}
+  - Plusieurs m\'ethodes existent (CART, ID3, C4.5, C5.0, CHAID, \ldots)
+
+  - R\'esultats (tr\`es) bons et exploitables dans la pratique
+		\begin{itemize}
+		  - Compr\'ehensible par tout utilisateur
+		  - Traduction en terme de r\`egles de d\'ecision
+		\end{itemize}
+
+  - Tr\`es utilis\'e en Fouille de Donn\'ees
+
+  - Possibilit\'e de pr\'edire aussi des variables quantitatives (arbres de r\'egression)
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Utilisation sous R}
+Programme pr?sent dans le fichier \lstinline!exemple.R! dans le r?pertoire usuel.
+\begin{itemize}\scriptsize
+  - Chargement de la librairie \lstinline!rpart!
+	 \lstinline!library(rpart)!
+
+%  - Visualisation de la table de donn?es \cmd{kyphosis} pr?sente directement sous R
+%	 \lstinline!kyphosis!
+%
+  - Cr?ation de l'arbre de d?cision
+	 \lstinline!f = rpart(Kyphosis~Age+Number+Start,data=kyphosis)!
+
+  - Affichage textuel de l'arbre
+	 \lstinline!f!
+  - Affichage visuel de l'arbre
+	 \lstinline!plot(f, margin=0.05)!
+	 \lstinline!text(f, use.n=T)!
+
+  - Visualisation des d?tails de la construction de l'arbre
+	 \lstinline!printcp(f)!
+	 \lstinline!summary(f)!
+
+  - Choix d'un autre ?lagage
+	 \lstinline!f2 = prune(f, cp=0.15)!
+	 \lstinline!plot(f2, margin=0.05)!
+	 \lstinline!text(f2, use.n=T)!
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Exemple de mod?le simple}
+\begin{itemize}
+  - Niveau de salaire (plus ou moins de 50K\$) en fonction du nombre d'heures par semaine
+	\tiny
+\begin{lstlisting}
+node), split, n, loss, yval, (yprob)
+      * denotes terminal node
+
+ 1) root 48842 11687 less (0.76071823 0.23928177)  
+   2) relationship=Not-in-family,Other-relative,Own-child,Unmarried 
+   			26795  1748 less (0.93476395 0.06523605)  
+     4) capital_gain< 7055.5 26324  1294 less (0.95084334 0.04915666) *
+     5) capital_gain>=7055.5 471    17 more (0.03609342 0.96390658) *
+   3) relationship=Husband,Wife 22047  9939 less (0.54919037 0.45080963)  
+     6) education_num< 12.5 15429  5167 less (0.66511115 0.33488885)  
+      12) capital_gain< 5095.5 14671  4423 less (0.69852089 0.30147911) *
+      13) capital_gain>=5095.5 758    14 more (0.01846966 0.98153034) *
+     7) education_num>=12.5 6618  1846 more (0.27893623 0.72106377) *
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Exemple de mod?le simple}
+\begin{itemize}
+  - Niveau de salaire (plus ou moins de 50K\$) en fonction du nombre d'heures par semaine
+\begin{lstlisting}
+Matrice de confusion
+     less  more
+  1 35278  5717
+  2  1877  5970
+  
+Taux de mal class?s
+15.55%
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Exemple de mod?le simple}
+\begin{itemize}
+  - Arbre de classification
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.35]{adult_rpart_1.pdf}
+\end{center}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Exemple de mod?le simple}
+\begin{itemize}
+  - Repr?sentation visuelle de la validation crois?e
+\end{itemize}
+\begin{center}
+\includegraphics[scale=0.35,angle=90]{adult_rpart_1_cp.pdf}
+\end{center}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Exemple de mod?le complet}
+\begin{itemize}
+  - Niveau de salaire (plus ou moins de 50K\$) en fonction du nombre d'heures par semaine
+\begin{lstlisting}
+Matrice de confusion
+     less  more
+  1 35479  3580
+  2  1676  8107
+    
+Taux de mal class?s
+10.77%
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Courbe ROC}
+\begin{itemize}
+  - Taux de vrai positif vs Taux de faux positif
+\end{itemize}
+\includegraphics[scale=0.35]{adult_rpart_ROC.pdf}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Courbe Precision/Recall}
+\begin{itemize}
+  - Pr?cision (Nb de vrai positifs sur Nb positifs pr?dits) vs Taux de vrai positif
+\end{itemize}
+\includegraphics[scale=0.35]{adult_rpart_PrecRec.pdf}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Courbe de \emph{performance}}
+\begin{itemize}
+  - Taux de vrai positifs vs Taux de pr?dictions positives
+  - Pour 40 \% des positifs pr?dits, on 89.4 \% des positifs
+\end{itemize}
+\includegraphics[scale=0.35]{adult_rpart_Perf.pdf}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Quelle m?thode ? Quelle mod?le ?}
+\begin{frame}
+  \tableofcontents[currentsection]
+\end{frame}      
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile]{Meilleur mod?le en r?gression}
+\begin{itemize}
+  - R?gression lin?aire
+		\begin{itemize}
+		  - $R^2$ ajust? maximum (sur donn?es d'apprentissage)
+		  - Crit?re $AIC$ minimum
+		  - Variables avec $b_i$ significativement diff?rent de 0
+		\end{itemize}
+
+  - CART
+		\begin{itemize}
+		  - $R^2$ ajust? maximum (sur donn?es d'apprentissage)
+		  - Arbre avec un nombre de n\oe uds minimal
+		  - \'Elagage optimis? selon l'?volution du param?tre de complexit? 
+		\end{itemize}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile] {Meilleur mod?le en classification}
+\begin{itemize}
+  - R?gression logistique
+		\begin{itemize}
+		  - Crit?re $AIC$ minimum
+		  - Pourcentage de mal-class?s sur donn?es d'apprentissage minimum
+		  - Variables avec $b_i$ significativement diff?rent de 0
+		\end{itemize}
+
+  - CART
+		\begin{itemize}
+		  - Pourcentage de mal-class?s sur donn?es d'apprentissage minimum
+		  - Arbre avec un nombre de n\oe uds minimal
+		  - \'Elagage optimis? selon l'?volution du param?tre de complexit? 
+		\end{itemize}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile] {Comparaison de mod?les/m?thodes}
+\begin{itemize}
+  - En prenant toutes les donn?es
+		\begin{itemize}
+		  - Dans notre cas, CART meilleur que R?gression logistique
+		  - Est-ce vrai ?
+		  - Qu'en-est'il sur un autre jeu de donn?es ?
+		\end{itemize}
+
+  - Utilisation de 3 ?chantillons
+		\begin{itemize}
+		  - \emph{Apprentissage}: pour estimer les param?tres des mod?les
+		  - \emph{Test} : pour choisir le meilleur mod?le
+		  - \emph{Validation} : pour estimer la performance sur des donn?es futures
+		\end{itemize}
+
+  - N?cessit? de faire plusieurs tirages
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile] {Utilisation de plusieurs ?chantillons}
+\begin{itemize}
+  - \'Echantillon Apprentissage $A$
+  - \'Echantillon Test $T$
+  - \'Echantillon Validation $V$
+
+  - Proc?dure
+		\begin{itemize}
+		  - Construire les diff?rents mod?les ? partir de $A$
+				\begin{itemize}
+				  - Plusieurs m?thodes
+				  - Plusieurs mod?les pour chaque m?thode
+				\end{itemize}
+		  - Pr?voir les valeurs de la variable cible pour l'?chantillon $T$ pour chaque mod?le
+		  - Comparer les r?sultats avec les \emph{vraies} valeurs dans $T$
+		
+		  - Pr?voir les valeurs de la variable cible pour l'?chantillon $V$ pour chaque mod?le afin d'estimer le vrai pouvoir pr?dictif du mod?le choisi
+		\end{itemize}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile] {Exemple de s?lection de mod?le}
+\begin{itemize}
+  - Cr?ation des trois ?chantillons $A$, $T$ et $V$
+\begin{lstlisting}
+                A     T     V
+Effectifs   24415 12251 12176
+Proportions    50    25    25
+\end{lstlisting}
+
+  - V?rification de la r?partition de la variable cible dans les ?chantillons
+\begin{lstlisting}
+     less more   less more
+A   18557 5858     76   24
+T    9324 2927     76   24
+V    9274 2902     76   24
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile] {Exemple de s?lection de mod?le}
+\begin{itemize}
+  - R?gression logistique
+\begin{lstlisting}
+Sur donn?es d'apprentissage A : 14.7% de mal-class?s
+
+         less  more
+  FALSE 17291  2330
+  TRUE   1266  3528
+
+sur donn?es de test T : 15.4% de mal-class?s
+        less more
+  FALSE 8624 1184
+  TRUE   700 1743
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile] {Exemple de s?lection de mod?le}
+\begin{itemize}
+  - R?gression logistique
+\begin{lstlisting}
+Sur donn?es d'apprentissage A : 12.8% de mal-class?s
+
+     less  more
+  1 17647  2219
+  2   910  3639
+  
+sur donn?es de test T : 14.2% de mal-class?s
+
+    less more
+  1 8760 1174
+  2  564 1753
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile] {Exemple de s?lection de mod?le}
+\begin{itemize}
+  - Comparaison des deux m?thodes : courbe ROC
+\end{itemize}
+\includegraphics[scale=0.35]{adult_comp_ROC.pdf}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile] {Exemple de s?lection de mod?le}
+\begin{itemize}
+  - Comparaison des deux m?thodes : courbe Precision/Recall
+\end{itemize}
+\includegraphics[scale=0.35]{adult_comp_PrecRec.pdf}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile] {Exemple de s?lection de mod?le}
+\begin{itemize}
+  - Comparaison des deux m?thodes : courbe Performances
+\end{itemize}
+\includegraphics[scale=0.35]{adult_comp_Perf.pdf}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+%--------------------------------------------------------------------- frame
+\begin{frame}[fragile] {Exemple de s?lection de mod?le}
+\begin{itemize}
+  - Validation sur l'?chantillon $V$
+\begin{lstlisting}
+R?gression logistique : 15.0% de mal class?s
+
+        less more
+  FALSE 8582 1140
+  TRUE   692 1762
+
+Arbre de classification CART : 13.8% de mal-class?s
+   
+    less more
+  1 8716 1128
+  2  558 1774
+\end{lstlisting}
+\end{itemize}
+\end{frame}
+%--------------------------------------------------------------------- 
+
+
+\end{document}
+
