@@ -130,8 +130,6 @@ De la même façon que précédemment, vous pouvez réaliser un diagramme en bar
 
 > Reproduisez ces opérations pour les variables `sex` et `size` dans une nouvelle feuille à chaque fois
 
-.travail[
 ## Compléments
 
 Compléter l'analyse à chaque variable non encore analysée.
-]
