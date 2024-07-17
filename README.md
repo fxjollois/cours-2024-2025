@@ -31,7 +31,7 @@ Ce site regroupe l'ensemble des documents que j'utilise dans mes cours.
 
 ## IUT de Cherbourg
 
-- [BUT TC 2ème année - Statistiques](cherbourg--but2-tc--stats)
+- [BUT TC 2ème année - Statistiques](tc-stats)
 
 
 <!--
