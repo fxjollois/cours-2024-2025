@@ -50,3 +50,4 @@ Fin Tant Que
 
 - [Premiers éléments de collecte de données sur le web](seance1)
 - [Interrogation de l'API Adresse par fichier `CSV`](seance2)
+- [Web-scraping avec Python](seance3)

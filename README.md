@@ -5,8 +5,8 @@ Ce site regroupe l'ensemble des documents que j'utilise dans mes cours.
 ## IUT Paris Rives de Seine - Département Science des Données
 
 - **BUT SD 2ème année - Parcours VCOD** :
-    - [Collecte automatisée de données web - FI](but2--vcod--collecte-fi)
-    - [Collecte automatisée de données web - FA](but2--vcod--collecte-fa)
+    - [Collecte automatisée de données web - FI](but2--vcod--fi--collecte)
+    - [Collecte automatisée de données web - FA](but2--vcod--fa--collecte)
 
 - **BUT SD 3ème année - Parcours VCOD** :
     - [Programmation web pour la visualisation](but3--vcod--dataviz-web)

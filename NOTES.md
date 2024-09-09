@@ -4,8 +4,7 @@
 
 ## M1 DCI : 
 
-- Soit je garde le supervisé et partie régression logistique à revoir complètement
-- Soit je supprime le supervisé et je fait :
+- Nouveau programme :
     1. Intro Python
     2. Manipulation "à la SQL" et visualisation de données (univarié et bivarié)
     3. [TP noté]
