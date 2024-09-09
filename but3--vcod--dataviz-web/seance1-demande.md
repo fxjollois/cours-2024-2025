@@ -6,7 +6,7 @@ Première utilisation HTML, CSS et JS ([lien vers Plnker](http://embed.plnkr.co/
 - Avec l'onglet *Code* (en haut à droite), vous pouvez voir le contenu de chaque fichier
 - En cliquant sur *Edit*, vous pourrez éditer ces fichiers et faire le travail demandé
 
-## A faire
+## Demande
 
 Créer un script permettant de faire un diagramme avec les contraintes suivantes :
 
