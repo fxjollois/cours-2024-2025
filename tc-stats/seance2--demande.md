@@ -3,7 +3,7 @@
 Nous allons continuer de travailler sur les données contenu dans le fichier `tips`, dont voici les versions initiales si besoin :
 
 - [Format Excel](tips.xlsx)
-- [Format Libre Office](tips.ods)
+- [Format Libre Office](tips.ods) (Téléchargement de [](https://fr.libreoffice.org/download/telecharger-libreoffice/))
 - [Format Numbers](tips.numbers)
 
 > Nota Bene : les noms des fonctions dans ce document sont valables dans **Libre Office**. Il est possible que certains soient différents dans les autres tableurs (me demander si cela ne fonctionne pas dans votre outil).
