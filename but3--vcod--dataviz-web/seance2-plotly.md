@@ -211,6 +211,27 @@ Plotly.newPlot(
 
 Bien évidemment, beaucoup d'autres choses sont possibles dans cette personnalisation.
 
+#### Personnalisation du menu (zoom, sélection et autre)
+
+Lorsqu'on passe la souris sur un graphique Plotly, un menu apparaît en haut à droite du graphique, avec les éléments suivants :
+
+- Téléchargement du graphique en PNG
+- Zoom
+- Déplacement dans le graphique (si zoom)
+- Sélection par rectangle
+- Sélection par *lasso*
+- Zoom avant et arrière
+- Mise à l'échelle automatique
+- Remise à zéro des axes
+
+Celui-ci peut être personnaliser, en ajoutant un quatrième paramètre à la fonction `newPlot()` (si rien à passer en 2ème et 3ème paramètres, mettre un objet vide `{}`), qui peut contenir les champs suivants (entre autres) :
+
+- `displayModeBar` : affiche tout le temps le menu si `true`, et ne l'affiche jamais si `false`
+- `staticPlot`: si `true`, rend le graphique totalement statique (et non cliquable)
+- `modeBarButtonsToRemove` : qui permet de supprimer certains boutons (sous forme de liste)
+    - quelques valeurs : `"pan2d"`, `"select2d"`, `"lasso2d"`, `"resetScale2d"`, `"zoomOut2d"`, `"zoomIn2d"`, `"zoom2d"`...
+- `displaylogo` : si `false`, cache le logo Plotly
+
 
 ## Interaction entre les deux graphiques
 

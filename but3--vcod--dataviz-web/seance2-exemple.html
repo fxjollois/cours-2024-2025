@@ -30,7 +30,7 @@
                     }
                 }
             ];
-            Plotly.newPlot("graphique_barres", data);
+            Plotly.newPlot("graphique_barres", data, {});
         </script>
 
         <div id="graphique_circulaire"></div>
@@ -73,6 +73,13 @@
                     title: "Evolution des modalités",
                     yaxis: { range: [0, 20] },
                     legend: { font: { size: 20 }}
+                } , 
+                {
+                    displaylogo: false,
+                    modeBarButtonsToRemove: [
+                        "pan2d", "select2d", "lasso2d", "resetScale2d", "autoScale2d",
+                        "zoom2d", "zoomOut2d", "zoomIn2d"
+                    ]
                 }
             );
             
@@ -97,6 +104,10 @@
                     Plotly.restyle("graphique_barres", { "marker.color": "DarkSalmon" })                    
                     Plotly.restyle("graphique_nuage", { "marker.color": "DarkGray", opacity: 1 })
                 });
+        </script>
+        <script src="par_annee.js"></script>
+        <script>
+            console.log(par_annee)
         </script>
     </body>
 </html>
