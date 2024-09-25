@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Title</title>
+        <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+        <script>
+            var valeurs = [12, 5, 21, 18, 14],
+                modalites = ["A", "B", "C", "E", "Z"];
+        </script>
+
+    </head>
+    <body>
+        <div id="graphique_barres"></div>
+        <script type="text/javascript">
+            var data = [
+                {
+                    x: modalites,
+                    y: valeurs,
+                    text: valeurs,
+                    hovertemplate: "Modalité : %{x}, <extra>Valeur : %{y}</extra>",
+                    type: 'bar',
+                    marker: {
+                        color: "DarkSalmon", //modalites.map(function(e) { return e == "B" ? "DarkRed" : "DarkSalmon" }),
+                        line: {
+                            color: "FireBrick",
+                            width: 2
+                        },
+                        opacity: 0.5
+                    }
+                }
+            ];
+            Plotly.newPlot("graphique_barres", data);
+        </script>
+
+        <div id="graphique_circulaire"></div>
+        <script type="text/javascript">
+            var data2 = [
+                {
+                    labels: modalites,
+                    values: valeurs,
+                    type: 'pie'
+                }
+            ];
+            // Plotly.newPlot("graphique_circulaire", data2);
+        </script>
+        
+        <script>
+            var X = [ 1,  2,  3,  4,  5,  6],
+                A = [18, 12, 16,  9, 17, 17],
+                B = [ 9,  4,  6,  7,  3,  5],
+                C = [ 1,  6,  4,  2,  5,  2],
+                E = [15, 14, 10, 12, 13, 16],
+                Z = [ 8, 12,  7, 15, 11,  9];
+        </script>
+        <div id="graphique_nuage"></div>
+        <script>
+            var traceA = { x: X, y: A, type: "scatter" },
+                traceB = { x: X, y: B, type: "scatter" },
+                traceC = { x: X, y: C, type: "scatter" },
+                traceE = { x: X, y: E, type: "scatter" },
+                traceZ = { x: X, y: Z, type: "scatter" };
+            var data3 = [traceA, traceB, traceC, traceE, traceZ];
+            // Plotly.newPlot("graphique_nuage", data3);
+            
+            Plotly.newPlot(
+                "graphique_nuage", 
+                modalites.map(function(e) { 
+                    return { x: X, y: window[e], type: "scatter", 
+                            name: e, marker: {color: "DarkGray"} }
+                }),
+                {
+                    title: "Evolution des modalités",
+                    yaxis: { range: [0, 20] },
+                    legend: { font: { size: 20 }}
+                }
+            );
+            
+        </script>
+
+
+        <script>
+            document.getElementById("graphique_barres").on(
+                'plotly_click', 
+                function(e) {
+                    console.log(e.points);
+                    var infos = e.points[0],
+                        couleurs = modalites.map(function(d) { return d == infos.label ? "DarkRed" : "lightgray" });
+                    Plotly.restyle("graphique_barres", { "marker.color": [couleurs] })
+                    Plotly.restyle("graphique_nuage", { "marker.color": "lightgray", opacity: 0.5 })
+                    Plotly.restyle("graphique_nuage", { "marker.color": "DarkRed", opacity: 1 }, [infos.pointIndex])
+                });
+            
+            document.getElementById("graphique_barres").on(
+                'plotly_doubleclick', 
+                function(e){
+                    Plotly.restyle("graphique_barres", { "marker.color": "DarkSalmon" })                    
+                    Plotly.restyle("graphique_nuage", { "marker.color": "DarkGray", opacity: 1 })
+                });
+        </script>
+    </body>
+</html>
