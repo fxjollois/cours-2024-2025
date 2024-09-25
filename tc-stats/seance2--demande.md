@@ -3,7 +3,7 @@
 Nous allons continuer de travailler sur les données contenu dans le fichier `tips`, dont voici les versions initiales si besoin :
 
 - [Format Excel](tips.xlsx)
-- [Format Libre Office](tips.ods)
+- [Format Libre Office](tips.ods) (Téléchargement de [](https://fr.libreoffice.org/download/telecharger-libreoffice/))
 - [Format Numbers](tips.numbers)
 
 > Nota Bene : les noms des fonctions dans ce document sont valables dans **Libre Office**. Il est possible que certains soient différents dans les autres tableurs (me demander si cela ne fonctionne pas dans votre outil).
@@ -54,16 +54,12 @@ Renommez cette feuille en lui donnant le titre `jour-sexe` par exemple.
 
 ### Création des profils lignes
 
-Si nous souhaitons avoir les profils lignes, nous allons devoir *à la main*. 
+Si nous souhaitons avoir les profils lignes, nous pouvons changer le mode de calcul sur *total_bill*, en réalisant les opérations suivantes :
 
-- Pour cela, faites un copier-coller du tableau en placant la copie en cellule `A10`
-- Dans la cellule `B12`, écrivez la formule suivante
-```
-=B3/$D3
-```
-    - le `$` est important ici pour la duplication aux autres cellules que nous allons faire ensuite
-- Dupliquer cette formule à la cellule `C12` en premier, puis aux cellules `B13` à `C16`
-- Sélectionner les nouvelles valeurs calculées pour les mettre en pourcentage
+- Clic droit dans le tableau dynamique
+- Dans *Champs de données*, double-cliquez sur *Compter - total_bill*
+- Cliquer sur le + de *Valeur affichée*
+- Choisissez *% de la ligne* et cliquez sur *OK*, puis *OK* encore
 
 > On remarque qu'ainsi, en général (ligne du bas), la répartition est 1/3 des notes payées par des femmes et 2/3 payées par des hommes. Par contre, on remarque de grosses différences entre les jours de la semaine : la semaine, c'est 50-50, alors que le week-end (particulièrement le dimanche) c'est 3 fois sur 4 un homme qui paie.
 
