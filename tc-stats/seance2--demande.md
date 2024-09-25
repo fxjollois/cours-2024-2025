@@ -3,7 +3,7 @@
 Nous allons continuer de travailler sur les données contenu dans le fichier `tips`, dont voici les versions initiales si besoin :
 
 - [Format Excel](tips.xlsx)
-- [Format Libre Office](tips.ods) (Téléchargement de [](https://fr.libreoffice.org/download/telecharger-libreoffice/))
+- [Format Libre Office](tips.ods) (Téléchargement de [LibreOffice](https://fr.libreoffice.org/download/telecharger-libreoffice/))
 - [Format Numbers](tips.numbers)
 
 > Nota Bene : les noms des fonctions dans ce document sont valables dans **Libre Office**. Il est possible que certains soient différents dans les autres tableurs (me demander si cela ne fonctionne pas dans votre outil).
@@ -15,15 +15,18 @@ Nous allons continuer de travailler sur les données contenu dans le fichier `ti
 - Créer une nouvelle feuille (que vous nommerez `montant-tip` par exemple)
 - En case `A1`, écrivez *Lien entre montant et pourboire* (et mettez en gras)
 - En case `A3`, écrivez *Corrélation* et en case `A4` la formule suivante :
-```
-=COEFFICIENT.CORRELATION(tips.A:A;tips.B:B)
-```
+    - Excel : `=COEFFICIENT.CORRELATION(tips!A:A;tips!B:B)`
+    - LibreOffice : `=COEFFICIENT.CORRELATION(tips.A:A;tips.B:B)`
 
 ### Création du nuage de points
 
-- Cliquez sur *Insertion* -> *Diagramme*
-- Choississez *XY (Dispersion)*
-- Dans la partie *Plage de données*, écrivez `tips.A:B` et choisir *Séries de données en colonnes*
+- Excel :
+    - Cliquez sur *Insertion* -> *Nuage de points*
+    - 
+- LibreOffice :
+    - Cliquez sur *Insertion* -> *Diagramme*
+    - Choississez *XY (Dispersion)*
+    - Dans la partie *Plage de données*, écrivez `tips.A:B` et choisir *Séries de données en colonnes*
 
 > On obtient notre nuage de points
 
