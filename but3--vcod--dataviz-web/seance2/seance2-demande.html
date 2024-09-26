@@ -45,8 +45,12 @@
                         type : "scatter",
                         marker: { color: "darkgrey" }
                     }
+                }),
+                traces_par_annee_bis = traces_par_annee.map(function (e) {
+                    e.y = e.y.map(function(d) { return d / e.y[0] * 100; });
+                    return e;
                 });
-            Plotly.newPlot("par_annee", traces_par_annee, { width: "600px" },  { displayModeBar: false });
+            Plotly.newPlot("par_annee", traces_par_annee_bis, { width: "600px" },  { displayModeBar: false });
             
             var traces_documents_citations = {
                 x: documents_citations.map(function(e) { return e.Documents; }),
@@ -72,7 +76,6 @@
             document.getElementById("top_regions").on(
                 'plotly_click', 
                 function(e) {
-                    console.log(e);
                     var infos = e.points[0],
                         couleurs_regions = top_regions.map(function(d) { return d.Region == infos.label ? "DarkRed" : "lightgray" }),
                         couleurs_pays = documents_citations.map(function(d) { return d.Region == infos.label ? "DarkRed" : "lightgray" }),
