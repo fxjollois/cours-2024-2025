@@ -28,15 +28,20 @@ A partir de ces données, on veut produire un tableau de bord schématisé ci-de
     - Affichage du nom du pays lors du passage de la souris au-dessus d'un point
     - Lors de la sélection d'une région dans le graphique 1, passage à une couleur spécifique (idéalement la même qu'au-dessus) pour les pays de la région sélectionnée (et les autres moins intenses)
     - Si désélection, retour aux couleurs d'origine
-    
-<svg width=900 height=600>
-<rect x=0 y=0 width=300 height=300 style="fill:rgb(240,230,230);stroke-width:3;stroke:black"/>
-<text x=150 y=150 dx=-50>1- Par régions</text>
-<rect x=300 y=0 width=600 height=300 style="fill:rgb(230,240,230);stroke-width:3;stroke:black"/>
-<text x=600 y=150 dx=-50>2- Par année</text>
-<rect x=0 y=300 width=900 height=300 style="fill:rgb(230,230,240);stroke-width:3;stroke:black"/>
-<text x=450 y=450 dx=-100>3- Croisement documents / citations</text>
-</svg>
+
+<div>
+    <div style="float: left; width: 35%; height: 200px; border: solid 1px black; position: relative;">
+        <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -100%);">1- Par régions</p>
+    </div>
+    <div style="float: right; width: 64%; height: 200px; border: solid 1px black; position: relative;">
+        <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -100%);">2- Par année</p>
+    </div>
+    <div style="clear:both"></div>
+    <div style="width: 100%; height: 200px; border: solid 1px black; position: relative;">
+        <p style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -100%);">3- Croisement documents / citations</p>
+    </div>
+</div>
+
 
 **Bonus** : l'idéal serait de faire un graphique en base 100 pour le 2 :
 
