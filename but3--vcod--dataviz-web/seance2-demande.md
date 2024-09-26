@@ -30,10 +30,18 @@ A partir de ces données, on veut produire un tableau de bord schématisé ci-de
     - Si désélection, retour aux couleurs d'origine
     
 <svg width=900 height=600>
-    <rect x=0 y=0 width=300 height=300 style="fill:rgb(240,230,230);stroke-width:3;stroke:black"/>
-    <text x=150 y=150 dx=-50>1- Par régions</text>
-    <rect x=300 y=0 width=600 height=300 style="fill:rgb(230,240,230);stroke-width:3;stroke:black"/>
-    <text x=600 y=150 dx=-50>2- Par année</text>
-    <rect x=0 y=300 width=900 height=300 style="fill:rgb(230,230,240);stroke-width:3;stroke:black"/>
-    <text x=450 y=450 dx=-100>3- Croisement documents / citations</text>
+<rect x=0 y=0 width=300 height=300 style="fill:rgb(240,230,230);stroke-width:3;stroke:black"/>
+<text x=150 y=150 dx=-50>1- Par régions</text>
+<rect x=300 y=0 width=600 height=300 style="fill:rgb(230,240,230);stroke-width:3;stroke:black"/>
+<text x=600 y=150 dx=-50>2- Par année</text>
+<rect x=0 y=300 width=900 height=300 style="fill:rgb(230,230,240);stroke-width:3;stroke:black"/>
+<text x=450 y=450 dx=-100>3- Croisement documents / citations</text>
 </svg>
+
+**Bonus** : l'idéal serait de faire un graphique en base 100 pour le 2 :
+
+- tous les pays commencent à 100 en 1996
+- chaque valeur d'une année est en référence à ce 100
+    - une valeur de 200 indique que le nombre a doublé depuis 1996
+    
+L'intérêt de ce type de graphique est bien de voir l'évolution, non pas la quantité. Il serait donc intéressant de faire le calcul pour afficher les valeurs en base 100 donc.
