@@ -2,9 +2,9 @@
 
 Nous allons travailler sur la production scientifique mondiale, depuis 1996. Les données ont été collectées à partir du site [SCImago Journal & Country Rank](http://www.scimagojr.com/help.php). Nous utiliserons 3 fichiers javascript, contenant chacun la déclaration d'une variable JSON :
 
-- [`top_regions.js`](seance2/top_regions.js) : Production scientifique totale par régions du monde, entre 1996 et 2023
-- [`par_annee.js`](seance2/par_annee.js) : Total par année et par région
-- [`documents_citations.js`](seance2/documents_citations.js) : Production de l'année 2023, par pays avec comme information
+- [top_regions.js](seance2/top_regions.js) : Production scientifique totale par régions du monde, entre 1996 et 2023
+- [par_annee.js](seance2/par_annee.js) : Total par année et par région
+- [documents_citations.js](seance2/documents_citations.js) : Production de l'année 2023, par pays avec comme information
     - le nom du pays
     - la région du monde de celui-ci
     - le nombre de documents scientifiques produits par ce pays
