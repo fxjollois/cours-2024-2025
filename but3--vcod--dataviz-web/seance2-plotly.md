@@ -45,8 +45,8 @@ Le plus simple est de créer une balise `<div>` avec un identifiant spécifique,
 
 Ensuite, on va, dans une balise de script, procéder en deux étapes :
 
-1- Créer une variable (nommée `data` ici), contenant les valeurs à mettre en $X$ et en $Y$, et le type de graphique
-2- Appler la fonction `newPlot()` de l'objet `Plotly` avec l'identifiant de la balise où placer le graphique et les données du graphique.
+1. Créer une variable (nommée `data` ici), contenant les valeurs à mettre en $X$ et en $Y$, et le type de graphique
+2. Appler la fonction `newPlot()` de l'objet `Plotly` avec l'identifiant de la balise où placer le graphique et les données du graphique.
 
 ```js
 var data = [
@@ -70,6 +70,7 @@ En ajoutant le champs `text` dans les données, on peut par exemple afficher les
 #### Customisation de la pop-up
 
 On peut customiser la pop-up qui s'affiche en passant la souris sur une barre, avec le champs `hoverinfo` qui peut prendre les valeurs suivantes, entre autres : 
+
 - "none" : supprime l'affichage
 - "x" ou "y" : pour ne voir que l'une des deux informations
 
@@ -140,10 +141,10 @@ on va créer une nouvelle balise `<div>` avec un identifiant spécifique, comme 
 
 Ensuite, on va, dans une balise de script, procéder en trois étapes cette fois-ci :
 
-1- Créer une variable par modalité (nommée `traceA` pour *A*, ...), contenant les valeurs à mettre en $X$ et en $Y$
+1. Créer une variable par modalité (nommée `traceA` pour *A*, ...), contenant les valeurs à mettre en $X$ et en $Y$
     - Dans Plotly, on parle de **trace**
-2- Créer une variable (`data3` ici), qui sera une liste contenant les 5 variables créées juste avant
-2- Appler la fonction `newPlot()` de l'objet `Plotly` avec l'identifiant de la balise où placer le graphique et les données du graphique.
+2. Créer une variable (`data3` ici), qui sera une liste contenant les 5 variables créées juste avant
+3. Appler la fonction `newPlot()` de l'objet `Plotly` avec l'identifiant de la balise où placer le graphique et les données du graphique.
 
 ```js
 var traceA = { x: X, y: A, type: "scatter" },
@@ -180,9 +181,9 @@ Le champs `name` dans chaque trace permet de changer ce qui est affiché dans la
 
 Ici, on voit que chaque trace est une ligne avec un point à chaque valeur. On peut modifier cela en ajoutant le champt `mode` à l'objet retourné. Celui-ci peut prendre plusieurs valeurs dont les suivantes :
 
-- "lines" : uniquement la ligne
-- "markers" : uniquement les points
-- "lines+markers" : les deux (idem si on ne met pas le champs)
+- `"lines"` : uniquement la ligne
+- `"markers"` : uniquement les points
+- `"lines+markers"` : les deux (idem si on ne met pas le champs)
 
 #### Personnalisation du graphique
 
