@@ -7,5 +7,5 @@
     - [Demande](seance1-demande)
     
 - Séance 2 : Plotly
-    - [Initiation à la librairie Plotlyt](seance2-plotly)
+    - [Initiation à la librairie Plotly](seance2-plotly)
     - [Demande](seance2-demande)
