@@ -1,5 +1,10 @@
 # Administration et système Linux pour la Data Science
 
+Lien zoom pour les séances : 
+
+> <https://u-paris.zoom.us/j/84144651454?pwd=aXbvEVHdeYEKV9MrJeSIqb2OrvR7tm.1>
+
+
 ## Master AMSD/MLSD - M1
 
 - [Séance 1](seance1) : Langage système
