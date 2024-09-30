@@ -39,7 +39,7 @@ Refondre totalement le cours en faisant 30 minutes de cours + 1h d'application �
     1. Rappel stats univariés + TP EXCEL univarié (partie de la séance 1 et séance 2)
     2. Rappel stats bivariés + TP EXCEL bivarié (partie de la séance 1 et séance 2)
     3. Rappel probas + TP EXCEL probas (dont conditionnelles - partie de la séance 3 + à inventer)
-    4. [QCM sur rappels] + Lois discrères + TP EXCEL lois discrètes (bernouilli, binomiale, poisson - partie séance 3 et séance 4)
+    4. [QCM sur rappels] + Lois discrètes + TP EXCEL lois discrètes (bernouilli, binomiale, poisson - partie séance 3 et séance 4)
     5. Lois continues + TP EXCEL lois continues (uniforme, normale - partie séance 3 et séance 5 + début séance 4)
     6. [QCM sur lois] + Estimation d'une moyenne par intervalles + TP EXCEL (partie séance 6)
     7. Estimation d'une proportion par intervalles + TP EXCEL (partie séance 6)
