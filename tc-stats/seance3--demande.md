@@ -38,7 +38,7 @@ On a vu que les tableaux (croisés) dynamiques permettent de calculer automatiqu
 Ici, on compte le nombre de lignes qui respectent une ou plusieurs conditions
 
 - En cellule `A6`, écrire *Avec fumeurs et à plus de 40$*
-- En cellule `B6`, écrire `NB.SI.ENS(tips!D:D; "Yes"; A:A; ">40")`
+- En cellule `B6`, écrire `NB.SI.ENS(tips!D:D; "Yes"; tips!A:A; ">40")`
     - On teste à la fois si la colonne `D` est égale à *Yes* et si la colonne `A` est supérieure à 40
     
 
