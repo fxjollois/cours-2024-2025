@@ -23,14 +23,14 @@ On a vu que les tableaux (croisés) dynamiques permettent de calculer automatiqu
 ### Compter avec une condition d'égalité
 
 - En cellule `A4`, écrire *Avec fumeurs*
-- En cellule `B4`, écrire `NB.SI(D:D; "Yes")`
+- En cellule `B4`, écrire `NB.SI(tips!D:D; "Yes")`
     - `NB.SI()` permet de compter le nombre de cellules avec une valeur respectant une condition (ici, égale à *Yes*)
     - Fonctionne aussi sur des valeurs numériques
     
 ### Compter avec une condition de comparaison
 
 - En cellule `A5`, écrire *A plus 40$*
-- En cellule `B5`, écrire `NB.SI(A:A; ">40")`
+- En cellule `B5`, écrire `NB.SI(tips!A:A; ">40")`
     - Noter ici le formalisme `""` pour mettre une condition
 
 ### Compter avec plusieurs conditions
@@ -38,7 +38,7 @@ On a vu que les tableaux (croisés) dynamiques permettent de calculer automatiqu
 Ici, on compte le nombre de lignes qui respectent une ou plusieurs conditions
 
 - En cellule `A6`, écrire *Avec fumeurs et à plus de 40$*
-- En cellule `B6`, écrire `NB.SI.ENS(D:D; "Yes"; A:A; ">40")`
+- En cellule `B6`, écrire `NB.SI.ENS(tips!D:D; "Yes"; A:A; ">40")`
     - On teste à la fois si la colonne `D` est égale à *Yes* et si la colonne `A` est supérieure à 40
     
 
