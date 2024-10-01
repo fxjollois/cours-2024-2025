@@ -4,6 +4,7 @@
 
 1. [Introduction à Python](seance1-intro-python)
     - [correction](seance1-correction.html)
+
 2. [Manipulation et Visualisation de données](seance2-stat-python)
 
 
