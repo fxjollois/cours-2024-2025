@@ -9,7 +9,7 @@ Lien zoom pour les séances :
 
 - [Séance 1](seance1) : Langage système
     - [Demande](seance1-demande)
-<!--    - [Correction](seance1-correction) -->
+    - [Correction](seance1-correction)
 
 <!--
 - [Séance 2](seance2) : Scripts en langage système
