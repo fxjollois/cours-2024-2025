@@ -11,8 +11,9 @@ Lien zoom pour les séances :
     - [Demande](seance1-demande)
     - [Correction](seance1-correction)
 
-<!--
 - [Séance 2](seance2) : Scripts en langage système
+
+<!--
     - [Demande](seance2-demande)
 - [Séance 3](seance3) : Correction et commentaires sur les scripts `shell`
     - [demande](seance3-demande)
