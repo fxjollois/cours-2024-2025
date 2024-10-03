@@ -28,5 +28,5 @@ A partir de ces données, on veut produire un tableau de bord ressemblant à la 
 
 **BONUS** : Ajout d'un bouton permettant d'avoir des FLOP 15 (films les moins bien notés)
 
-<iframe src="seance3/resultat_voulu.html" width="100%" height="100%"></iframe>
+<iframe src="seance3/resultat_voulu.html" style="width: 100%;min-width: 800px;min-height: 600px"></iframe>
 
