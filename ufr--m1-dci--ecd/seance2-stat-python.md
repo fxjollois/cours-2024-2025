@@ -606,7 +606,7 @@ p.set_axis_labels("Nombre de convives", "Pourboire")
     - Ensemble de variables expliquées sur [cette page](https://docs.google.com/spreadsheets/d/1iWCNJcSutYqpULSQHlNyGInUvHg2BoUGoNRIGa6Szc4/edit#gid=1938308660).
     
 - Données sur Paris :
-    - 4 septembre 2023
+    - 6 septembre 2024
     - Fichier [listings.csv](https://data.insideairbnb.com/france/ile-de-france/paris/2024-09-06/visualisations/listings.csv) 
 
 ---
