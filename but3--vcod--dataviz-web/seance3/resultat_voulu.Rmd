@@ -1,0 +1,46 @@
+---
+title: "Movies - demande"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(kableExtra)
+
+load("movies.RData")
+```
+
+<style type="text/css">
+.main-container {
+  max-width: 80% !important;
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+
+## Résultat voulu
+
+```{r top_genres, fig.show="hold", out.width="50%"}
+ggplot(data = top_genres, aes(reorder(Genre, NbFilms), NbFilms)) +
+  geom_bar(stat = "identity") + coord_flip() +
+  theme_minimal() +
+  labs(x = "", y = "")
+
+ggplot(evol_genres_bis, 
+       aes(Annee, Nb, color = Genre, group = Genre)) +
+  geom_line() +
+  theme_minimal() +
+  labs(x = "", y = "")
+```
+
+
+```{r top_films, fig.show="hold", out.width="50%"}
+ggplot(notes_films %>% arrange(desc(Rotten)) %>% head(20), aes(Titre, Rotten)) +
+  geom_bar(stat = "identity") + coord_flip() +
+  theme_minimal()
+
+ggplot(notes_films %>% arrange(desc(IMDB)) %>% head(20), aes(reorder(Titre, IMDB), IMDB)) +
+  geom_bar(stat = "identity") + coord_flip() +
+  theme_minimal()
+```

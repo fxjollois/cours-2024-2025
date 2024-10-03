@@ -8,6 +8,9 @@
         <script src="par_annee.js"></script>
         <script src="documents_citations.js"></script>
         <style>
+            h1 {
+                text-align: center;
+            }
             #top_regions {
                 float: left;
             }
@@ -17,13 +20,15 @@
         </style>
     </head>
     <body>
-
-        <div>
-            <div id = "top_regions"></div>
-            <div id = "par_annee"></div>
+        <h1>Production scientifique mondiale</h1>
+        <div style="width: 80%; margin: 0 auto;">
+            <div>
+                <div id = "top_regions"></div>
+                <div id = "par_annee"></div>
+            </div>
+            <div style="clear: both;">&nbsp;</div>
+            <div id = "documents_citations"></div>
         </div>
-        <div style="clear: both;">&nbsp;</div>
-        <div id = "documents_citations"></div>
         <script>
             var trace_top_regions = [
                 {
@@ -34,15 +39,28 @@
                     orientation: "h"
                 }
             ];
-            Plotly.newPlot("top_regions", trace_top_regions, { margin: { l: 150 }},  { displayModeBar: false });
+            Plotly.newPlot(
+                "top_regions", 
+                trace_top_regions, 
+                {  
+                    title: "Classement des régions selon la production scientifique",
+                    margin: { l: 150 }, 
+                    xaxis: { fixedrange: true }, 
+                    yaxis: { fixedrange: true }
+                },  
+                { displayModeBar: false }
+            );
             
             var regions = top_regions.map(function(e) { return e.Region }),
                 traces_par_annee = regions.map(function(e) { 
                     return {
                         x: par_annee.map(function(d) { return d.Year; }),
                         y: par_annee.map(function(d) { return d[e]; }),
+                        text: par_annee.map(function(d) { return d.Year == 2021 ? e : ""}),
                         name: e,
-                        type : "scatter",
+                        type: "scatter",
+                        mode: "lines+text",
+                        textposition: "right",
                         marker: { color: "darkgrey" }
                     }
                 }),
@@ -50,7 +68,17 @@
                     e.y = e.y.map(function(d) { return d / e.y[0] * 100; });
                     return e;
                 });
-            Plotly.newPlot("par_annee", traces_par_annee_bis, { width: "600px" },  { displayModeBar: false });
+            Plotly.newPlot(
+                "par_annee", 
+                traces_par_annee_bis, 
+                { 
+                    title: "Evolution sur la période (base 100 en 1996)",
+                    // width: "600px", 
+                    xaxis: { range: [1996, 2030], fixedrange: true }, 
+                    yaxis: { fixedrange: true }
+                },  
+                { displayModeBar: false }
+            );
             
             var traces_documents_citations = {
                 x: documents_citations.map(function(e) { return e.Documents; }),
@@ -60,17 +88,22 @@
                 mode: "markers",
                 marker: { color: "darkgray", size: 5 }
             }
-            var layout = {
-                xaxis: {
-                    type: 'log',
-                    autorange: true
-                },
-                yaxis: {
-                    type: 'log',
-                    autorange: true
-                }
-            };
-            Plotly.newPlot("documents_citations", [traces_documents_citations], layout,  { displayModeBar: false });
+            Plotly.newPlot(
+                "documents_citations", 
+                [traces_documents_citations], 
+                {
+                    title: "Croisement en documents produits et citations en 2021",
+                    xaxis: {
+                        type: 'log',
+                        autorange: true
+                    },
+                    yaxis: {
+                        type: 'log',
+                        autorange: true
+                    }
+                },  
+                { displayModeBar: false }
+            );
         </script>
         <script>
             document.getElementById("top_regions").on(
