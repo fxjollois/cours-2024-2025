@@ -607,7 +607,7 @@ p.set_axis_labels("Nombre de convives", "Pourboire")
     
 - Données sur Paris :
     - 4 septembre 2023
-    - Fichier [listings.csv](http://data.insideairbnb.com/france/ile-de-france/paris/2023-09-04/visualisations/listings.csv) 
+    - Fichier [listings.csv](https://data.insideairbnb.com/france/ile-de-france/paris/2024-09-06/visualisations/listings.csv) 
 
 ---
 ## Réaliser les étapes suivantes
@@ -625,3 +625,4 @@ p.set_axis_labels("Nombre de convives", "Pourboire")
 - Décrire le lien entre `room_type` et `neighboorhood`
 - Représenter les logements dans un nuage de points, en mettant une couleur par `neighboorhood`
 - Ajouter l'information sur `price` pour chaque point dans ce graphique
+
