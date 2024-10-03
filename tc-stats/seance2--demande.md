@@ -22,7 +22,8 @@ Nous allons continuer de travailler sur les données contenu dans le fichier `ti
 
 - Excel :
     - Cliquez sur *Insertion* -> *Nuage de points*
-    - 
+    - Cliquez sur *Sélectionner des données*
+    - Ecrivez `tips!A:B`
 - LibreOffice :
     - Cliquez sur *Insertion* -> *Diagramme*
     - Choississez *XY (Dispersion)*
