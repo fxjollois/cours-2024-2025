@@ -3,7 +3,8 @@
     <head>
         <meta charset = "UTF-8">
         
-        {% seo %}
+        {% seo title=false %}
+        <title>page.title</title>
         
         <link rel = "stylesheet" type = "text/css" href = "../remarkjs-v2.css">
         <link rel = "icon" href = "favicon-graduation-cap.ico" type = "image/x-icon">
@@ -17,7 +18,7 @@
     </head>
     <body>
         <textarea id="source">
-            {{ content }}
+            {{ page.content }}
         </textarea>
         <script src="../remark.js"></script>
         <script>
