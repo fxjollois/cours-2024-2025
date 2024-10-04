@@ -55,15 +55,15 @@ Refondre totalement le cours en faisant 30 minutes de cours + 1h d'application �
 
 - streamlit ou pas ? javascript ou pas ?
 - 10 séances de 3h :
-    1. ??
-    1. ??
-    1. ??
-    1. ??
-    1. ??
-    1. ??
-    1. ??
-    1. ??
-    1. ??
+    1. Rappels HTML/CSS et Intro JS
+    1. Plotly : intro
+    1. Plotly : correction et travail à faire
+    1. Datatables : intro
+    1. Datatables : correction et travail à faire
+    1. D3.js : intro
+    1. D3.js : correction et travail à faire
+    1. Leaflet : intro
+    1. Leaflet : correction et travail à faire
     1. Evaluation finale
 
 <!--

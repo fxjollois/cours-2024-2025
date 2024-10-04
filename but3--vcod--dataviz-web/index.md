@@ -9,3 +9,8 @@
 - Séance 2 : Plotly
     - [Initiation à la librairie Plotly](seance2-plotly)
     - [Demande](seance2-demande)
+
+- Séance 3 : Suite sur Plotly
+    - [Explication sur la correction de la séance 2](seance3-explication)
+    - [Demande](seance3-demande)
+    
