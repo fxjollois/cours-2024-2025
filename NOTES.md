@@ -112,6 +112,10 @@ Refondre totalement le cours en faisant 30 minutes de cours + 1h d'application �
         1. Importation (readr, readexcel)
         1. Manipulation (dplyr)
         1. Visualisation (ggplot2)
+- Cours Analyse de données et tests (3ème année - CT3 GEM)
+    - CM 1h :
+    - TD : associé aux CM ?
+    - TP : ??
         1. 
         1. 
       

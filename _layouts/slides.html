@@ -3,7 +3,7 @@
     <head>
         <meta charset = "UTF-8">
         
-        {% seo %}
+        {% seo title=false %}
         
         <link rel = "stylesheet" type = "text/css" href = "../remarkjs-v2.css">
         <link rel = "icon" href = "favicon-graduation-cap.ico" type = "image/x-icon">
@@ -16,9 +16,7 @@
 
     </head>
     <body>
-        <textarea id="source">
-{{ page.content }}
-        </textarea>
+        <textarea id="source">{{ page.content }}</textarea>
         <script src="../remark.js"></script>
         <script>
             var slideshow = remark.create({
@@ -26,6 +24,9 @@
                 ratio: "16:9",
                 countIncrementalSlides: false
             });
+        </script>
+        <script>
+            document.title = document.getElementsByClassName("remark-slide-container")[0].getElementsByTagName("h1")[0].innerHTML;
         </script>
     </body>
 </html>
