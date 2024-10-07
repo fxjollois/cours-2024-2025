@@ -1,9 +1,24 @@
-
 ---
+title: "Lois de probabilité"
+author: "FX Jollois"
+date: "BUT TC - 2ème année"
+output:
+  xaringan::moon_reader:
+    css: [nhsr, chocolate-fonts]
+    nature: 
+      beforeInit: "macros.js"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+set.seed(1234)
+```
 
 ## Variable aléatoire 
 
-### Variable aléatoire
 Mesure d'un phénomène (*variable*) dont le résultat est déterminé par une expérience *aléatoire* (*i.e*. dépendant du hasard)
 
 - Exemples classiques : Pile/Face, Lancer de dé, Température, ...
