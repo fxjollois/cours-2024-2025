@@ -197,25 +197,6 @@ $$
 
 ---
 
-## Loi uniforme discrète
-
-
-
-`\(\rightarrow\)` Simulation avec 6 valeurs possibles, et 10^{4} tirages.
-
-
-
-![](seance4--lois-proba_files/figure-html/uni-dis-sim-masse-1.png)&lt;!-- --&gt;
-
----
-
-## Loi uniforme discrète
-
-![](seance4--lois-proba_files/figure-html/uni-dis-sim-esp-1.png)&lt;!-- --&gt;
-
-
----
-
 ## Loi uniforme discrète - *exercice*
 
 ### Questions
@@ -258,23 +239,6 @@ Pile ou face avec une pièce équilibrée
 $$
   E(X) = p \mbox{ et } V(X) = pq
 $$
-
-
----
-
-## Loi de Bernouilli
-
-`\(\rightarrow\)` Simulation avec une urne avec 100 boules oranges et 50 boules vertes. On considère qu'on veut des boules oranges, donc `\(P(X = 1) = \frac{100}{150}\)`. On fait toujours 10^{4} tirages, avec remise ici.
-
-
-
-![](seance4--lois-proba_files/figure-html/ber-sim-masse-1.png)&lt;!-- --&gt;
-
----
-
-## Loi de Bernouilli
-
-![](seance4--lois-proba_files/figure-html/ber-sim-esp-1.png)&lt;!-- --&gt;
 
 
 ---
@@ -331,15 +295,6 @@ $$
 $$
 P(X = k) = f(k) = C_k^n p^k (1-p)^{n-k}
 $$
-
-Exemple avec `\(n=10\)` et `\(p=.6\)`
-
-![](seance4--lois-proba_files/figure-html/bin-masse-1.png)&lt;!-- --&gt;
-
----
-
-## Loi Binomiale
-
 ### Fonction de répartition
 
 $$
@@ -347,26 +302,6 @@ F(x) = \sum_{k=0}^{\lfloor x \rfloor} f(k) \mbox{ pour } 0 \le x \le n
 $$
 
 A noter que `\(F(x)=0\)` pour `\(x &lt; 0\)` et `\(F(x)=1\)` pour `\(x&gt;n\)`.
-
-![](seance4--lois-proba_files/figure-html/bin-rep-1.png)&lt;!-- --&gt;
-
-
----
-
-## Loi Binomiale
-
-`\(\rightarrow\)` Simulation avec notre urne avec 100 boules oranges et 50 boules vertes. Chaque essai comportera 100 tirages avec remise. On fait toujours 10^{4} essais. On cherche à savoir combien on aura de boules oranges dans ces 100 tirages.
-
-
-
-![](seance4--lois-proba_files/figure-html/bin-sim-masse-1.png)&lt;!-- --&gt;
-
-
----
-
-## Loi Binomiale
-
-![](seance4--lois-proba_files/figure-html/bin-sim-esp-1.png)&lt;!-- --&gt;
 
 
 ---
@@ -427,36 +362,12 @@ $$
 P(X = k) = f(k) = \frac{\lambda^k}{k!}e^{-\lambda}
 $$
 
-Exemple avec `\(\lambda=5\)`
-
-![](seance4--lois-proba_files/figure-html/pois-masse-1.png)&lt;!-- --&gt;
-
----
 
 ### Fonction de répartition
 
 $$
 F(k) = \frac{\Gamma(\lfloor k+1 \rfloor, \lambda)}{\lfloor k \rfloor !} \mbox{ pour } k &gt; 0
 $$
-
-![](seance4--lois-proba_files/figure-html/pois-rep-1.png)&lt;!-- --&gt;
-
-
----
-
-## Loi de Poisson
-
-`\(\rightarrow\)` Simulation en considérant un arrêt de bus. On considère que 2 personnes viennent toutes les minutes. On étudie le nombre de personnes sur une durée de 5 minutes. On choisit donc `\(\lambda = 10\)`.
-
-
-
-![](seance4--lois-proba_files/figure-html/pois-sim-masse-1.png)&lt;!-- --&gt;
-
----
-
-## Loi de Poisson
-
-![](seance4--lois-proba_files/figure-html/pois-sim-esp-1.png)&lt;!-- --&gt;
 
 
 ---
@@ -518,24 +429,6 @@ A noter que `\(F(x)=0\)` pour `\(x&lt;a\)`, et `\(F(x)=1\)` pour `\(x&gt;b\)`.
 
 ---
 
-## Loi uniforme continue
-
-`\(\rightarrow\)` Simulation sur l'intervalle `\([1;5]\)`
-
-
-
-
-![](seance4--lois-proba_files/figure-html/uni-cont-sim-dens-1.png)&lt;!-- --&gt;
-
----
-
-## Loi uniforme continue
-
-![](seance4--lois-proba_files/figure-html/uni-cont-sim-esp-1.png)&lt;!-- --&gt;
-
-
----
-
 ## Loi Normale
 
 ### Définition
@@ -577,172 +470,6 @@ $$
 $$
 
 ![](seance4--lois-proba_files/figure-html/norm-rep-1.png)&lt;!-- --&gt;
-
-
----
-
-## Loi Normale
-
-`\(\rightarrow\)` Simulation d'une loi Normale de moyenne `\(\mu = 170\)` et d'écart-type `\(10\)`
-
-
-
-![](seance4--lois-proba_files/figure-html/norm-sim-dens-1.png)&lt;!-- --&gt;
-
----
-
-## Loi Normale
-
-![](seance4--lois-proba_files/figure-html/norm-sim-esp-1.png)&lt;!-- --&gt;
-
-
----
-
-## Exercice
-
-### Plus grand nombre tiré
-
-On joue à un jeu avec deux dés (non pipés), pendant lequel on note le plus grand chiffre obtenu. Quelle est la loi de la variable aléatoire  ?
-
----
-
-## Solution
-
-### Plus grand nombre tiré
-
-On définit `\(\Omega\)` avec :
-`$$\Omega=\left\{\{1, 1\}, \{1, 2\}, \{1, 3\}, \ldots\right\}$$` 
-
-On peut donc faire le tableau suivant, avec en ligne les résultats du dé `\(A\)` et en colonnes ceux du dé `\(B\)`. Chaque cellule représente donc le plus grand des 2 chiffres obtenus.
-
-&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt;  &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; b=1 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; b=2 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; b=3 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; b=4 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; b=5 &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; b=6 &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; a=1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; a=2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; a=3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; a=4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; a=5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; a=6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-
----
-
-## Solution
-
-### Plus grand nombre tiré
-
-On obtient ainsi la loi de probabilité suivante :
-
-&lt;table class="table" style="margin-left: auto; margin-right: auto;"&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:right;"&gt; Plus grand &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Nb &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Px &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; P &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 1/36 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.03 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 3/36 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.08 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 5/36 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.14 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 7 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 7/36 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.19 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 9 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 9/36 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.25 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 11 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; 11/36 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.31 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
