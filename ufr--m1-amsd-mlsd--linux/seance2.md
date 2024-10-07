@@ -505,6 +505,7 @@ a[10]=dix
 echo ${a[@]}        # Affiche un deux trois 4 dix
 echo ${a[10]}       # Affiche dix
 echo ${a[5]}        # Affiche ligne vide
+echo ${#a[@]}       # Affiche 5 (taille du tableau)
 ```
 ---
 
@@ -523,7 +524,7 @@ echo ${a[5]}        # Affiche ligne vide
 
 ```bash
 # lignes de commande
-if [ condition_erreur ] ; do
+if [ condition_erreur ] ; then
     exit 1  # Dire à quoi cela correspond (mettre un message d'erreur est un plus mais pas toujours bon à faire)
 fi
 # ...
