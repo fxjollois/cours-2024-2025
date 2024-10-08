@@ -1,9 +1,24 @@
-
 ---
+title: "Lois de probabilité"
+author: "FX Jollois"
+date: "BUT TC - 2ème année"
+output:
+  xaringan::moon_reader:
+    css: [nhsr, chocolate-fonts]
+    nature: 
+      beforeInit: "macros.js"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+set.seed(1234)
+```
 
 ## Variable aléatoire 
 
-### Variable aléatoire
 Mesure d'un phénomène (*variable*) dont le résultat est déterminé par une expérience *aléatoire* (*i.e*. dépendant du hasard)
 
 - Exemples classiques : Pile/Face, Lancer de dé, Température, ...
@@ -128,47 +143,6 @@ $$
 
 ---
 
-## Loi uniforme discrète
-
-```{r def-rand}
-n = 6
-ntry = 10000
-```
-
-$\rightarrow$ Simulation avec `r n` valeurs possibles, et `r ntry` tirages.
-
-```{r uni-dis-sim-tab}
-tirages = sample(1:n, ntry, replace = TRUE)
-tab = tibble(essai = 1:ntry, tirage = tirages, cumul = cumsum(tirages)) %>%
-  mutate(moyenne = cumul / essai)
-```
-
-```{r uni-dis-sim-masse}
-ggplot(tab, aes(factor(tirage))) +
-  geom_bar(fill = "steelblue") +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25))
-```
-
----
-
-## Loi uniforme discrète
-
-```{r uni-dis-sim-esp}
-ggplot(tab, aes(essai, moyenne)) +
-  geom_hline(yintercept = 3.5, color = "gray10", linetype = "dashed") +
-  geom_line(color = "steelblue", size = 2) +
-  ylim(3, 4) +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25)) +
-  ggtitle("Evolution de la moyenne")
-```
-
-
----
-
 ## Loi uniforme discrète - *exercice*
 
 ### Questions
@@ -211,41 +185,6 @@ Pile ou face avec une pièce équilibrée
 $$
   E(X) = p \mbox{ et } V(X) = pq
 $$
-
-
----
-
-## Loi de Bernouilli
-
-$\rightarrow$ Simulation avec une urne avec 100 boules oranges et 50 boules vertes. On considère qu'on veut des boules oranges, donc $P(X = 1) = \frac{100}{150}$. On fait toujours `r ntry` tirages, avec remise ici.
-
-```{r ber-sim-tab}
-tirages = rbernoulli(ntry, 2/3)
-tab = tibble(essai = 1:ntry, tirage = tirages, cumul = cumsum(tirages)) %>%
-  mutate(moyenne = cumul / essai)
-```
-
-```{r ber-sim-masse, fig.height=4}
-ggplot(tab, aes(factor(tirage))) +
-  geom_bar(fill = c("darkgreen", "orange3")) +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25), axis.text.x = element_blank())
-```
-
----
-
-## Loi de Bernouilli
-
-```{r ber-sim-esp}
-ggplot(tab, aes(essai, moyenne)) +
-  geom_hline(yintercept = 2/3, color = "gray10", linetype = "dashed") +
-  geom_line(color = "steelblue", size = 2) +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25)) +
-  ggtitle("Evolution de la moyenne")
-```
 
 
 ---
@@ -302,22 +241,6 @@ $$
 $$
 P(X = k) = f(k) = C_k^n p^k (1-p)^{n-k}
 $$
-
-Exemple avec $n=10$ et $p=.6$
-
-```{r bin-masse, fig.height=5}
-x = seq(0, 20, by = 1)
-df = data.frame(x = x, y = dbinom(x, 10, .6))
-ggplot(df, aes(x, y)) + 
-  geom_bar(fill = "steelblue", stat = "identity", size = 2) +
-  labs(x = "", y = "") +
-  theme_minimal()
-```
-
----
-
-## Loi Binomiale
-
 ### Fonction de répartition
 
 $$
@@ -325,51 +248,6 @@ F(x) = \sum_{k=0}^{\lfloor x \rfloor} f(k) \mbox{ pour } 0 \le x \le n
 $$
 
 A noter que $F(x)=0$ pour $x < 0$ et $F(x)=1$ pour $x>n$.
-
-```{r bin-rep, fig.height=5}
-df = data.frame(x = x, y = pbinom(x, 10, .6))
-ggplot(df, aes(x, y)) + 
-  geom_step(color = "steelblue", size = 2) +
-  labs(x = "", y = "") +
-  theme_minimal()
-```
-
-
----
-
-## Loi Binomiale
-
-$\rightarrow$ Simulation avec notre urne avec 100 boules oranges et 50 boules vertes. Chaque essai comportera 100 tirages avec remise. On fait toujours `r ntry` essais. On cherche à savoir combien on aura de boules oranges dans ces 100 tirages.
-
-```{r bin-sim-tab}
-tirages = rbinom(ntry, 100, 2/3)
-tab = tibble(essai = 1:ntry, tirage = tirages, cumul = cumsum(tirages)) %>%
-  mutate(moyenne = cumul / essai)
-```
-
-```{r bin-sim-masse, fig.height=5}
-ggplot(tab, aes(factor(tirage))) +
-  geom_bar(fill = "steelblue") +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25))
-```
-
-
----
-
-## Loi Binomiale
-
-```{r bin-sim-esp}
-ggplot(tab, aes(essai, moyenne)) +
-  geom_hline(yintercept = 100*2/3, color = "gray10", linetype = "dashed") +
-  geom_line(color = "steelblue", size = 2) +
-  ylim(65, 68) +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25)) +
-  ggtitle("Evolution de la moyenne")
-```
 
 
 ---
@@ -430,67 +308,12 @@ $$
 P(X = k) = f(k) = \frac{\lambda^k}{k!}e^{-\lambda}
 $$
 
-Exemple avec $\lambda=5$
-
-```{r pois-masse, fig.height=4}
-x = seq(0, 20, by = 1)
-df = data.frame(x = x, y = dpois(x, 5))
-ggplot(df, aes(x, y)) + 
-  geom_bar(fill = "steelblue", stat = "identity", size = 2) +
-  labs(x = "", y = "") +
-  theme_minimal()
-```
-
----
 
 ### Fonction de répartition
 
 $$
 F(k) = \frac{\Gamma(\lfloor k+1 \rfloor, \lambda)}{\lfloor k \rfloor !} \mbox{ pour } k > 0
 $$
-
-```{r pois-rep}
-df = data.frame(x = x, y = ppois(x, 5))
-ggplot(df, aes(x, y)) + 
-  geom_step(color = "steelblue", size = 2) +
-  labs(x = "", y = "") +
-  theme_minimal()
-```
-
-
----
-
-## Loi de Poisson
-
-$\rightarrow$ Simulation en considérant un arrêt de bus. On considère que 2 personnes viennent toutes les minutes. On étudie le nombre de personnes sur une durée de 5 minutes. On choisit donc $\lambda = 10$.
-
-```{r pois-sim-tab}
-tirages = rpois(ntry, 10)
-tab = tibble(essai = 1:ntry, tirage = tirages, cumul = cumsum(tirages)) %>%
-  mutate(moyenne = cumul / essai)
-```
-
-```{r pois-sim-masse}
-ggplot(tab, aes(factor(tirage))) +
-  geom_bar(fill = "steelblue") +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25)) 
-```
-
----
-
-## Loi de Poisson
-
-```{r pois-sim-esp}
-ggplot(tab, aes(essai, moyenne)) +
-  geom_hline(yintercept = 10, color = "gray10", linetype = "dashed") +
-  geom_line(color = "steelblue", size = 2) +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25)) +
-  ggtitle("Evolution de la moyenne")
-```
 
 
 ---
@@ -580,43 +403,6 @@ ggplot(df, aes(x, y)) +
 
 ---
 
-## Loi uniforme continue
-
-$\rightarrow$ Simulation sur l'intervalle $[1;5]$
-
-```{r uni-cont-sim-tab}
-tirages = runif(ntry, 1, 5)
-tab = tibble(essai = 1:ntry, tirage = tirages, cumul = cumsum(tirages)) %>%
-  mutate(moyenne = cumul / essai)
-```
-
-
-```{r uni-cont-sim-dens}
-ggplot(tab, aes(tirage)) +
-  geom_histogram(fill = "steelblue", breaks = seq(1, 5, by = .1)) +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25)) +
-  ggtitle("Fonction de masse")
-```
-
----
-
-## Loi uniforme continue
-
-```{r uni-cont-sim-esp}
-ggplot(tab, aes(essai, moyenne)) +
-  geom_hline(yintercept = 3, color = "gray10", linetype = "dashed") +
-  geom_line(color = "steelblue", size = 2) +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25)) +
-  ggtitle("Evolution de la moyenne")
-```
-
-
----
-
 ## Loi Normale
 
 ### Définition
@@ -672,89 +458,4 @@ ggplot(df, aes(x, y)) +
   labs(x = "", y = "") +
   theme_minimal()
 ```
-
-
----
-
-## Loi Normale
-
-$\rightarrow$ Simulation d'une loi Normale de moyenne $\mu = 170$ et d'écart-type $10$
-
-```{r norm-sim-tab}
-tirages = rnorm(ntry, 170, 10)
-tab = tibble(essai = 1:ntry, tirage = tirages, cumul = cumsum(tirages)) %>%
-  mutate(moyenne = cumul / essai)
-```
-
-```{r norm-sim-dens}
-ggplot(tab, aes(tirage)) +
-  geom_histogram(fill = "steelblue") +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25))
-```
-
----
-
-## Loi Normale
-
-```{r norm-sim-esp}
-ggplot(tab, aes(essai, moyenne)) +
-  geom_hline(yintercept = 170, color = "gray10", linetype = "dashed") +
-  geom_line(color = "steelblue", size = 2) +
-  theme_minimal() +
-  labs(x = "", y = "") +
-  theme(text = element_text(size = 25)) +
-  ggtitle("Evolution de la moyenne")
-```
-
-
----
-
-## Exercice
-
-### Plus grand nombre tiré
-
-On joue à un jeu avec deux dés (non pipés), pendant lequel on note le plus grand chiffre obtenu. Quelle est la loi de la variable aléatoire  ?
-
----
-
-## Solution
-
-### Plus grand nombre tiré
-
-On définit $\Omega$ avec :
-$$\Omega=\left\{\{1, 1\}, \{1, 2\}, \{1, 3\}, \ldots\right\}$$ 
-
-On peut donc faire le tableau suivant, avec en ligne les résultats du dé $A$ et en colonnes ceux du dé $B$. Chaque cellule représente donc le plus grand des 2 chiffres obtenus.
-
-```{r exo-tab}
-tab = data.frame(matrix(1, nrow = 6, ncol = 6))
-colnames(tab) = paste0("b=", 1:6)
-rownames(tab) = paste0("a=", 1:6)
-for (i in 1:6) 
-  for (j in 1:6)
-    tab[i,j] = max(i, j)
-kable(tab) %>%
-  kable_styling(position = "center")
-```
-
-
----
-
-## Solution
-
-### Plus grand nombre tiré
-
-On obtient ainsi la loi de probabilité suivante :
-
-```{r exo-loi}
-loi = sapply(1:6, function (x) return (sum(tab == x)))
-tib = tibble("Plus grand" = 1:6, "Nb" = loi) %>%
-  mutate("Px" = paste(loi, 36, sep = "/")) %>%
-  mutate("P" = loi / 36)
-kable(tib, digits = 2) %>%
-  kable_styling(position = "center")
-```
-
 

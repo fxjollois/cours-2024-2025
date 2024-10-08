@@ -8,4 +8,5 @@
 
 - Séance 3 - Rappels de probabilité : [cours](seance3--rappels-proba) - [TP](seance3--demande)
 
+- Séance 4 - Lois de probabilité : [cours](seance4--lois-proba) - [TP](seance4--demande)
 

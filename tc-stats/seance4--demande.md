@@ -1,8 +1,5 @@
 # Lois de probabilité - Discrète
 
-<!-- reprise de l'exercice avec le dé et le gain (+1, -2, +5...) et comparer avec un autre jeu -->
-
-
 ## Outil de calcul des probabilités dans un tableur
 
 ### Pour la loi binomiale 
@@ -81,6 +78,8 @@ Supposons que nous avons un ensemble de 500 prospects, et on suppose qu'on a en 
 1. Suite à cette campagne, nous avons réussi à avoir 130 clients sur le produit 1, 110 clients sur le produit 2 et 80 clients sur le produit 3. Que peut-on dire de la performance de notre campagne pour chaque produit ?
 1. Quelle est la probabilité qu'une personne achète les 3 produits ? Seulement 2 ? Seulement 1 ? Aucun ? 
 1. Au final, combien de clients (quelque soit le produit) puis-je espérer avoir ?
+
+## Exercices sur loi de Poisson
 
 ### Gestion d'un magasin
 
