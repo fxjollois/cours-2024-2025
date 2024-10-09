@@ -374,6 +374,44 @@ document.getElementById("top_regions").on(
     });
 ```
 
+---
+### Lors d'un clic sur une barre du premier graphique (suite)
+
+- Modification des couleurs dans le premier graphique
+- Remise à zéro des couleurs et de l'opacité dans le deuxième graphique
+    - utile si déjà changé une première fois
+- Affectation de la couleur et de l'opacité juste pour la région voulue dans le 2ème graphique
+- Modification des couleurs et des tailles pour les pays de la région sélectionné dans le graphique 3
+
+```js
+document.getElementById("top_regions").on(
+    'plotly_click', 
+    function(e) {
+        var infos = e.points[0],
+            couleurs_regions = top_regions.map(function(d) { return d.Region == infos.label ? "DarkRed" : "lightgray" }),
+            couleurs_pays = documents_citations.map(function(d) { return d.Region == infos.label ? "DarkRed" : "lightgray" }),
+            tailles_pays = documents_citations.map(function(d) { return d.Region == infos.label ? 12 : 5 });
+*        Plotly.restyle("top_regions", { "marker.color": [couleurs_regions] })
+*        Plotly.restyle("par_annee", { "marker.color": "lightgray", opacity: 0.5 })
+*        Plotly.restyle("par_annee", { "marker.color": "DarkRed", opacity: 1 }, [infos.pointIndex])
+*        Plotly.restyle("documents_citations", { "marker.size": [tailles_pays], "marker.color": [couleurs_pays]})
+    });
+```
 
 
+---
+### Lors d'un double-clic en dehors d'une barre dans le premier graphique
 
+- Remise à zéro des couleurs dans le graphique 1
+- Remise à zéro des couleurs et de l'opacité dans le graphique 2
+- Remise à zéro des couleurs et de l'opacité dans le graphique 3
+
+```js
+document.getElementById("top_regions").on(
+    'plotly_doubleclick', 
+    function(e){
+        Plotly.restyle("top_regions", { "marker.color": "DarkGray" })                    
+        Plotly.restyle("par_annee", { "marker.color": "DarkGray", opacity: 1 })
+        Plotly.restyle("documents_citations", { "marker.color": "DarkGray", "marker.size": 5 })
+    });
+```
