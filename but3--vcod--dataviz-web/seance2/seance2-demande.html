@@ -30,6 +30,9 @@
             <div id = "documents_citations"></div>
         </div>
         <script>
+            /******************************************************************
+             PREMIER GRAPHIQUE
+             *****************************************************************/
             var trace_top_regions = [
                 {
                     y: top_regions.map(function(e) { return e.Region }),
@@ -51,13 +54,15 @@
                 { displayModeBar: false }
             );
             
+            /******************************************************************
+             DEUXIEME GRAPHIQUE
+             *****************************************************************/
             var regions = top_regions.map(function(e) { return e.Region }),
                 traces_par_annee = regions.map(function(e) { 
                     return {
                         x: par_annee.map(function(d) { return d.Year; }),
                         y: par_annee.map(function(d) { return d[e]; }),
                         text: par_annee.map(function(d) { return d.Year == 2021 ? e : ""}),
-                        name: e,
                         type: "scatter",
                         mode: "lines+text",
                         textposition: "right",
@@ -73,24 +78,29 @@
                 traces_par_annee_bis, 
                 { 
                     title: "Evolution sur la période (base 100 en 1996)",
-                    // width: "600px", 
-                    xaxis: { range: [1996, 2030], fixedrange: true }, 
+                    showlegend: false, 
+                    xaxis: { range: [1996, 2028], fixedrange: true }, 
                     yaxis: { fixedrange: true }
                 },  
                 { displayModeBar: false }
             );
             
-            var traces_documents_citations = {
-                x: documents_citations.map(function(e) { return e.Documents; }),
-                y: documents_citations.map(function(e) { return e.Citations; }),
-                text: documents_citations.map(function(e) { return e.Country; }),
-                type: "scatter",
-                mode: "markers",
-                marker: { color: "darkgray", size: 5 }
-            }
+            /******************************************************************
+             TROISIEME GRAPHIQUE
+             *****************************************************************/
+            var traces_documents_citations = [
+                {
+                    x: documents_citations.map(function(e) { return e.Documents; }),
+                    y: documents_citations.map(function(e) { return e.Citations; }),
+                    text: documents_citations.map(function(e) { return e.Country; }),
+                    type: "scatter",
+                    mode: "markers",
+                    marker: { color: "darkgray", size: 5 }
+                }
+            ];
             Plotly.newPlot(
                 "documents_citations", 
-                [traces_documents_citations], 
+                traces_documents_citations, 
                 {
                     title: "Croisement en documents produits et citations en 2021",
                     xaxis: {
@@ -104,8 +114,10 @@
                 },  
                 { displayModeBar: false }
             );
-        </script>
-        <script>
+
+            /******************************************************************
+             GESTION DES INTERACTIONS ENTRE GRAPHIQUE
+             *****************************************************************/
             document.getElementById("top_regions").on(
                 'plotly_click', 
                 function(e) {
