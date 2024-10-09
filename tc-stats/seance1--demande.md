@@ -4,7 +4,6 @@ Nous allons travailler sur les données contenu dans le fichier `tips`, dont vou
 
 - [Format Excel](tips.xlsx)
 - [Format Libre Office](tips.ods) (Téléchargement de [LibreOffice](https://fr.libreoffice.org/download/telecharger-libreoffice/))
-- [Format Numbers](tips.numbers)
 
 > Nota Bene : les noms des fonctions dans ce document sont valables dans **Libre Office**. Il est possible que certains soient différents dans les autres tableurs (me demander si cela ne fonctionne pas dans votre outil).
 
@@ -42,11 +41,12 @@ Différence entre Libre Office et Excel
 
 - Dans la case `B3`, écrivez la formule suivante : `=MOYENNE(tips.a:a)`
     - notez qu'il est possible d'écrire en minuscule ou en majuscule les noms des fonctions
-    - dans Excel : `=MOYENNE(tips!a:a)`
-    - dans Numbers : `=MOYENNE(tips::Tableau 1::A)`
-- Pour l'écart-type, c'est la fonction `ECARTYPE()` qu'il faut utiliser
+    - dans **Excel** ou **Google Sheets** : `=MOYENNE(tips!a:a)` (le `"."` est remplacé par un `"!"`)
+- Pour l'écart-type, c'est la fonction `ECARTYPE()` qu'il faut utiliser (sur la même colonne)
 - Pour minimum, maximum et médiane, il existe les fonction `MIN()`, `MAX()` et `MEDIANE()`
-- Pour les quartiles, nous avons la fonction `QUARTILE()`, qui demande en premier la plage des données (ici `tips.A:A`) et le type de quartile (0 : minimum, 1 : Q1, 2 : médiane, 3 : Q3, 4 : maximum)
+- Pour les quartiles, nous avons la fonction `QUARTILE()`, qui demande deux paramètres (séparés par un `";"`) :
+    - la plage des données (ici `tips.A:A`) 
+    - le type de quartile (0 : minimum, 1 : Q1, 2 : médiane, 3 : Q3, 4 : maximum)
 - Pour les centiles, il existe la fonction `CENTILE()` qui prend 2 paramètres :
     - la plage des données (ici toujours `tips.A:A`)
     - la valeur du centile (entre 0 et 1). Nous allons donc écrire la formule suivante dans la cellule `B13`, qu'il faudra dupliquer sur les cellules en dessous donc
@@ -71,7 +71,7 @@ Pour faire notre tableau, nous devons réaliser une première étape de créatio
 Pour calculer le nombre de valeurs entre 2 seuils, nous allons utiliser la fonction `FREQUENCE()`. Elle prend en première paramètre les données (toujours `tips.A:A`) et en deuxième paramètre, la liste des seuils. Ecrivez la formule suivante en cellule `E4` :
 
 - LibreOffice : `=FREQUENCE(tips.A:A;D4:D11)`
-- Excel : `=FREQUENCE(tips!A:A;D4:D11)`
+- Excel ou Google Sheets : `=FREQUENCE(tips!A:A;D4:D11)`
 
 Une fois cela fait, vous remarquerez que des valeurs se sont ajoutées sur les cellules en dessous. La valeur en `E4` est 0 car aucune valeur n'est inférieure à 0 dans les données. Ensuite, la valeur dans la cellule `E5` indique qu'il y a 17 valeurs entre 0 et 10. Et ainsi de suite. La somme des valeurs entre `E4` et `E11` est bien égale à 244 (*i.e.* le nombre de lignes du tableau).
 
@@ -95,13 +95,15 @@ On peut améliorer ce graphique en modifiant les libellés des axes, en ajoutant
 
 ##### avec LibreOffice
 
-Dans la partie *Séries de données*, après avoir cliquer dans la zone *Catégories*, cliquez sur l'icône à droite pour sélectionner la plage `F5:F11` (ou écrivez directement `montant.F5:F11`). Puis cliquez sur *Terminer*.
+Dans la partie *Séries de données*, après avoir cliquer dans la zone *Catégories*, cliquez sur l'icône à droite pour sélectionner la plage `F5:F11` (ou écrivez directement `F5:F11`). Puis cliquez sur *Terminer*.
 
 ##### avec Excel
 
-Dans le menu *Création de graphiques*, cliquer sur *Sélectionner des données*. Puis, dans la partie *Etiquettes*, vous pouvez soit aller sélectionner les étiquettes directement, soit écrire `montant!F5:F11`.
+Dans le menu *Conception de la carte*, cliquer sur *Sélectionner des données*. Puis, dans la partie *Etiquettes*, vous pouvez soit aller sélectionner les étiquettes directement, soit écrire `F5:F11`.
 
+##### avec Google Sheets
 
+Dans l'*éditeur graphique* (à droite), cliquer sur *Ajouter Axe X*, puis cliquer l'icône tableau à droite. Puis, vous pouvez soit aller sélectionner les étiquettes directement, soit écrire `F5:F11`.
 
 ### A FAIRE
 
