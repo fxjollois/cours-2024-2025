@@ -7,14 +7,15 @@
 - Nouveau programme :
     1. Intro Python
     2. Manipulation "à la SQL" et visualisation de données (univarié et bivarié)
-    3. [TP noté]
-    4. ACP
-    5. AFC
-    6. MDS et autre (?) + [QCM]
-    7. k-means et CAH
+    3. ACP
+    4. AFC
+    5. MDS et autre (?) + [QCM]
+    6. k-means et CAH
+    7. [TP noté]
     8. DBSCAN, SOM et autre ? + [QCM]
     9. Application sur données réelles
-    10. [TP noté Evaluation finale]
+    10. 2ème application sur données réelles
+    11. [TP noté Evaluation finale]
 
 ## M1 AMSD/MLSD
 
