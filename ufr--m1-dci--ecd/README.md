@@ -7,6 +7,7 @@
 
 2. [Manipulation et Visualisation de données](seance2-stat-python)
     - [correction](seance2-correction.html)
+
 3. [Représentation multidimensionnelle via l'ACP](seance3-acp.html)
     - [sous `python`](seance3-acp-python.html)
 
@@ -14,6 +15,26 @@
 <!--
     - [correction Wine](seance3-correction-wine.html)
     - [correction WGI](seance3-correction-wgi.html)
+
+3. [Représentation multidimensionnelle via l'AFC](seance4-afc.html)
+    - [sous `python`](seance4-afc-python.html)
+
+
+- Nouveau programme :
+    1. Intro Python
+    2. Manipulation "à la SQL" et visualisation de données (univarié et bivarié)
+    3. ACP
+    4. AFC
+    5. MDS et autre (?) + [QCM]
+    6. k-means et CAH
+    7. [TP noté]
+    8. DBSCAN, SOM et autre ? + [QCM]
+    9. Application sur données réelles
+    10. 2ème application sur données réelles
+    11. [TP noté Evaluation finale]
+
+
+OLD
 4. [Classification avec CAH et k-means](seance4-classif.html)
     - [sous `python`](seance4-classif-python.html)
     - [correction](seance4-correction.html)
