@@ -6,6 +6,8 @@
     - [correction](seance1-correction.html)
 
 2. [Manipulation et Visualisation de données](seance2-stat-python)
+    - [correction](seance2-correction.html)
+3. [Représentation multidimensionnelle via l'ACP](seance3-acp.html)
 
 
 
