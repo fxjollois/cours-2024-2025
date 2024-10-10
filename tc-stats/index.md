@@ -6,7 +6,9 @@
 
 - Séance 2 - Statistique Bivariée : [cours](seance2--stat-bi) - [tp](seance2--demande)
 
-- Séance 3 - Rappels de probabilité : [cours](seance3--rappels-proba) - [TP](seance3--demande)
+- Séance 3 - Rappels de probabilité : [cours](seance3--rappels-proba) - [tp](seance3--demande)
 
-- Séance 4 - Lois de probabilité : [cours](seance4--lois-proba) - [TP](seance4--demande)
+- Séance 4 - Lois de probabilité : [cours](seance4--lois-proba) - [tp](seance4--demande)
+
+- Séance 5 - Loi Normale : [tp](seance5--demande)
 
