@@ -3,7 +3,7 @@
     <head>
         <meta charset = "UTF-8">
         
-        {% seo title=false %}
+        {% seo %}
         
         <link rel = "stylesheet" type = "text/css" href = "../remarkjs-v2.css">
         <link rel = "icon" href = "favicon-graduation-cap.ico" type = "image/x-icon">
@@ -22,7 +22,10 @@
             var slideshow = remark.create({
                 // sourceUrl: 'seance3.md',
                 ratio: "16:9",
-                countIncrementalSlides: false
+                countIncrementalSlides: false, 
+                highlightStyle: 'monokai',
+                highlightLanguage: 'remark',
+                highlightLines: true
             });
         </script>
         <script>

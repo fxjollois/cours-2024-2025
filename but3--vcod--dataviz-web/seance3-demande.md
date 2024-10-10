@@ -1,5 +1,7 @@
 # Séance 3
 
+> Rendu des fichiers sur cet espace : <https://moodle.u-paris.fr/mod/assign/view.php?id=1222039>
+
 Nous allons travailler sur une liste de 23530 films sorties en salle, et notés sur les sites [*Rotten Tomatoes*](https://www.rottentomatoes.com/) et [*IMDB*](https://www.imdb.com/). Nous utiliserons 4 fichiers javascript, contenant chacun la déclaration d'une variable JSON :
 
 - [top_genres.js](seance3/top_genres.js) : Nombre de films par genre, ordonné
