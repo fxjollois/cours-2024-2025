@@ -16,6 +16,9 @@
     9. Application sur données réelles
     10. 2ème application sur données réelles
     11. [TP noté Evaluation finale]
+    
+- Pour 2025/2026 :
+    - REVOIR séance 3 !!!
 
 ## M1 AMSD/MLSD
 
