@@ -67,9 +67,9 @@ Reprendre fichier `tips.csv` :
 - Calculer le nombre de valeurs de cette colonne comprise entre *-1.96* et *1.96*
     - on retrouve la même répartition
 
-Si *X* suit une loi normale *N(m,&sigma;<exp>2</exp>)*, il est possible de passer à une v.a. *Y* de loi normale *N(0,1)* en réalisant deux opérations : enlever la moyenne et diviser par l'écart-type
+Si *X* suit une loi normale *N(m,&sigma;<sup>2</sup>)*, il est possible de passer à une v.a. *Y* de loi normale *N(0,1)* en réalisant deux opérations : enlever la moyenne et diviser par l'écart-type
 
-> *Y = (X - m)(&sigma;<exp>2</exp>)*
+> *Y = (X - m)(&sigma;<sup>2</sup>)*
 
 ## A faire
 
