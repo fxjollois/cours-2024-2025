@@ -51,6 +51,9 @@ Refondre totalement le cours en faisant 30 minutes de cours + 1h d'application �
     9. Application sur données réelles 2 (séance 8)
     10. [TP noté] final (reprendre celui fait)
 
+- Pour 2025/2026 :
+    - REVOIR séance 6 sur loi normale !!! Utilisez d'autres données
+
 ## BUT SD Paris
 
 ### Collecte de données
