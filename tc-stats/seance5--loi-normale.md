@@ -73,8 +73,8 @@ Si *X* suit une loi normale *N(m,&sigma;<sup>2</sup>)*, il est possible de passe
 
 On peut du coup obtenir les bornes de l'intervalle comprenant 95% des données d'origine avec les calculs suivants donc :
 
-- Borne inférieure : *m - 1,96 * &sigma;<sup>2</sup>*
-- Borne supérieure : *m + 1,96 * &sigma;<sup>2</sup>*
+- Borne inférieure : *m - 1,96 * &sigma;*
+- Borne supérieure : *m + 1,96 * &sigma;*
 
 ## A faire
 
