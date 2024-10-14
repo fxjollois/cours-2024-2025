@@ -48,13 +48,12 @@ Reprendre fichier `tips.csv` :
 
 ## 4ème étape :
 
-- Dans une nouvelle feuille, créer une liste de valeurs : *0.025*, *0.05*, *0.10*, *0.9*, *0.95* et *0.975*
-- Ecrire Valeur
+- Dans une nouvelle feuille, créer une liste de valeurs à partir de `A2` et en-dessous : *0.025*, *0.05*, *0.10*, *0.9*, *0.95* et *0.975*
+- Ecrire *Proba* en `A1` et *Valeur* en `B1`
 - Dans `B2`, écrire la formule `=LOI.NORMALE.INVERSE(A2;0;1)`
     - Ceci calcule la valeur *x* pour laquelle *P(X < x) = 0.025*
 - Dupliquer les formules pour toutes les valeurs de la colonne `A`
-    - Il est normal que cela ne fonctionne pas pour 0 et 1
-- Repérer la ligne 3, pour laquelle on a *0.025*
+- Repérer la ligne 2, pour laquelle on a *0.025*
     - Ceci indique qu'il y a *2.5* % de chance d'avoir une valeur inférieure à *1.96* pour une loi normale *N(0,1)*
 - Idem ligne 7, pour laquelle on a *0.975*
     - nous avons la même valeur, *1.96*
@@ -64,13 +63,13 @@ Reprendre fichier `tips.csv` :
 
 ## 5ème étape
 
-- Dans la feuille avec les données `tips`, écrire dans `I2` la formule suivante `=(A2-moyenne)/ecart-type`
+- Dans la feuille avec les données `tips`, écrire dans `I2` la formule suivante `=(A2-moyenne)/ecart-type` (en remplaçant la moyenne et l'écart-type par les cellules où elles sont calculées)
 - Calculer le nombre de valeurs de cette colonne comprise entre *-1.96* et *1.96*
     - on retrouve la même répartition
 
-Si *X* suit une loi normale *N(m,\sigma)*, il est possible de passer à une v.a. *Y* de loi normale *N(0,1)* en réalisant deux opérations : enlever la moyenne et diviser par l'écart-type
+Si *X* suit une loi normale *N(m,&sigma<exp>2</exp>)*, il est possible de passer à une v.a. *Y* de loi normale *N(0,1)* en réalisant deux opérations : enlever la moyenne et diviser par l'écart-type
 
-> *Y = \frac{X - m}{\sigma}*
+> *Y = (X - m)(&sigma<exp>2</exp>)*
 
 ## A faire
 
