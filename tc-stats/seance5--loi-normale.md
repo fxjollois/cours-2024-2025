@@ -69,7 +69,7 @@ Reprendre fichier `tips.csv` :
 
 Si *X* suit une loi normale *N(m,&sigma;<sup>2</sup>)*, il est possible de passer à une v.a. *Y* de loi normale *N(0,1)* en réalisant deux opérations : enlever la moyenne et diviser par l'écart-type
 
-> *Y = (X - m)(&sigma;<sup>2</sup>)*
+> *Y = (X - m) / (&sigma;<sup>2</sup>)*
 
 ## A faire
 
