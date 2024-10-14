@@ -71,6 +71,11 @@ Si *X* suit une loi normale *N(m,&sigma;<sup>2</sup>)*, il est possible de passe
 
 > *Y = (X - m) / (&sigma;<sup>2</sup>)*
 
+On peut du coup obtenir les bornes de l'intervalle comprenant 95% des données d'origine avec les calculs suivants donc :
+
+- Borne inférieure : *m - 1,96 * &sigma;<sup>2</sup>*
+- Borne supérieure : *m + 1,96 * &sigma;<sup>2</sup>*
+
 ## A faire
 
 - Calculer les bornes de l'intervalle comprenant 95% des valeurs de la colonne `tip` (`B`) 
