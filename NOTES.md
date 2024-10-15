@@ -53,6 +53,7 @@ Refondre totalement le cours en faisant 30 minutes de cours + 1h d'application �
 
 - Pour 2025/2026 :
     - REVOIR séance 5 sur loi normale !!! Utilisez d'autres données
+    - Tout sur Excel
 
 ## BUT SD Paris
 
