@@ -12,5 +12,5 @@
 
 - Séance 5 - Loi Normale : [tp](seance5--loi-normale)
 
-- Séance 5 - Estimation par intervalles : [cours](seance6--estimation-intervalle) - [tp](seance6--demande)
+- Séance 6 - Estimation par intervalles : [cours](seance6--estimation-intervalle) - [tp](seance6--demande)
 
