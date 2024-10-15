@@ -26,7 +26,7 @@ Reprendre fichier `tips.csv` :
 ## 2ème étape :
 
 - Dans une nouvelle feuille, écrire *Valeur*, *Densité* et *Répartition* sur la première ligne (cellules `A1` à `C1`)
-- Créer une liste de valeur allant de -5 à 5 par pas de *0.25* à partir de la cellule `A2` (et en-dessous)
+- Créer une liste de valeur allant de -5 à 5 par pas de *0,25* à partir de la cellule `A2` (et en-dessous)
 - Ecrire dans `B2` la formule `=LOI.NORMALE(A2;0;1;0)`
     - Ceci calcule la densité de probabilité d'une loi normale *N(0,1)* pour la valeur dans `A2`
 - Ecrire dans `C2` la formule `=LOI.NORMALE(A2;0;1;1)`
@@ -51,14 +51,14 @@ Reprendre fichier `tips.csv` :
 ## 4ème étape :
 
 - Dans une nouvelle feuille, écrire *Proba* en `A1` et *Valeur* en `B1`
-- Créer une liste de valeurs à partir de `A2` et en-dessous : *0.025*, *0.05*, *0.10*, *0.9*, *0.95* et *0.975*
+- Créer une liste de valeurs à partir de `A2` et en-dessous : *0,025* , *0,05* , *0,10* , *0,9* , *0,95* et *0,975*
 - Dans `B2`, écrire la formule `=LOI.NORMALE.INVERSE(A2;0;1)`
-    - Ceci calcule la valeur *x* pour laquelle *P(X < x) = 0.025*
+    - Ceci calcule la valeur *x* pour laquelle *P(X < x) = 0,025*
 - Dupliquer les formules pour toutes les valeurs de la colonne `A`
-- Repérer la ligne 2, pour laquelle on a *0.025*
-    - Ceci indique qu'il y a *2.5* % de chance d'avoir une valeur inférieure à *1.96* pour une loi normale *N(0,1)*
-- Idem ligne 7, pour laquelle on a *0.975*
-    - nous avons la même valeur, *1.96*
+- Repérer la ligne 2, pour laquelle on a *0,025*
+    - Ceci indique qu'il y a *2,5* % de chance d'avoir une valeur inférieure à *1,96* pour une loi normale *N(0,1)*
+- Idem ligne 7, pour laquelle on a *0,975*
+    - nous avons la même valeur, *1,96*
 
 > Ceci implique qu'il y a 95% de chances d'avoir une valeur entre -1,96 et 1,96 pour une loi normale *N(0,1)*
 
@@ -66,7 +66,7 @@ Reprendre fichier `tips.csv` :
 ## 5ème étape
 
 - Dans la feuille avec les données `tips`, écrire dans `I2` la formule suivante `=(A2-moyenne)/ecart-type` (en remplaçant la moyenne et l'écart-type par les cellules où elles sont calculées)
-- Calculer le nombre de valeurs de cette colonne comprise entre *-1.96* et *1.96*
+- Calculer le nombre de valeurs de cette colonne comprise entre *-1,96* et *1,96*
     - on retrouve la même répartition
 
 > Si *X* suit une loi normale *N(m,&sigma;<sup>2</sup>)*, il est possible de passer à une v.a. *Y* de loi normale *N(0,1)* en réalisant deux opérations : enlever la moyenne *m* et diviser par l'écart-type *&sigma;*
