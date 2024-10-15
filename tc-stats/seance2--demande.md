@@ -47,7 +47,9 @@ Nous pourrions faire comme précédemment, mais cela prendrait du temps et ne se
 - Cliquez sur *OK* (on va garder la sélection déjà faite)
 - Glissez-déplacez `day` dans l'espace *Champs de ligne* et `sex` dans *Champs de colonnes*
 - Dans le *Champs de données*, on peut choisir `total_bill` par exemple. Vous voyez que par défaut, l'opération associé est la *Somme*. 
-- Double-cliquez sur *Somme - total_bill* et sélectionnez *Nombe* (puis *OK*)
+- Pour avoir le nombre de valeurs, effectuez les opérations suivantes selon l'outil :
+    - LibreOffice : Double-cliquez sur *Somme - total_bill* et sélectionnez *Nombre* (puis *OK*)
+    - Excel : Cliquez sur *Somme - total_bill* et sélectionnez *Paramètres de valeurs*, puis choisissez *Nombre* (puis *OK*)
 - Cliquez sur *OK*
 
 > Dans une nouvelle feuille, nous avons maintenant la table de contingence entre le jour de la semaine et le sexe de la personne qui paie la note.

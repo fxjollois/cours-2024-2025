@@ -42,7 +42,7 @@ Différence entre Libre Office et Excel
 - Dans la case `B3`, écrivez la formule suivante : `=MOYENNE(tips.a:a)`
     - notez qu'il est possible d'écrire en minuscule ou en majuscule les noms des fonctions
     - dans **Excel** ou **Google Sheets** : `=MOYENNE(tips!a:a)` (le `"."` est remplacé par un `"!"`)
-- Pour l'écart-type, c'est la fonction `ECARTYPE()` qu'il faut utiliser (sur la même colonne)
+- Pour l'écart-type, c'est la fonction `ECARTYPE.PEARSON()` qu'il faut utiliser (sur la même colonne)
 - Pour minimum, maximum et médiane, il existe les fonction `MIN()`, `MAX()` et `MEDIANE()`
 - Pour les quartiles, nous avons la fonction `QUARTILE()`, qui demande deux paramètres (séparés par un `";"`) :
     - la plage des données (ici `tips.A:A`) 
