@@ -14,3 +14,6 @@
     - [Explication sur la correction de la séance 2](seance3-explication)
     - [Demande](seance3-demande)
     
+- Séance 4 : d3.js
+    - [Principes de la librairie d3.js](seance4-d3-slides)
+    - [Tutoriel](seance4-d3-tutoriel)
