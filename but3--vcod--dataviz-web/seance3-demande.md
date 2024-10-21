@@ -1,4 +1,4 @@
-# Séance 3
+# Séance 3 - Demande sur Plotly
 
 > Rendu des fichiers sur cet espace : <https://moodle.u-paris.fr/mod/assign/view.php?id=1222039>
 
