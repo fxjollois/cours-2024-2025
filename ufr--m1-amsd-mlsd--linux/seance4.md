@@ -612,7 +612,7 @@ minute heure jour_mois mois jour_semaine commande
 - Lancement du même script toutes les 5 minutes de 9h à 17h les jours de semaine
 
 ```cron
-*/5 9-17 * * 1-5 /home/user/commande.sh
+    */5 9-17 * * 1-5 /home/user/commande.sh
 ```
 
 ---
