@@ -17,9 +17,10 @@ Lien zoom pour les séances :
 - [Séance 3](seance3) : Correction et commentaires sur les scripts `shell`
     - [demande](seance3-demande)
 
-<!--
 - [Séance 4](seance4) : Gestion des scripts R et Python en `shell`
     - [demande](seance4-demande)
+
+<!--
 - [Séance 5](seance5) : Introduction à MongoDB
     - [tutoriel Python](seance5-python)
     - [tutoriel R](seance5-r)
