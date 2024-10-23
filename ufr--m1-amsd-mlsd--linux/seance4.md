@@ -588,7 +588,7 @@ minute heure jour_mois mois jour_semaine commande
 - Lancement du script `commande.sh` tous les 14 novembre à 15h52
 
 ```cron
-52 15 14 11 * /home/user/commande.sh
+    52 15 14 11 * /home/user/commande.sh
 ```
 
 --
@@ -596,7 +596,7 @@ minute heure jour_mois mois jour_semaine commande
 - Lancement du même script tous les premier du mois, à 1h30
 
 ```cron
-30 1 1 * * /home/user/commande.sh
+    30 1 1 * * /home/user/commande.sh
 ```
 
 --
@@ -604,7 +604,7 @@ minute heure jour_mois mois jour_semaine commande
 - Lancement du même script tous les mardis et jeudis, à 10h et 16h
 
 ```cron
-0 10,16 * * tue,thu /home/user/commande.sh
+    0 10,16 * * tue,thu /home/user/commande.sh
 ```
 
 --
@@ -632,7 +632,7 @@ Raccourcis possibles pour la définition de la récurrence :
 Exemple : lancement de la commande tous les jours
 
 ```cron
-@daily /home/user/commande.sh
+    @daily /home/user/commande.sh
 ```
 
 ---
@@ -646,7 +646,7 @@ Exemple : lancement de la commande tous les jours
 - Possibilité de spécifier l'utilisateur (pour exécuter selon les droits de celui-ci) en l'insérant entre la programmation et la commande
 
 ```cron
-@daily user /home/user/commande.sh
+    @daily user /home/user/commande.sh
 ```
 
 --
