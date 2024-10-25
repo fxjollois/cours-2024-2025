@@ -81,6 +81,7 @@ Plusieurs fonctions pour :
 - Avoir des informations sur la sélection
     - `size()` : taille de la sélection
     - `empty()` : sélection vide ou non
+
 - Modifier les éléments sélectionnés
     - `style()` : appliquer des règles `CSS` 
     - `html()` : modifier le contenu de la balise
@@ -309,7 +310,7 @@ Gestions d'événements sur objets créés via fonction `on()` :
 ---
 ## Exemple 
 
-Sestion du passage de la souris sur chaque `div` (entrée et sortie)
+Gestion du passage de la souris sur chaque `div` (entrée et sortie)
 
 - Ajout de la propriété `couleur`
 - Souris dessus : changement de la couleur de la police
