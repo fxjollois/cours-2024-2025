@@ -162,7 +162,7 @@ d3.csv(
     })
 ```
 
-> **A FAIRE** : Ajouter les champs `Region` (sans modification) et `Hindex` à chaque élément dans la fonction dédiée, à partir des champs `Region` et `H index` (attention à l'espace - il faut aussi le transformer en entier).
+> **A FAIRE** : Ajouter le champs `Region` (sans modification) à chaque élément dans la fonction dédiée.
 
 #### Mise à jour du choix des années
 
