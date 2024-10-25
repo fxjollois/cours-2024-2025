@@ -72,7 +72,7 @@ choix_taille
     .on("change", function() { console.log(this.value) });
 ```
 
-Si vous affichez la console du navigateur, lors d'un changement de taille, vous devriez vous écrit la nouvelle taille choisie.
+Si vous affichez la console du navigateur, lors d'un changement de taille, vous devriez voir écrit la nouvelle taille choisie.
 
 > **A FAIRE** : créer dans un nouveau `fieldset` (stockée dans une variable nommée `champs1_bis`) intitulé "Choisir si vous souhaitez un FLOP" une [`checkbox`](https://developer.mozilla.org/fr/docs/Web/HTML/Element/Input/checkbox) nommée `flop`, décochée par défaut et avec comme label `FLOP`
 
@@ -162,7 +162,7 @@ d3.csv(
     })
 ```
 
-> **A FAIRE** : Ajouter les champs `Region` (sans modification) et `Hindex` à chaque élément dans la fonction dédiée, à partir des champs `Region` et `H index` (attention à l'espace - il faut aussi le transformer en entier).
+> **A FAIRE** : Ajouter le champs `Region` (sans modification) à chaque élément dans la fonction dédiée.
 
 #### Mise à jour du choix des années
 
