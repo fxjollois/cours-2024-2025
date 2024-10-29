@@ -20,11 +20,12 @@ Lien zoom pour les séances :
 - [Séance 4](seance4) : Gestion des scripts R et Python en `shell`
     - [demande](seance4-demande)
 
-<!--
 - [Séance 5](seance5) : Introduction à MongoDB
     - [tutoriel Python](seance5-python)
     - [tutoriel R](seance5-r)
     - [demande](seance5-demande)
+
+<!--
 - [Séance 6](seance6) : Mini-projet *Tableaux de bord sur données temps réel*
 -->
 
