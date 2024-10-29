@@ -15,12 +15,14 @@ Nous nous basons sur le tutoriel officielle disponible sur [cette page](https://
 
 - Importer la clé publique 
 ```bash
-$ curl https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add -
+$ curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | \
+   sudo gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg \
+   --dearmor
 ```
 
 - Créer un fichier spécifique pour MongoDB
 ```bash
-$ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+$ echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] https://repo.mongodb.org/apt/ubuntu noble/mongodb-org/8.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-8.0.list
 ```
 
 - Mettre à jour la VM
@@ -28,18 +30,14 @@ $ echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongo
 $ sudo apt update
 ```
 
-- Installer de `libssl 1.1` (je n'ai pas pu faire sans cette étape)
-```bash
-$ curl http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb --output libssl.deb
-$ sudo dpkg -i libssl.deb
-```
 
 - Installer mongo 
 ```bash
-$ sudo apt-get install -y mongodb-org
+$ sudo apt install -y mongodb-org
 ```
 
-- Redémarrer la machine
+- Redémarrer la machine (fait automatiquement normalement)
+
 - Pour lancer Mongo, vous devrez (à chaque lancement de machine a priori) faire 
 ```bash
 $ sudo systemctl start mongod
