@@ -15,6 +15,9 @@
 
 4. [Représentation multidimensionnelle via l'AFC](seance4-afc.html)
     - [sous `python`](seance4-afc-python.html)
+    - [correction](seance4-afc-correction.html)
+
+5. [Application sur données réelles](seance5-donnees-reelles-1.html)
 
 <!--
 5. [Classification avec CAH et k-means](seance5-classif.html)
@@ -30,27 +33,14 @@
     2. Manipulation "à la SQL" et visualisation de données (univarié et bivarié)
     3. ACP
     4. AFC
-    6. k-means et CAH
-    9. Application sur données réelles
-    7. [TP noté]
-    5. MDS et autre (?) + [QCM]
-    8. DBSCAN, SOM et autre ? + [QCM]
-    10. 2ème application sur données réelles
-    11. [TP noté Evaluation finale]
+    5. Application sur données réelles
+    6. [TP noté]
+    7. k-means et CAH
+    8. DBSCAN, SOM, MDS et autre ?
+    9. 2ème application sur données réelles
+    10. [TP noté Evaluation finale]
 
 
-OLD
-6. [Modélisation via régression](seance6-reglog.html)
-    - [sous `python`](seance6-reglog-python.html)
-    - [correction](seance6-correction.html)
-7. [Modélisation via d'autres modèles](seance7-autres-python.html)
-    - [correction](seance7-correction.html)
-8. [Application sur données réelles](seance8-supervise.html)
-    - [correction](seance8-correction.html)
-9. [TP blanc](seance9-tp-blanc.html) : sujet de l'année denière
-    - [correction](seance9-correction.html)
-
-- [Sujet du TP](tp-note.html)
 
 -->
 
@@ -60,15 +50,3 @@ Lien vers les plateformes de l'UFR Math-Info :
 - [RStudio](https://rstudio.ens.math-info.univ-paris5.fr/)
 -->
 
-<!--
-10 séances de 3 heures avec comme sujet : dataming/textmining
-sous python ?
-
-3. Analyse de données (ACP, AFC...)
-4. Clustering
-5. Scoring via régression logistique (?)
-6. Arbres de décision
-7. Règles d'association
-8. Réseaux de neurones (MLP)
-9. Evaluation
--->
