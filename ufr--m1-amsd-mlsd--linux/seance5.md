@@ -389,7 +389,7 @@ db.restaurants.distinct("borough")
 - Idem pour les documents respectant une condition
 
 ```js
-db.restaurants.distinct("borough"), { cuisine: "Vegetarian" })
+db.restaurants.distinct("borough", { cuisine: "Vegetarian" })
 ```
 
 ---
@@ -418,7 +418,7 @@ Voici quelques unes des opérations possibles :
 
 | Fonction       | Opération |
 |-|-|
-| `$limit`       | restriction à un petit nombre de documents (très utiles pour tester son calcul) |
+| `$limit`       | restriction à un petit nombre de documents (très utile pour tester son calcul) |
 | `$sort`        | tri sur les documents |
 | `$match`       | restriction sur les documents à utiliser |
 | `$unwind`      | séparation d'un document en plusieurs sur la base d'un tableau |
@@ -746,7 +746,7 @@ db.restaurants.aggregate([
 ```
 
 --
-- Equivalent avec les deux fonctions `$group` et `$count`
+- Equivalent avec les deux fonctions `$group` et `$sort`
 
 ```js
 db.restaurants.aggregate([
