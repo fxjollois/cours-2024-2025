@@ -2,7 +2,7 @@
 
 ## Master AMSD/MLSD
 
-### Mini-projet *Tableaux de bord temps réel*
+### Projet *Tableaux de bord temps réel*
 
 **DEADLINE** : **31 DECEMBRE 2024 23h59**
 
