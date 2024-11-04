@@ -68,6 +68,7 @@ A partir de sources de données temps réel, vous devez récupérer les données
         - Quelle périodicité faut-il prévoir pour les récupérer ?
         - Qu'ont-elles en commun éventuellement ? (hormis les aspects date et zone géographique)
         - Est-il possible de les ré-utiliser librement ou non ?
+        - Volumétrie à prévoir sur une année d'utilisation
     - Tableau de bord et/ou analyse envisagé.e
         - Aspect visuel (schématiquement)
         - Graphiques et/ou tableaux prévus
