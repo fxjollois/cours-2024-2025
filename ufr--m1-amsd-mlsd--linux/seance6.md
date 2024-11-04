@@ -4,9 +4,9 @@
 
 ### Mini-projet *Tableaux de bord temps réel*
 
-**DEADLINE** : **3 MARS 23h59**
+**DEADLINE** : **31 DECEMBRE 2024 23h59**
 
-**RENDU** : <https://cloud.parisdescartes.fr/index.php/s/K8Hkn5wqLqQyCHN>
+**RENDU** : <https://cloud.parisdescartes.fr/index.php/s/ModM7qMiw9Pbi89>
 
 - *Fichier compressé* (`zip` ou `tar.gz`) avec les noms des étudiants dans le nom de fichier
 - Bien mettre les noms des étudiants dans le rapport
@@ -17,7 +17,7 @@
 
 Vous êtes missionné pour réfléchir à la création un tableau de bord temps réel, représentant l'activité journalière de ce que vous voulez (activités humaines, activités géologiques, activités climatiques..) sur une zone de votre choix (terre, continent, pays, ville...).
 
-L'idée du projet est principalement de mettre en place la partie extraction des données et stockage, pas forcément la partie analyse et visualisation.
+> L'idée du projet est de réaliser un *PoC* (*Proof of Concept* - pré-réalisation permettant la validation du projet ou non).
 
 A partir de sources de données temps réel, vous devez récupérer les données en 3 étapes :
 
@@ -39,7 +39,7 @@ A partir de sources de données temps réel, vous devez récupérer les données
 ## Contraintes
 
 - Groupes de 3 ou 4
-- Au moins 3 ou 4 sources de données différentes (Une par étudiant du groupe), comme par exemple
+- Au moins 3 ou 4 sources de données différentes (au moins une par étudiant du groupe), comme par exemple
     - Météo
     - Bourse
     - Réseaux sociaux
@@ -61,7 +61,7 @@ A partir de sources de données temps réel, vous devez récupérer les données
 
 - Rapport
     - Problématique choisie
-        - Quel sujet ? Avec quelle approche ? Quelles analyses à prévoir ?
+        - Quel sujet ? Avec quelles approches ? Quelles analyses à prévoir ?
     - Sources de données (ainsi que leur modèle)
         - Comment sont structurées les sources ? Qu'est-ce qu'il y a dedans comme informations ?
         - Comment y a t'on accès ? 
@@ -75,3 +75,5 @@ A partir de sources de données temps réel, vous devez récupérer les données
         - Méthodes
         - ...
 - Codes d'importation des données et de transformation (pour chaque étape et pour chaque source), ainsi que le fichier `chron` pour l'automatisation 
+- Vidéo commentée de démonstration de votre tableau de bord
+
