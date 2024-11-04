@@ -17,7 +17,7 @@
 
 Vous êtes missionné pour réfléchir à la création un tableau de bord temps réel, représentant l'activité journalière de ce que vous voulez (activités humaines, activités géologiques, activités climatiques..) sur une zone de votre choix (terre, continent, pays, ville...).
 
-> L'idée du projet est de réaliser un *PoC* (*Proof of Concept* - pré-réalisation permettant la validation du projet ou non).
+> L'idée du projet est de réaliser un **PoC** (**Proof of Concept** - pré-réalisation permettant la validation du projet ou non).
 
 A partir de sources de données temps réel, vous devez récupérer les données en 3 étapes :
 
