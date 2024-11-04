@@ -26,8 +26,9 @@ Lien zoom pour les séances :
     - [demande](seance5-demande)
     - [Tutoriel pour installation sur sa propre machine](../infos-mongo)
 
-<!--
 - [Séance 6](seance6) : Mini-projet *Tableaux de bord sur données temps réel*
+
+<!--
 -->
 
 <!--
