@@ -10,14 +10,15 @@
 
 3. [Représentation multidimensionnelle via l'ACP](seance3-acp.html)
     - [sous `python`](seance3-acp-python.html)
-    - [correction Wine](seance3-correction-wine.html)
-    - [correction WGI](seance3-correction-wgi.html)
+    - [correction `Wine`](seance3-correction-wine.html)
+    - [correction `WGI`](seance3-correction-wgi.html)
 
 4. [Représentation multidimensionnelle via l'AFC](seance4-afc.html)
     - [sous `python`](seance4-afc-python.html)
     - [correction](seance4-afc-correction.html)
 
 5. [Application sur données réelles](seance5-donnees-reelles-1.html)
+    - [correction `pendigits`](seance5-correctionA.html)
 
 <!--
 5. [Classification avec CAH et k-means](seance5-classif.html)
