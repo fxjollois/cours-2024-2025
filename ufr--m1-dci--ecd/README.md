@@ -19,6 +19,7 @@
 
 5. [Application sur données réelles](seance5-donnees-reelles-1.html)
     - [correction `pendigits`](seance5-correctionA.html)
+    - [correction `hadCRUT5`](seance5-correctionB.html)
 
 <!--
 5. [Classification avec CAH et k-means](seance5-classif.html)
