@@ -17,3 +17,6 @@
 - Séance 4 : d3.js
     - [Principes de la librairie d3.js](seance4-d3-slides)
     - [Tutoriel](seance4-d3-tutoriel)
+
+- Séance 5 : 
+    - [TP évalué](https://moodle.u-paris.fr/course/view.php?id=50365)
