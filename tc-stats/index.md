@@ -14,3 +14,6 @@
 
 - Séance 6 - Estimation par intervalles : [cours](seance6--estimation-intervalle) - [tp](seance6--demande)
 
+- Séance 7 - Application sur données réelles 1 : [tp](seance7--application1)
+
+- Séance 8 - Application sur données réelles 2 : [tp](seance8--application2)
