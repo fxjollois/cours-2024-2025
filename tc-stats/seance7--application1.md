@@ -14,13 +14,13 @@ Pour les villes de Paris et de Lyon, nous avons un échantillon de logements Air
     
 - Le prix des logements est-il le même entre les deux villes ?
     - A faire dans une nouvelle feuille
-- La répartition de logements complets ("Entire home/appt") est-elle identique ?
+- La répartition de logements complets ("Entire home/apt") est-elle identique ?
 
 ### Pour chaque ville séparemment
 
-- Le prix d'un logement de type "Entire home/appt" est-il plus élevé que les autres logements ?
+- Le prix d'un logement de type "Entire home/apt" est-il plus élevé que les autres logements ?
     - Vous pouvez créer une nouvelle colonne indiquant si c'est le logement complet ou non qui est disponible, pour simplifier le calcul
     - Pour le calcul de la moyenne et de l'écart-type pour chaque type de logement (entier vs autre), vous devez utiliser un tableau croisé dynamique
-- La proportion de logement ayant le Wifi est-elle la même entre les logements complets ("Entire home/appt") et les autres logements ?
+- La proportion de logement ayant le Wifi est-elle la même entre les logements complets ("Entire home/apt") et les autres logements ?
 - Même question pour la télévision ?
 
