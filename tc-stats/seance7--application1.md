@@ -15,7 +15,6 @@ Pour les villes de Paris et de Lyon, nous avons un échantillon de logements Air
 - Le prix des logements est-il le même entre les deux villes ?
     - A faire dans une nouvelle feuille
 - La répartition de logements complets ("Entire home/appt") est-elle identique ?
-    - Vous pouvez créer une nouvelle colonne indiquant si c'est le logement complet ou non qui est disponible, pour simplifier le calcul
 
 ### Pour chaque ville séparemment
 
