@@ -13,16 +13,15 @@ Pour les villes de Paris et de Lyon, nous avons un échantillon de logements Air
 ### Comparaison entre Paris et Lyon
     
 - Le prix des logements est-il le même entre les deux villes ?
-    - A faire idéalement dans une nouvelle feuille
-- La répartition de logements complets (“Entire home/appt”) est-elle identique ?
+    - A faire dans une nouvelle feuille
+- La répartition de logements complets ("Entire home/appt") est-elle identique ?
     - Vous pouvez créer une nouvelle colonne indiquant si c'est le logement complet ou non qui est disponible, pour simplifier le calcul
 
 ### Pour chaque ville séparemment
 
-- Le prix d’un logement de type “Entire home/appt” est-il plus élevé que les autres logements ?
+- Le prix d'un logement de type "Entire home/appt" est-il plus élevé que les autres logements ?
     - Vous pouvez ré-utiliser la colonne créée précédemment
-    - La fonction `MOYENNE.SI()` permet de calculer une moyenne sur une colonne, pour les lignes qui respectent une condition particulière sur une autre colonne
-    - Il n'existe pas de fonction permettant de calculer l'écart-type si une condition est respectée ; nous allons donc utiliser l'écart-type sur l'ensemble des prix pour les 2 types de logements (entiers et autres)
-- La proportion de logement ayant le Wifi est-elle la même entre les logements complets (“Entire home/appt”) et les autres logements ?
-    - La fonction `NB.SI.ENS()` permet de faire un décompte du nombre de lignes respectant plusieurs critères
+    - Pour le calcul de la moyenne et de l'écart-type pour chaque type de logement (entier vs autre), vous devez utiliser un tableau croisé dynamique
+- La proportion de logement ayant le Wifi est-elle la même entre les logements complets ("Entire home/appt") et les autres logements ?
 - Même question pour la télévision ?
+
