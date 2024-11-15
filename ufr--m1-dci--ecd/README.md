@@ -21,6 +21,8 @@
     - [correction `pendigits`](seance5-correctionA.html)
     - [correction `hadCRUT5`](seance5-correctionB.html)
 
+6. [TP noté 1](seance6-tpnote1.html)
+
 <!--
 5. [Classification avec CAH et k-means](seance5-classif.html)
     - [sous `python`](seance5-classif-python.html)
