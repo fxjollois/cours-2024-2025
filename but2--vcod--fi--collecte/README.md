@@ -7,9 +7,12 @@
 - Séances :
     1. API simple -> adresse
     2. API complexe -> avec paramètrage (à trouver)
+        - AUTONOMIE QUI COMMENCE (1,5h)
     3. API avec token -> à trouver
+        - AUTONOMIE (1,5h + 1,5h)
     4. Web-scraping -> Google Maps c'est pas si mal
     5. Lancement de la SAE -> sujet à trouver
+        - AUTONOMIE (3h + 3h | 3h + 3h | 3h + 3h)
 -->
 
 ## Séances
