@@ -63,7 +63,7 @@ d3.csv(
             .html(d => d);
         d3.select("#table_donnees").append("tbody")
             .selectAll("tr")
-            .data(data)
+            .data(data.filter(d => d.Year === 2021)) // on se restreint à 2021 uniquement
             .enter()
             .append("tr").selectAll("td")
                 .data(d => Object.values(d))
@@ -71,7 +71,7 @@ d3.csv(
                 .append("td")
                 .html(d => d);
     
-        // PLACE OU AJOUTER LE CODE CI-DESSOUS
+        // PLACE OU METTRE LE CODE CI-DESSOUS
 });
 ```
 
@@ -110,10 +110,10 @@ Voici les différentes fonctionnalités qu'on peut interdire :
 
 ## Tri des données en amont
 
-On peut définir un tri par défaut, on utilise le paramètre `order` qui prend un tableau de couples : [numéro de colonne (qui débute à 0), type de tri (`"asc"` ou `"desc"`)]. Ici, on trie par ordre décroissant les années, puis par ordre croissant du rang.
+On peut définir un tri par défaut, on utilise le paramètre `order` qui prend un tableau de couples : [numéro de colonne (qui débute à 0), type de tri (`"asc"` ou `"desc"`)]. Ici, on trie par ordre décroissant les régions, puis par ordre croissant du rang.
 
 ```js
-new DataTable("#table_donnees", { order: [[2, "desc"], [3, "asc"]] });
+new DataTable("#table_donnees", { order: [[1, "desc"], [3, "asc"]] });
 ```
 
 ## Affichage avec scrolling
@@ -176,13 +176,7 @@ new DataTable("#table_donnees", { caption : "Production scientifique mondiale de
 ```
 
 
-## Autres trucs à voir
-
-ajout d'un titre
-filtre par colonnes (filter)
-format pré-défini (currency, date), styleColorBar
-
-Sélection des lignes
+## Sélection des lignes
 
 
 ## Extensions

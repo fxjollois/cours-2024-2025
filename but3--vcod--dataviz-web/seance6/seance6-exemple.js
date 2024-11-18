@@ -25,7 +25,7 @@ d3.csv(
             .html(d => d);
         d3.select("#table_donnees").append("tbody")
             .selectAll("tr")
-            .data(data)
+            .data(data.filter(d => d.Year === 2021))
             .enter()
             .append("tr").selectAll("td")
                 .data(d => Object.values(d))
