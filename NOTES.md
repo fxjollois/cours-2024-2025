@@ -15,6 +15,8 @@
 
 - REVOIR séance 5 sur loi normale !!! Utilisez d'autres données
 - Tout sur Excel
+- TCD avec moyenne, écart-type et nombre en modifiant la structure pour séance 7 et 8
+- ATTENTION séance 5 avec le +/- 2 écart-type pouvant être incompréhensible après pour les étudiants.
 
 ## BUT SD Paris
 
