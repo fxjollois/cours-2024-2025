@@ -27,7 +27,7 @@ Ce site regroupe l'ensemble des documents que j'utilise dans mes cours.
 ## INTECHMER
 
 - [Initiation à la Statistique]()
-- [Analyse de données]()
+- [CT3 GEM -- Outils de surveillance et analyses statistiques](intechmer-3a-add-tests)
 
 ## IUT de Cherbourg
 
