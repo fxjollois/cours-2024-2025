@@ -1,6 +1,22 @@
-# INTECHMER
+# Outils de surveillance et analyses statistiques
 
-## 3ème année
+## Cadre technique génie de l'environnement marin - 3ème année - INTECHMER
+
+Lien vers le [cours Moodle](https://par.moodle.lecnam.net/course/view.php?id=22651)
+
+-   **Cours**
+    1.  [Statistique inférentielle](cm1--stat-inf.html)
+    2.  [Analyse de données]()
+    3.  [Classification]()
+-   **TD**
+    1.  --
+    2.  --
+-   **TP**
+    1.  --
+    2.  --
+    3.  --
+    4.  --
+    5.  --
 
 <!--
 Programme à faire :
