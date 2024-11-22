@@ -28,14 +28,14 @@ Programme à faire :
 - Mise en place du protocole ?
 - PCOA ??
 Organisation :
-- CM 1h30
-- CM 2h
-- CM 1h30
-- TD 3h
-- TD 1h30
-- TP 3h
-- TP 3h
-- TP 3h
-- TP 3h
-- TP 3h
+- CM 1h30  -> Proba, loi et Test
+- CM 2h    -> ACP et AFC
+- CM 1h30  -> CAH et k-means
+- TD 3h    -> Tests
+- TD 1h30  -> ??
+- TP 3h    -> R - stats desc et normalité/chi2 univarié
+- TP 3h    -> T-test/wilcoxon - ANOVA/Kruskal-Wallis
+- TP 3h    -> ACP / AFC
+- TP 3h    -> k-means / CAH
+- TP 3h    -> Récap' global
 -->
