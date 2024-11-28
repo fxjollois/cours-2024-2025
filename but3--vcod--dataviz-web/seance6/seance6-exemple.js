@@ -15,7 +15,7 @@ d3.csv(
         // Création du tableau
         d3.select("#contenant").append("table")
             .attr("id", "table_donnees")
-            .attr("class", " compact hover order-column stripe")
+            .attr("class", "display")
             .append("thead")
             .append("tr")
             .selectAll("th")
@@ -33,6 +33,11 @@ d3.csv(
                 .append("td")
                 .html(d => d);
     
-        new DataTable("#table_donnees", { caption : "Production scientifique mondiale depuis 1996" });
+        new DataTable("#table_donnees", {
+    buttons: ['print'],
+    layout: {
+        topStart: 'buttons'
+    }
+});
 });
 

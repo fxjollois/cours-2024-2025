@@ -6,7 +6,7 @@ La librairie [`DataTables`](https://datatables.net/) permet de présenter des ta
 
 Pour voir le fonctionnement de la librairie `DT`, nous allons d'abord créer une table HTML à partir des données précédemment utilisé dans ce cours.
 
-### Fichier HTML de base 
+### Fichier HTML de base
 
 On créé d'abord un fichier HTML de base, dans lequel nous chargeons les librairies `D3`, `jQuery` et `DataTables`, ainsi qu'un script JS que nous allons développé plus tard.
 
@@ -176,12 +176,14 @@ new DataTable("#table_donnees", { caption : "Production scientifique mondiale de
 ```
 
 
-## Sélection des lignes
-
-
 ## Extensions
 
 ### Buttons
+
+        <link href="https://cdn.datatables.net/buttons/3.2.0/css/buttons.dataTables.min.css" rel="stylesheet">
+        <script src="https://cdn.datatables.net/buttons/3.2.0/js/dataTables.buttons.min.js"></script>
+
+??? -> Marche pas
 
 ### FixedColumns
 
@@ -190,4 +192,33 @@ new DataTable("#table_donnees", { caption : "Production scientifique mondiale de
 ## Plug-Ins
 
 ### percentageBars
+
+
+
+## Sélection des lignes
+
+
+## A FAIRE
+
+### Données
+
+Nous disposons de deux fichiers CSV (cf liens ci-dessous) contenant les informations de ventes immobilières dans des villes (du Texas pour information), avec en détail :
+
+- [`tab_resume.csv`](seance6/tab_resume.csv) : Résumé par ville
+    - Champs : nom de la ville, nombre de ventes total sur la période, volume (en $) des ventes et prix médian de ventes
+- [`tab_complet.csv`](seance6/tab_complet.csv) : Détail par mois
+    - Champs : nom de la ville, année et mois, et sur le mois, nombre de ventes, volume (en $) et prix médian
+    
+### Demande initiale
+
+On veut avoir un tableau reprenant les informations du premier fichier, au format numérique simple. Et un graphique en-dessous qui affiche l'évolution du nombre de ventes de toutes les villes. 
+
+Lorsqu'une ou plusieurs sont sélectionnées dans le tableau, on souhaite mettre en avant leur évolution dans le graphique.
+
+### Complément
+
+- On veut que la colonne du prix médian soit une barre représentant ce prix médian par rapport au prix médian maximum constaté ;
+- On veut pouvoir choisir la variable représentée dans le graphique, à savoir : le nombre de ventes total, le volume (en $) ou le prix médian de ventes.
+
+
 

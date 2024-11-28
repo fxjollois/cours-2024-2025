@@ -23,12 +23,14 @@
 
 6. [TP noté 1](seance6-tpnote1.html)
 
+7. [Classification avec CAH et k-means](seance7-classif.html)
+    - [sous `python`](seance7-classif-python.html)
+    <!-- - [correction](seance5-correction.html) -->
+    
+8. [Application sur données réelles](seance8-donnees-reelles.html)
+    <!-- - [correction](seance8-correction.html) -->
+
 <!--
-5. [Classification avec CAH et k-means](seance5-classif.html)
-    - [sous `python`](seance5-classif-python.html)
-    - [correction](seance5-correction.html)
-6. [Application sur données réelles](seance6-donnees-reelles.html)
-    - [correction](seance6-correction.html)
 
 
 
@@ -40,9 +42,10 @@
     5. Application sur données réelles
     6. [TP noté]
     7. k-means et CAH
-    8. DBSCAN, SOM, MDS et autre ?
-    9. 2ème application sur données réelles
-    10. [TP noté Evaluation finale]
+    8. Application sur données réelles 2
+    9. DBSCAN, SOM, MDS et autre ?
+    10. Application sur données réelles 3
+    11. [TP noté Evaluation finale]
 
 
 

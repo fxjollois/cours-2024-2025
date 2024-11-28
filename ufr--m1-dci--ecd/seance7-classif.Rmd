@@ -1,6 +1,6 @@
 ---
 title: "Extraction de connaissances à partir de données structurées et non structurées"
-subtitle: "Séance 5 : Classification (CAH et $k$-means)"
+subtitle: "Séance 7 : Classification (CAH et $k$-means)"
 output: 
   xaringan::moon_reader:
     css: ["default", "default-fonts", "style.css"]
