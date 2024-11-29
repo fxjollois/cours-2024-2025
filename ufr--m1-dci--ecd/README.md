@@ -28,7 +28,7 @@
     - [correction](seance7-correction.html)
     
 8. [Application sur données réelles](seance8-donnees-reelles.html)
-    <!-- - [correction](seance8-correction.html) -->
+    - [correction](seance8-correction.html)
 
 <!--
 
