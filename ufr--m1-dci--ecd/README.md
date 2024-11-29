@@ -25,7 +25,7 @@
 
 7. [Classification avec CAH et k-means](seance7-classif.html)
     - [sous `python`](seance7-classif-python.html)
-    <!-- - [correction](seance5-correction.html) -->
+    - [correction](seance7-correction.html)
     
 8. [Application sur données réelles](seance8-donnees-reelles.html)
     <!-- - [correction](seance8-correction.html) -->
