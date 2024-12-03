@@ -20,13 +20,25 @@ affTable <- function (tab, nrow = 8, ncol = 8, digits = 2) {
   formattable(
     round(tab, digits), 
     list(
-      area(1:nrow, 1:ncol) ~ color_tile("lightsalmon","lightblue")
+      area(1:nrow, 1:ncol) ~ color_tile("transparent","lightblue")
     )
   )
 }
 
 ```
 
+## Que veut-on faire ?
+
+- Décrire et/ou résumer l'information contenue dans les données
+
+- Sans formuler d'hypothèses au préalable
+
+- Méthode de visualisation des données très pertinente
+
+### Une méthode pour deux applications en fonction du type des données
+
+1. **ACP** sur des données quantitatives
+2. **AFC** sur une table de contingence
 
 ---
 class: middle, center, section
@@ -36,29 +48,21 @@ class: middle, center, section
 ### Analyse en Composantes Principales (ACP)
 
 ---
-
-## Que veut-on faire ?
-
-- Décrire et/ou résumer l'information contenue dans les données
-
-- Sans formuler d'hypothèses au préalable
-
-- Technique efficace de réduction de dimension
-
-- Méthode de visualisation des données très pertinente
-
-- Méthode de décorrélation des variables, utile pour certaines méthodes statistiques.
-
----
 ## Comment ?
 
 - Transformations linéaires d'un grand nombre de variables intercorrélées
 
-- Nombre relativement limité de composantes non corrélées
+- En un nombre relativement limité de composantes non corrélées
 
 - Regroupant les données en des ensembles plus petits
 
-- Permettant d'éliminer les problèmes de multicolinéarité entre les variables.
+### Quelques bénéfices
+  
+- Technique efficace de réduction de dimension
+
+- Méthode de décorrélation des variables, utile pour certaines méthodes statistiques
+
+- Parfois utilisée pour de la réduction du bruit
 
 ---
 ## Du choix de la projection dépend l'analyse
@@ -74,8 +78,11 @@ knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/6/64/Dua
 ## Méthodes descriptives
 
 - Pas de modèle probabiliste, mais elles dépendent d'un modèle géométrique
+
 - Représentations géométriques de ces unités et de ces variables
+
 - Représentations des individus permettent de voir s'il existe une structure, non connue a priori
+
 - Représentations des variables permettent d'étudier les structures de liaisons linéaires
 
 --
@@ -83,11 +90,14 @@ knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/6/64/Dua
 ### Lecture
 
 - Distinguer des groupes dans l'ensemble des individus en regardant quelles sont les individus qui se ressemblent, celles qui se distinguent des autres, etc...
+
 - Pour les variables, on cherchera quelles sont celles qui sont très corrélées entre elles, celles qui, au contraire ne sont pas corrélées aux autres, ...
 
 --
 
-**Idée principale** : Projeter le nuage dans un sous-espace de dimension inférieure
+### Idée principale
+
+Projeter le nuage dans un sous-espace de dimension inférieure
 
 ---
 ## Exemple en 2D
@@ -120,6 +130,7 @@ knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/6/64/Dua
 ## Problème
 
 - Etudier simultanément $p$ variables (avec $p$ grand)
+
 - A l'aide d'informations sur $n$ individus (avec $n$ encore plus grand)
 
 --
@@ -128,6 +139,7 @@ knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/6/64/Dua
 
 - d'individus atypiques
 - de liaisons entre variables
+
 - Recherche de *bonnes* variables
 
 --
@@ -135,6 +147,7 @@ knitr::include_graphics("https://upload.wikimedia.org/wikipedia/commons/6/64/Dua
 ### Représentation graphique
 
 - des variables
+
 - des individus
 
 ---
@@ -418,11 +431,10 @@ knitr::kable(data.frame(Moyenne = apply(donnees, 2, mean),
 
 - Deux groupes de variables.
 
-```{r cor}
-data.frame(cor(donnees)) %>%
-  mutate_all(~cell_spec(round(.x,2), bold = .x > .75)) %>%
-  kable(escape = F, align = "r") %>%
-  kable_styling()
+```{r cor, results='asis'}
+formattable(as.data.frame(cor(donnees)), 
+            list(~ color_tile("transparent", "gray")),
+            digits = 2)
 ```
 
 ```{r acp}
@@ -464,10 +476,9 @@ plot(acp, choix = "var")
 ### Contribution
 
 ```{r indcontrib}
-setNames(as.data.frame(addmargins(acp$ind$contrib, 1)), paste("contrib", 1:4)) %>%
-  mutate_all(~cell_spec(round(.x, 1), bold = .x > 100/9)) %>%
-  kable(escape = F, align = "r") %>%
-  kable_styling()
+indcontrib = setNames(as.data.frame(addmargins(acp$ind$contrib, 1)),
+                      paste("contrib", 1:4))
+affTable(indcontrib, nrow = 9, ncol = 4)
 ```
 
 ---
@@ -476,10 +487,9 @@ setNames(as.data.frame(addmargins(acp$ind$contrib, 1)), paste("contrib", 1:4)) %
 ### Qualité de représentation
 
 ```{r indcos2}
-setNames(as.data.frame(addmargins(acp$ind$cos2, 2)), c(paste("qualité", 1:4), "Somme")) %>%
-  mutate_all(~cell_spec(round(.x, 2), bold = .x > .25)) %>%
-  kable(escape = F, align = "r") %>%
-  kable_styling()
+indcos2 = setNames(as.data.frame(addmargins(acp$ind$cos2, 2)), 
+                   c(paste("qualité", 1:4), "Somme"))
+affTable(indcos2, nrow = 9, ncol = 4)
 ```
 
 
@@ -489,10 +499,9 @@ setNames(as.data.frame(addmargins(acp$ind$cos2, 2)), c(paste("qualité", 1:4), "
 ### Contribution
 
 ```{r varcontrib}
-setNames(as.data.frame(acp$var$contrib), paste("contrib", 1:4)) %>%
-  mutate_all(~cell_spec(round(.x, 1), bold = .x > 25)) %>%
-  kable(escape = F, align = "r") %>%
-  kable_styling()
+varcontrib = setNames(as.data.frame(addmargins(acp$var$contrib, 1)),
+                      paste("contrib", 1:4))
+affTable(varcontrib, nrow = 4, ncol = 4)
 ```
 
 ---
@@ -501,10 +510,9 @@ setNames(as.data.frame(acp$var$contrib), paste("contrib", 1:4)) %>%
 ### Qualité de représentation
 
 ```{r varcos2}
-setNames(as.data.frame(acp$var$cos2), paste("qualité", 1:4)) %>%
-  mutate_all(~cell_spec(round(.x,2), bold = .x > .25)) %>%
-  kable(escape = F, align = "r") %>%
-  kable_styling()
+varcos2 = setNames(as.data.frame(addmargins(acp$var$cos2, 2)), 
+                   c(paste("qualité", 1:4), "Somme"))
+affTable(varcos2, nrow = 4, ncol = 4)
 ```
 
 
@@ -521,13 +529,18 @@ class: middle, center, section
 
 - Décrire et/ou résumer l'information contenue dans les données 
     - Sans formuler d'hypothèses au préalable 
+
 - Tableau individu $\times$ variable
     - On connaît : **ACP**
+
 - Table de contingence
     - **AFC**
+
 - Plus largement sur un tableau de nombres non négatifs
 
-**Idée principale** : Utiliser les principes de l'ACP en utilisant une autre métrique
+### Idée principale
+
+Utiliser les principes de l'ACP en utilisant une autre métrique
 
 ---
 ## Table de contingence
@@ -539,7 +552,7 @@ formattable(as.data.frame(apply(Titanic, c(1,4), sum)),
             table.attr = "class=\"table table-condensed centering\"")
 ```
 
-Ici, nous représentons les passagers du Titanic répartis sur leur classe (1ère, 2nde, 3ème et équipage) et leur surie ou non (*i.e.* 178 passagers en 3ème classe ont survécu au naufrage).
+Ici, nous représentons les passagers du Titanic répartis sur leur classe (1ère, 2nde, 3ème et équipage) et leur survie ou non (*i.e.* 178 passagers en 3ème classe ont survécu au naufrage).
 
 ---
 ## Problème et objectifs
@@ -547,7 +560,9 @@ Ici, nous représentons les passagers du Titanic répartis sur leur classe (1èr
 Visualiser les liens entre les deux variables
 
 - Utiliser la représentation simultanée des deux variables pour analyser les liens entre les modalités des deux variables
+
 - Détection de modalités atypiques 
+
 - Visualiser les ressemblances entre les modalités d'une même variable
 
 **Objectifs similaires à l'ACP**

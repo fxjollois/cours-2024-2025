@@ -3,6 +3,7 @@
 ## M1 DCI : 
 
 - REVOIR séance 3 !!!
+- REVOIR les packages utilisés -> virer sklearn ???
 
 ## M1 AMSD/MLSD
 
