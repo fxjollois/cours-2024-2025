@@ -129,6 +129,113 @@ fig.update_yaxes(range = [10.5,0.5])
 fig.update_layout(showlegend = False)
 streamlit.plotly_chart(fig)
 
+- Quelques élèments de texte
+
+streamlit.??
+
+write() -> pour intégrer qqch dans l'appli (résultat dépendant de ce qui est mis en paramètre)
+text() -> pur texte
+markdown() -> explicitement du markdown
+title() -< titre de niveau 1
+header() -> titre de niveau 2 (avec une ligne en dessous avec divider = True)
+subheader() -> niveau 3
+caption() -> titre d'une figure ou d'un tableau (plutôt à placer en dessous)
+code() -< du code
+divider() -> ligne de séparation
+
+dans le texte : https://docs.streamlit.io/develop/api-reference/text/st.markdown
+- des emojis possibles ":emoji:" -> https://share.streamlit.io/streamlit/emoji-shortcodes
+- des icones avec ":material/nom_icone:" -> https://fonts.google.com/icons?icon.set=Material+Symbols&icon.style=Rounded
+- de la couleur ":couleur[texte à colorier]" ou ":couleur-background[texte à surligner donc]"
+
+Voici un :red[**tableau de bord**] sur la :green-background[production scientifique mondiale] :material/School: :sunglasses:
+
+
+- Espace à gauche pour paramètres
+
+with streamlit.sidebar:
+    annee = streamlit.slider("Année", min(data["Year"]), max(data["Year"]), max(data["Year"]))
+    taille = streamlit.radio("Taille", [3, 5, 10, 20], 1, horizontal = True)
+    regions = streamlit.multiselect("Régions", set(data["Region"]))
+    flop = streamlit.checkbox("FLOP")
+
+- Avec onglets
+
+onglet1, onglet2 = streamlit.tabs(["TOP/FLOP", "Evolution TOP10"])
+
+with onglet1:
+    streamlit.header("TOP/FLOP de la production par année", divider = True)
+    streamlit.dataframe(temp.head(taille), hide_index = True)
+    streamlit.caption(msg + " des pays des régions sélectionnées (monde si aucune).")
+
+with onglet2:
+    streamlit.header("Evolution des rangs des pays du TOP10", divider = True)
+    import plotly.express as px
+    fig = px.line(data.query("Rank <= 10"), x = "Year", y = "Rank", color = "Country", markers = True)
+    streamlit.plotly_chart(fig)
+
+- Configuration globale
+
+streamlit.set_page_config(
+    page_title="Production scientifique mondiale | Séance 6",
+    page_icon=":student:",
+    layout="wide"
+)
+
+- gestion des sélections (et plus généralements des évènements)
+
+--- d'un dataframe
+
+streamlit.set_page_config(layout="wide")
+
+
+data = pandas.read_csv("scimagojr.csv")
+top10 = data.query("Year == 2021").head(10)
+
+col1, col2 = streamlit.columns(2)
+
+liste_pays = []
+
+with col1:
+    selection = streamlit.dataframe(top10, hide_index = True, selection_mode = "multi-row", on_select = "rerun")
+    streamlit.write(selection)
+    streamlit.write(selection["selection"]["rows"])
+    if (selection["selection"]["rows"]):
+        streamlit.write(top10.iloc[selection["selection"]["rows"]])
+        liste_pays = list(top10.iloc[selection["selection"]["rows"]]["Country"])
+        streamlit.write(liste_pays)
+
+with col2:
+    if (liste_pays):
+        fig = px.line(data.query("Rank <= 10 & Country in @liste_pays"), x = "Year", y = "Rank", color = "Country", markers = True)
+    else:
+        fig = px.line(data.query("Rank <= 10"), x = "Year", y = "Rank", color = "Country", markers = True)
+    streamlit.plotly_chart(fig)
+    
+
+--- d'un diagramme en bar plotly
+
+streamlit.set_page_config(layout="wide")
+
+data = pandas.read_csv("scimagojr.csv").query("Year == 2021").sort_values(by = "H index", ascending = False).head(20)
+
+col1, col2 = streamlit.columns(2)
+
+with col1:
+    fig = px.bar(
+        data.iloc[::-1],
+        y = "Country",
+        x = "H index"
+    )
+    selection = streamlit.plotly_chart(fig, on_select = "rerun", selection_mode = "points")
+    streamlit.write(selection)
+
+with col2:
+    temp = data.filter(["Country", "Region", "H index", "Documents"])
+    if (selection["selection"]["points"]):
+        indice_pays = 19 - selection["selection"]["points"][0]["point_index"]
+        temp = temp.style.applymap(lambda _: "background-color: lightblue", subset=(temp.index[indice_pays],))
+    streamlit.dataframe(temp, hide_index = True, height = 750, use_container_width = True)
 
 
 
