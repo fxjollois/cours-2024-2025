@@ -1,58 +1,123 @@
 # Séance 6 - Introduction à `streamlit`
 
-VS Code
+Nous allons voir l'utilisation du package [`streamlit`](https://streamlit.io/), équivalent Python de `shiny` pour R. Pour réaliser notre application, nous allons utiliser un environnement de développement, de type VS Code (utilisé ici) ou Spyder.
 
-- Créer new folder
+## Préparation de l'environnement de développement
 
-- Créer un fichier et copier
+Nous utilisons donc ici l'outil [VS Code](https://code.visualstudio.com/), très utilisé actuellement. Suivez les étapes suivantes pour mettre en place les élèments nous permettant de créer, développer et tester notre application.
+
+1. Créer un nouveau répertoire dans l'explorateur Windows (dans votre espace personnel par exemple)
+1. Dans VS Code, cliquer sur *File*, puis sur *Open Folder*
+1. Choississez le répertoire que vous venez de créer
+1. Créer un nouveau fichier en (bien choisir **Python File** en haut) :
+    - Soit cliquant sur *New File* dans la fenêtre centrale
+    - Soit allant sur *File* puis *New File...*
+1. Copier le code suivant dans le fichier
+```python
 import streamlit
  
 streamlit.write("""
 # Production scientifique mondiale
 Voici un tableau de bord sur la **production scientifique mondiale**
 """)
- 
-- Créer un environnement
+```
+1. Sauvegarder le fichier, en l'appelant `app.py` par exemple
 
-- dans le terminal, installer streamlit
+Il n'est normalement pas possible de l'exécuter directement car nous n'avons pas installé la librairie `streamlit`. Et pour développer, l'idéal est de créer un [environnement Python](https://docs.python.org/fr/3/tutorial/venv.html).
+
+<!-- https://python.doctor/page-virtualenv-python-environnement-virtuel -->
+
+Nous allons le faire directement dans VS Code, en suivant les étapes suivantes :
+
+1. Lancer la palette de commande (qui permet d'exécuter certaines opérations dans VS Code) en cliquant sur *View* puis *Command Palette*
+1. Chercher la commande *Python: Create environnement* (en écrivant la commande, il y a une sélection automatique des commandes listées)
+1. Cliquer ensuite sur *Venv*, puis choisir l'interpréteur par défaut
+
+Un nouvel environnement est créé, visible car le dossier `.venv` est créé dans le répertoire de travail.
+
+Nous allons maintenant installer la librairie `streamlit` et exécuter notre application pour la première fois.
+
+1. Lancer le *Terminal* en cliquant sur *Terminal* puis *New Terminal*
+1. Installer la librairie avec la commande suivante :
+```bash
 pip install streamlit
-
-- dans le terminal, écrire
+```
+1. Ensuite, lancer l'appli en exécutant la commande suivante :
+```bash
 streamlit run app.py
+```
 
-- Télécharger le fichier scimagojr.csv (https://fxjollois.github.io/donnees/scimagojr/scimagojr.csv) dans le répertoire de app.py
+> Votre application doit se lancer dans le navigateur par défaut. Par la suite, vous pouvez **uniquement sauvegarder** votre fichier `app.py` (dans VS Code) **et recharger** (`Ctrl+R`) la page de l'appli (dans votre navigateur) à chaque étape pour voir les changements effectués dans votre application.
 
-- Ajouter le code suivant 
+## Quelques éléments de base
+
+Vous devez d'abord télécharger le fichier [`scimagojr.csv`](https://fxjollois.github.io/donnees/scimagojr/scimagojr.csv) dans le répertoire de votre application.
+
+### Affichage simple d'un dataframe
+
+Ajouter le code suivant à votre application
+
+```python
 import pandas
 
 data = pandas.read_csv("scimagojr.csv")
 streamlit.write(data.query("Year == 2021").head(10))
+```
 
-- Modifier pour supprimer l'index
+La fonction `write()` ajoute l'élément dans l'application, et réagit en fonction de l'élèment passé en paramètre. 
+
+### Affichage plus spécifique
+
+La fonction `dataframe()` est elle dédiée spécifiquement à l'affichage d'un dataframe pandas dans une application. Elle permet donc plus de possibilités.
+
+Dans la suite, on souhaite par exemple supprimer l'index
+
+```python
 streamlit.dataframe(data.query("Year == 2021").head(10), hide_index = True)
+```
 
-- Ajout d'un sélection de l'année
+### Ajout d'un slider (sélection d'une valeur quantitative discrète)
+
+En ajoutant le code suivant, on créé un outil de sélection de l'année
+
+```python
 annee = streamlit.slider("Année", min(data["Year"]), max(data["Year"]), max(data["Year"]))
 
 streamlit.dataframe(data.query("Year == @annee").head(10), hide_index = True)
+```
 
-- ajout du choix de la taille du TOP
+### Ajout de boutons radio (sélection d'une modalité parmi plusieurs)
+
+Ici, on ajoute un choix de la taille du TOP (entre les valeurs 3, 5, 10 et 20)
+
+```python
 taille = streamlit.radio("Taille", [3, 5, 10, 20], 1)
 
 streamlit.dataframe(data.query("Year == @annee").head(taille), hide_index = True)
+```
 
-- en horizontal
-horizontal = True
+Si on souhaite avoir les boutons sur une ligne, on peut ajouter l'option `horizontal = True` à la fonction `radio()`
 
-- choix des régions
+### Ajout d'un sélecteur multiple
+
+Pour le choix des régions, on veut laisser la possibilité d'en sélectionner plusieurs. Nous utilisons la fonction `multiselect()`. On doit gérer la possibilité qu'aucune sélection ne soit faite, en testant le résultat de la sélection. Si celui-ci n'est pas vide (ce que fait la condition du `if`), il y a bien une sélection. Sinon, on affiche toutes les régions. 
+
+```python
 regions = streamlit.multiselect("Régions", set(data["Region"]))
 
 if (regions):
     streamlit.dataframe(data.query("Year == @annee & Region in @regions").head(taille), hide_index = True)
 else:
     streamlit.dataframe(data.query("Year == @annee").head(taille), hide_index = True)
+```
 
-- choix TOP / FLOP
+### Ajout d'une checkbox
+
+On veut pouvoir alterner entre TOP (meillleurs) et FLOP (plus mauvais). Le plus simple est d'utiliser une checkbox. 
+
+A cette étape, il est préférable de ré-écrire le code pour le rendre plus lisible et que les opérations soient faites correctement.
+
+```python
 data = pandas.read_csv("scimagojr.csv")
 
 annee = streamlit.slider("Année", min(data["Year"]), max(data["Year"]), max(data["Year"]))
@@ -67,9 +132,13 @@ if (flop):
     temp = temp.iloc[::-1]
 
 streamlit.dataframe(temp.head(taille), hide_index = True)
+```
 
-- un peu de mise en page
+### Un peu de mise en page en colonnes
 
+On peut créer un système de colonnes pour répartir les sélecteurs par exemple. Ici, on créé deux colonnes, qu'on utilise pour les positionner autrement.
+
+```python
 col1, col2 = streamlit.columns(2)
 
 with col1:
@@ -79,9 +148,13 @@ with col1:
 with col2:
     regions = streamlit.multiselect("Régions", set(data["Region"]))
     flop = streamlit.checkbox("FLOP")
-    
-- Ajout d'un titre aoprès le tableau
+```
 
+### Ajout d'un titre 
+
+Après le tableau (ou après une figure), il est d'usage de mettre un titre, permettant de spécifier certaines informations (par exemple). Pour ajouter un tel titre (avec l'indication de TOP ou FLOP), on peut modifier le code comme ci-dessous :
+
+```python
 msg = "TOP"
 temp = data.query("Year == @annee")
 if (regions):
@@ -92,20 +165,34 @@ if (flop):
 
 streamlit.dataframe(temp.head(taille), hide_index = True)
 streamlit.caption(msg + " des pays des régions sélectionnées (monde si aucune).")
+```
 
-- Représentation de l'évolution des rangs des payx du TOP10
-streamlit.header("Evolution des rangs des pays tu TOP10", divider = True)
+## Création d'un graphique
 
+### De base
+
+La librairie `streamlit` permet de faire un certain nombre de graphiques. On peut par exemple utiliser la fonction `line_chart()` pour voir l'évolution de la position des pays dans le TOP10 tout au long de la période.
+
+```python
 streamlit.line_chart(data.query("Rank <= 10"), x = "Year", y = "Rank", color = "Country")
+```
 
-- Amélioration du graphique en utilisant plotly
+### Avec `plotly`
+
+La librairie `plotly`, en plus d'être accessible en JS, l'est aussi en Python. En particulier, le sous-module `express` permet de réaliser des graphiques simplement.
+
+```python
 import plotly.express as px
 
 fig = px.line(data.query("Rank <= 10"), x = "Year", y = "Rank", color = "Country", markers = True)
 streamlit.plotly_chart(fig)
+```
 
-- Et encore plus amélioré
+### Et encore plus amélioré
 
+Si on veut pousser plus loin la création de ce graphique, on doit complexifier grandement le code.
+
+```python
 import plotly.graph_objects as go
 fig = go.Figure()
 for pays in set(data["Country"]):
@@ -128,39 +215,52 @@ for pays in set(data["Country"]):
 fig.update_yaxes(range = [10.5,0.5])
 fig.update_layout(showlegend = False)
 streamlit.plotly_chart(fig)
+```
 
-- Quelques élèments de texte
+## Quelques élèments de texte
 
-streamlit.??
+On dispose de plusieurs fonctions permettant d'écrire du texte et de le structurer :
 
-write() -> pour intégrer qqch dans l'appli (résultat dépendant de ce qui est mis en paramètre)
-text() -> pur texte
-markdown() -> explicitement du markdown
-title() -< titre de niveau 1
-header() -> titre de niveau 2 (avec une ligne en dessous avec divider = True)
-subheader() -> niveau 3
-caption() -> titre d'une figure ou d'un tableau (plutôt à placer en dessous)
-code() -< du code
-divider() -> ligne de séparation
+- `write()` : pour intégrer qqch dans l'appli (résultat dépendant de ce qui est mis en paramètre)
+- `text()` : pur texte
+- `markdown()` : explicitement du markdown
+- `title()` : titre de niveau 1
+- `header()` : titre de niveau 2 (avec une ligne en dessous avec divider = True)
+- `subheader()` : niveau 3
+- `caption()` : titre d'une figure ou d'un tableau (plutôt à placer en dessous)
+- `code()` : du code
+- `divider()` : ligne de séparation
 
-dans le texte : https://docs.streamlit.io/develop/api-reference/text/st.markdown
-- des emojis possibles ":emoji:" -> https://share.streamlit.io/streamlit/emoji-shortcodes
-- des icones avec ":material/nom_icone:" -> https://fonts.google.com/icons?icon.set=Material+Symbols&icon.style=Rounded
-- de la couleur ":couleur[texte à colorier]" ou ":couleur-background[texte à surligner donc]"
+Dans le texte écrit en [Markdown](https://docs.streamlit.io/develop/api-reference/text/st.markdown), on dispose aussi de différents éléments :
 
+- des emojis possibles au format `":emoji:"` 
+    - Liste des émojis disponible ici <https://share.streamlit.io/streamlit/emoji-shortcodes>
+- des icones Google Fonts au format `":material/nom_icone:"` 
+    - Liste disponible sur ce lien <https://fonts.google.com/icons?icon.set=Material+Symbols&icon.style=Rounded>
+- de la couleur au format `":couleur[texte à colorier]"` (le texte) ou `":couleur-background[texte à surligner donc]"` (le fond)
+    - Liste des couleurs usuels HTML
+
+Par exemple, ajouter ce texte dans l'application :
+
+```python
 Voici un :red[**tableau de bord**] sur la :green-background[production scientifique mondiale] :material/School: :sunglasses:
+```
 
+## Structuration globale de l'application
 
-- Espace à gauche pour paramètres
+### Espace à gauche pour paramètres
 
+```python
 with streamlit.sidebar:
     annee = streamlit.slider("Année", min(data["Year"]), max(data["Year"]), max(data["Year"]))
     taille = streamlit.radio("Taille", [3, 5, 10, 20], 1, horizontal = True)
     regions = streamlit.multiselect("Régions", set(data["Region"]))
     flop = streamlit.checkbox("FLOP")
+```
 
-- Avec onglets
+### Système d'onglets
 
+```python
 onglet1, onglet2 = streamlit.tabs(["TOP/FLOP", "Evolution TOP10"])
 
 with onglet1:
@@ -173,21 +273,24 @@ with onglet2:
     import plotly.express as px
     fig = px.line(data.query("Rank <= 10"), x = "Year", y = "Rank", color = "Country", markers = True)
     streamlit.plotly_chart(fig)
+```
 
-- Configuration globale
+### Configuration globale
 
+```python
 streamlit.set_page_config(
     page_title="Production scientifique mondiale | Séance 6",
     page_icon=":student:",
     layout="wide"
 )
+```
 
-- gestion des sélections (et plus généralements des évènements)
+## Gestion des sélections (et plus généralements des évènements)
 
---- d'un dataframe
+### Dans un dataframe
 
+```
 streamlit.set_page_config(layout="wide")
-
 
 data = pandas.read_csv("scimagojr.csv")
 top10 = data.query("Year == 2021").head(10)
@@ -211,10 +314,11 @@ with col2:
     else:
         fig = px.line(data.query("Rank <= 10"), x = "Year", y = "Rank", color = "Country", markers = True)
     streamlit.plotly_chart(fig)
-    
+```
 
---- d'un diagramme en bar plotly
+### Dans un diagramme en bar `plotly`
 
+```python
 streamlit.set_page_config(layout="wide")
 
 data = pandas.read_csv("scimagojr.csv").query("Year == 2021").sort_values(by = "H index", ascending = False).head(20)
@@ -236,6 +340,6 @@ with col2:
         indice_pays = 19 - selection["selection"]["points"][0]["point_index"]
         temp = temp.style.applymap(lambda _: "background-color: lightblue", subset=(temp.index[indice_pays],))
     streamlit.dataframe(temp, hide_index = True, height = 750, use_container_width = True)
-
+```
 
 
