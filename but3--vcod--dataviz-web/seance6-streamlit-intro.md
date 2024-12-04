@@ -6,13 +6,14 @@ Nous allons voir l'utilisation du package [`streamlit`](https://streamlit.io/), 
 
 Nous utilisons donc ici l'outil [VS Code](https://code.visualstudio.com/), très utilisé actuellement. Suivez les étapes suivantes pour mettre en place les élèments nous permettant de créer, développer et tester notre application.
 
-1. Créer un nouveau répertoire dans l'explorateur Windows (dans votre espace personnel par exemple)
-1. Dans VS Code, cliquer sur *File*, puis sur *Open Folder*
-1. Choississez le répertoire que vous venez de créer
-1. Créer un nouveau fichier en (bien choisir **Python File** en haut) :
+- Créer un nouveau répertoire dans l'explorateur Windows (dans votre espace personnel par exemple)
+- Dans VS Code, cliquer sur *File*, puis sur *Open Folder*
+- Choississez le répertoire que vous venez de créer
+- Créer un nouveau fichier en (bien choisir **Python File** en haut) :
     - Soit cliquant sur *New File* dans la fenêtre centrale
     - Soit allant sur *File* puis *New File...*
-1. Copier le code suivant dans le fichier
+- Copier le code suivant dans le fichier
+
 ```python
 import streamlit
  
@@ -21,28 +22,30 @@ streamlit.write("""
 Voici un tableau de bord sur la **production scientifique mondiale**
 """)
 ```
-1. Sauvegarder le fichier, en l'appelant `app.py` par exemple
 
-Il n'est normalement pas possible de l'exécuter directement car nous n'avons pas installé la librairie `streamlit`. Et pour développer, l'idéal est de créer un [environnement Python](https://docs.python.org/fr/3/tutorial/venv.html).
+Sauvegarder ensuite le fichier, en l'appelant `app.py` par exemple. Il n'est normalement pas possible de l'exécuter directement car nous n'avons pas installé la librairie `streamlit`. Et pour développer, l'idéal est de créer un [environnement Python](https://docs.python.org/fr/3/tutorial/venv.html).
 
 <!-- https://python.doctor/page-virtualenv-python-environnement-virtuel -->
 
 Nous allons le faire directement dans VS Code, en suivant les étapes suivantes :
 
-1. Lancer la palette de commande (qui permet d'exécuter certaines opérations dans VS Code) en cliquant sur *View* puis *Command Palette*
-1. Chercher la commande *Python: Create environnement* (en écrivant la commande, il y a une sélection automatique des commandes listées)
-1. Cliquer ensuite sur *Venv*, puis choisir l'interpréteur par défaut
+- Lancer la palette de commande (qui permet d'exécuter certaines opérations dans VS Code) en cliquant sur *View* puis *Command Palette*
+- Chercher la commande *Python: Create environnement* (en écrivant la commande, il y a une sélection automatique des commandes listées)
+- Cliquer ensuite sur *Venv*, puis choisir l'interpréteur par défaut
 
 Un nouvel environnement est créé, visible car le dossier `.venv` est créé dans le répertoire de travail.
 
 Nous allons maintenant installer la librairie `streamlit` et exécuter notre application pour la première fois.
 
-1. Lancer le *Terminal* en cliquant sur *Terminal* puis *New Terminal*
-1. Installer la librairie avec la commande suivante :
+- Lancer le *Terminal* en cliquant sur *Terminal* puis *New Terminal*
+- Installer la librairie avec la commande suivante :
+
 ```bash
 pip install streamlit
 ```
-1. Ensuite, lancer l'appli en exécutant la commande suivante :
+
+- Ensuite, lancer l'appli en exécutant la commande suivante :
+
 ```bash
 streamlit run app.py
 ```
