@@ -20,3 +20,8 @@
 
 - Séance 5 : 
     - [TP évalué](https://moodle.u-paris.fr/course/view.php?id=50365)
+    
+    
+- Séance 6 : Introduction à `streamlit`
+    - [Tutoriel de création d'une première application](seance6-streamlit-intro)
+    - [Demande](seance6-demande)
