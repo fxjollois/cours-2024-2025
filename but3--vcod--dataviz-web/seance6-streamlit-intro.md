@@ -2,6 +2,8 @@
 
 Nous allons voir l'utilisation du package [`streamlit`](https://streamlit.io/), équivalent Python de `shiny` pour R. Pour réaliser notre application, nous allons utiliser un environnement de développement, de type VS Code (utilisé ici) ou Spyder.
 
+Le but de cette séance est de découvrir la librairie et ces premières possibilités, mais n'est pas d'être exhaustif sur celles-ci.
+
 ## Préparation de l'environnement de développement
 
 Nous utilisons donc ici l'outil [VS Code](https://code.visualstudio.com/), très utilisé actuellement. Suivez les étapes suivantes pour mettre en place les élèments nous permettant de créer, développer et tester notre application.
@@ -251,7 +253,11 @@ Voici un :red[**tableau de bord**] sur la :green-background[production scientifi
 
 ## Structuration globale de l'application
 
+Voici quelques éléments permettant de structurer (basiquement) une application.
+
 ### Espace à gauche pour paramètres
+
+A l'instar de `shiny`, il est courant d'avoir une barre sur le côté gauche regroupant certains éléments, comme des sélecteurs, ou un menu (ou d'autres éléments). On peut simplement créer un tel espace avec l'objet `sidebar` :
 
 ```python
 with streamlit.sidebar:
@@ -262,6 +268,8 @@ with streamlit.sidebar:
 ```
 
 ### Système d'onglets
+
+Toujours comme dans `shiny`, on peut avoir besoin d'un système d'onglets, créés ici avec la fonction `tabs()` :
 
 ```python
 onglet1, onglet2 = streamlit.tabs(["TOP/FLOP", "Evolution TOP10"])
@@ -278,19 +286,36 @@ with onglet2:
     streamlit.plotly_chart(fig)
 ```
 
+> Noter qu'un système de menu et de pages est également possible, mais nous verrons cela dans une autre séance.
+
 ### Configuration globale
+
+Enfin, il est possible de définir des paramètres globaux de l'application avec la fonction `set_page_config()`, avec les paramètres suivants :
+
+- `page_title` : titre affiché dans le navigateur (pas sur la page donc)
+- `page_icon` : icône affiché dans le navigateur
+- `layout` : l'option `wide` permet d'élargir la zone dans laquelle l'application est présentée
 
 ```python
 streamlit.set_page_config(
-    page_title="Production scientifique mondiale | Séance 6",
-    page_icon=":student:",
-    layout="wide"
+    page_title = "Production scientifique mondiale | Séance 6",
+    page_icon = ":student:",
+    layout = "wide"
 )
 ```
 
 ## Gestion des sélections (et plus généralements des évènements)
 
+Au final, puisque nous avons créé une application web, il est important de gérer les interactions avec l'utilisateur. Cela passera forcément par les gestions des sélections dans un tableau et/ou un graphique. Voici deux exemples
+
 ### Dans un dataframe
+
+On affiche un dataframe avec la fonction `dataframe()` donc, avec le résultat stocké dans une variable. Ce résultat sera la sélection (s'il y en a une) de l'utilisateur. Les lignes en-dessous de `selection = streamlit.dataframe(...)` permettent justement de voir le contenu de celle-ci.
+
+Vous pouvez observer l'usage des paramètres suivants dans la fonction `dataframe()` :
+
+- `selection_mode` : définit ce qu'il est possible de sélectionner (ici, plusieurs lignes via `"multi-row"`)
+- `on_select` : définit ce que doit faire l'appli une fois la sélection faite (ici, on la redémarre avec `"rerun"`)
 
 ```
 streamlit.set_page_config(layout="wide")
@@ -319,7 +344,11 @@ with col2:
     streamlit.plotly_chart(fig)
 ```
 
-### Dans un diagramme en bar `plotly`
+> Noter la gestion de la sélection pour ne voir afficher sur le graphique que les pays choisis (s'il y en a).
+
+### Dans un diagramme en barres `plotly`
+
+L'autre opération est un peu *l'inverse* : on sélectionne dans un graphique `plotly` (en laissant la possibilité de ne sélectionner un seul objet -- une barre ici -- que via un clic simple -- valeur `"points"`).
 
 ```python
 streamlit.set_page_config(layout="wide")
@@ -345,4 +374,4 @@ with col2:
     streamlit.dataframe(temp, hide_index = True, height = 750, use_container_width = True)
 ```
 
-
+> Noter la gestion de la sélection pour mettre en valeur le pays choisi (via une couleur de fond)
