@@ -2,7 +2,7 @@
 
 Refaire avec streamlit la demande 2 pour avoir le résultat suivant :
 
-https://fxjollois.github.io/cours-2024-2025/but3--vcod--dataviz-web/seance2/seance2-demande.html
+<https://fxjollois.github.io/cours-2024-2025/but3--vcod--dataviz-web/seance2/seance2-demande.html>
 
 En y ajoutant une **Carte de chaleur du nombre de documents** : 
 - Graphique montrant pour chaque pays et chaque année le nombre de documents avec une couleur
