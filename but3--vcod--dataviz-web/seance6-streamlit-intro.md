@@ -192,6 +192,12 @@ streamlit.line_chart(data.query("Rank <= 10"), x = "Year", y = "Rank", color = "
 
 La librairie `plotly`, en plus d'être accessible en JS, l'est aussi en Python. En particulier, le sous-module `express` permet de réaliser des graphiques simplement.
 
+Vous devez d'abord installer cette librairie en suivant les étapes suivantes :
+
+- Aller dans *Terminal*, puis cliquer sur *New Terminal*
+- Activer l'environnement virtuel
+- Installer `plotly`
+
 ```python
 import plotly.express as px
 
