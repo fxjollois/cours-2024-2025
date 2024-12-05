@@ -35,11 +35,17 @@ Nous allons le faire directement dans VS Code, en suivant les étapes suivantes 
 - Chercher la commande *Python: Create environnement* (en écrivant la commande, il y a une sélection automatique des commandes listées)
 - Cliquer ensuite sur *Venv*, puis choisir l'interpréteur par défaut
 
-Un nouvel environnement est créé, visible car le dossier `.venv` est créé dans le répertoire de travail.
+Un nouvel environnement est créé, visible car le dossier `.venv` est créé dans le répertoire de travail. Une fois celui-ci créé, vous devez l'activez. 
+
+- Lancer le *Terminal* en cliquant sur *Terminal* puis *New Terminal*
+- Lancer la commande suivante :
+
+```bash
+.venv/Scripts/activate
+```
 
 Nous allons maintenant installer la librairie `streamlit` et exécuter notre application pour la première fois.
 
-- Lancer le *Terminal* en cliquant sur *Terminal* puis *New Terminal*
 - Installer la librairie avec la commande suivante :
 
 ```bash
