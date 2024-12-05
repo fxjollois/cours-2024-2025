@@ -52,7 +52,7 @@ Nous allons maintenant installer la librairie `streamlit` et exécuter notre app
 pip install streamlit
 ```
 
-- Ensuite, lancer l'appli en exécutant la commande suivante :
+- Ensuite, lancer l'appli en exécutant la commande suivante dans le Terminal :
 
 ```bash
 streamlit run app.py
