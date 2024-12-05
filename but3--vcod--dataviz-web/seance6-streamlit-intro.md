@@ -35,18 +35,24 @@ Nous allons le faire directement dans VS Code, en suivant les étapes suivantes 
 - Chercher la commande *Python: Create environnement* (en écrivant la commande, il y a une sélection automatique des commandes listées)
 - Cliquer ensuite sur *Venv*, puis choisir l'interpréteur par défaut
 
-Un nouvel environnement est créé, visible car le dossier `.venv` est créé dans le répertoire de travail.
+Un nouvel environnement est créé, visible car le dossier `.venv` est créé dans le répertoire de travail. Une fois celui-ci créé, vous devez l'activez. 
+
+- Lancer le *Terminal* en cliquant sur *Terminal* puis *New Terminal*
+- Lancer la commande suivante :
+
+```bash
+.venv/Scripts/activate
+```
 
 Nous allons maintenant installer la librairie `streamlit` et exécuter notre application pour la première fois.
 
-- Lancer le *Terminal* en cliquant sur *Terminal* puis *New Terminal*
 - Installer la librairie avec la commande suivante :
 
 ```bash
 pip install streamlit
 ```
 
-- Ensuite, lancer l'appli en exécutant la commande suivante :
+- Ensuite, lancer l'appli en exécutant la commande suivante dans le Terminal :
 
 ```bash
 streamlit run app.py
@@ -185,6 +191,12 @@ streamlit.line_chart(data.query("Rank <= 10"), x = "Year", y = "Rank", color = "
 ### Avec `plotly`
 
 La librairie `plotly`, en plus d'être accessible en JS, l'est aussi en Python. En particulier, le sous-module `express` permet de réaliser des graphiques simplement.
+
+Vous devez d'abord installer cette librairie en suivant les étapes suivantes :
+
+- Aller dans *Terminal*, puis cliquer sur *New Terminal*
+- Activer l'environnement virtuel
+- Installer `plotly`
 
 ```python
 import plotly.express as px
