@@ -9,7 +9,7 @@ Lien vers le [cours Moodle](https://par.moodle.lecnam.net/course/view.php?id=226
     2.  [Analyse de données](cm2--add.html)
     3.  [Classification](cm3--classif.html)
 -   **TD**
-    1.  --
+    1.  [TD1 - Statistique inférentielle](td1--stat-inf.html)
     2.  --
 -   **TP**
     1.  --
