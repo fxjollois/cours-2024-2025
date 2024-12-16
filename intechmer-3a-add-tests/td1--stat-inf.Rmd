@@ -11,13 +11,13 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Données `tips`
 
-Dans cette séance, nous allons utiliser les données `tips`, contenant des informations recueillies par un serveur pendant son travail. Les voici présentées ci-dessous (les 6 premières lignes).
+Dans cette séance, nous allons utiliser les données [`tips`](https://fxjollois.github.io/cours-2024-2025/intechmer-3a-add-tests/tips.csv), contenant des informations recueillies par un serveur pendant son travail. Les voici présentées ci-dessous (les 6 premières lignes).
 
 ```{r donnees, warning=FALSE, message=FALSE}
 library(tidyverse)
-library(knitr)
-tips = read_csv("tips.csv")
-kable(head(tips))
+library(DT)
+tips = read_csv("https://fxjollois.github.io/cours-2024-2025/intechmer-3a-add-tests/tips.csv")
+datatable(tips)
 ```
 
 ## Test de normalité
@@ -30,10 +30,16 @@ Lorsqu'on réalise une description des variables quantitatives, une des question
 
 Premier graphique à créer, l'histogramme permet d'avoir un premier élément de réponse.
 
-> La distribution semble unimodale (un seul *pic*) mais pas totale symétrique.
+> La distribution semble unimodale (un seul *pic*-- en diminuant le nombre d'intervalles) mais pas totale symétrique.
 
 ```{r hist}
-hist(tips$total_bill)
+ggplot(tips, aes(total_bill)) +
+  geom_histogram()
+```
+
+```{r hist2}
+ggplot(tips, aes(total_bill)) +
+  geom_histogram(bins = 15)
 ```
 
 Pour avoir une meilleure estimation de la distribution de la variable, il est d'usage de représenter une estimation par noyau de la densité, comme ci-dessous. L'intérêt est que cette représentation est moins sensible qu'un histogramme, dont l'allure peut changer en fonction du nombre d'intervalles choisi.
@@ -41,8 +47,9 @@ Pour avoir une meilleure estimation de la distribution de la variable, il est d'
 > On fait la même observation que ci-dessus.
 
 ```{r density}
-hist(tips$total_bill, freq = F)
-lines(density(tips$total_bill))
+ggplot(tips, aes(total_bill)) +
+  geom_histogram(aes(y = after_stat(density)), bins = 15, fill = "lightgray") +
+  geom_density()
 ```
 
 Mais le meilleur moyen est de réaliser ce qu'on appelle un **Q-Q plot**. Ce graphique présente les valeurs observées (en $Y$) pour les quantiles, versus les valeurs théoriques d'une loi Normale. Si les points suivent la droite, il y a normalité, sinon, on s'en éloigne. 
@@ -50,8 +57,9 @@ Mais le meilleur moyen est de réaliser ce qu'on appelle un **Q-Q plot**. Ce gra
 > On remarque que la variable `total_bill` ne suit pas la droite.
 
 ```{r qqplot}
-qqnorm(tips$total_bill) # représentation des observés
-qqline(tips$total_bill) # affichage de la droite, représentant la "normalité"
+ggplot(tips, aes(sample = total_bill)) +
+  stat_qq() +     # représentation des quantiles observés
+  stat_qq_line()  # affichage de la droite, représentant la "normalité"
 ```
 
 ### Via un test statistique - Test de *Shapiro-Wilk*
@@ -160,7 +168,7 @@ tips %>%
 
 ```{r comp_hist}
 ggplot(tips, aes(x = total_bill, fill = sex)) +
-  geom_histogram() +
+  geom_histogram(bins = 15) +
   facet_wrap(~ sex, ncol = 1)
 ```
 
@@ -362,6 +370,27 @@ Quel commentaire pouvons-nous faire sur ces deux derniers tests ?
 
 
 
+## Application sur autres données
 
+Nous allons utiliser le jeu de données [`adult.csv`](https://fxjollois.github.io/cours-2024-2025/intechmer-3a-add-tests/adult.csv), issu d'une enquête aux USA pour analyser le salaire (variable binaire : plus ou moins de 50k$) en fonction de certains critères (âge, sexe, éducation, nombre d'heures de travail par semaine...).
 
+```{r adult}
+adult = read_csv("https://fxjollois.github.io/cours-2024-2025/intechmer-3a-add-tests/adult.csv")
+datatable(adult, options = list(scrollX = TRUE))
+```
+
+Tester les éléments suivants :
+
+- Normalité de l'âge
+- Normalité du nombre d'heures par semaine (variable `hours_per_week`)
+- Equi-répartition du sexe
+- Equi-répartition du salaire (variable `class`)
+
+Identifier si les liens suivants sont réels :
+
+- Âge et salaire
+- Nombre d'heures de travail par semaine et salaire
+- Sexe et salaire
+- Catégorisation ethnique (variable `race`) et salaire
+- Âge et nombre d'heures de travail par semaine
 
