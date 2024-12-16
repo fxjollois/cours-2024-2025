@@ -1,0 +1,221 @@
+---
+title: "Classification - TD 3"
+author: "Outils de surveillance et analyses statistiques"
+date: "INTECHMER - CT3 GEM"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## Classification Ascendante Hiérarchique (CAH)
+
+### Données `iris`
+
+Nous utilisons encore pour exemple les données `iris`, déjà présentes dans R. 
+
+```{r}
+library(tidyverse)
+library(DT)
+datatable(iris)
+```
+
+Pour réaliser la CAH, nous utilisons la fonction `hclust()` du package `stats`, déjà présent dans R. Et comme l'ACP, la classification avec la CAH et $k$-means se réalisent uniquement que sur des variables quantitatives.
+
+iris2 = iris.drop("Species", axis = 1)
+iris2.head()
+Sepal Length	Sepal Width	Petal Length	Petal Width
+0	5.1	3.5	1.4	0.2
+1	4.9	3.0	1.4	0.2
+2	4.7	3.2	1.3	0.2
+3	4.6	3.1	1.5	0.2
+4	5.0	3.6	1.4	0.2
+Classification Ascendante Hiérarchique (CAH)
+Réalisation
+Indiquer distance_threshold = 0 et n_clusters = None va nous permettre de récupérer l'arbre complet (le dendrogramme).
+
+hac = AgglomerativeClustering(distance_threshold = 0, n_clusters = None)
+hac.fit(scale(iris2))
+
+AgglomerativeClustering
+AgglomerativeClustering(distance_threshold=0, n_clusters=None)
+Réalisation du dendrogramme
+Création d'une fonction en se basant sur cette page (avec quelques modifications)
+
+from scipy.cluster.hierarchy import dendrogram
+
+def plot_dendrogram(model, **kwargs):
+    # Create linkage matrix and then plot the dendrogram
+
+    # create the counts of samples under each node
+    counts = numpy.zeros(model.children_.shape[0])
+    n_samples = len(model.labels_)
+    for i, merge in enumerate(model.children_):
+        current_count = 0
+        for child_idx in merge:
+            if child_idx < n_samples:
+                current_count += 1  # leaf node
+            else:
+                current_count += counts[child_idx - n_samples]
+        counts[i] = current_count
+
+    linkage_matrix = numpy.column_stack([model.children_, model.distances_, counts]).astype(float)
+
+    # Plot the corresponding dendrogram
+    dendrogram(linkage_matrix, **kwargs)
+Dendrogramme
+plt.figure(figsize = (16, 8))
+plt.title("CAH (Ward)")
+plot_dendrogram(hac)
+plt.axhline(y = 20, linewidth = .5, color = "dimgray", linestyle = "--")
+plt.axhline(y = 10, linewidth = .5, color = "dimgray", linestyle = "--")
+plt.show()
+No description has been provided for this image
+Avec proposition du nombre de classes
+La méthode propose une partition en un nombre de classes choisi via un algorithme interne.
+
+hac2 = AgglomerativeClustering()
+hac2.fit(scale(iris2))
+
+AgglomerativeClustering
+AgglomerativeClustering()
+hac2.labels_
+array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1,
+       1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+Avec recherche du nombre de classes demandé
+Mais on peut bien évidemment choisir notre propre nombre de classes.
+
+hac3 = AgglomerativeClustering(n_clusters = 3)
+hac3.fit(scale(iris2))
+
+AgglomerativeClustering
+AgglomerativeClustering(n_clusters=3)
+hac3.labels_
+array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
+       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1,
+       1, 1, 1, 1, 1, 1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0,
+       2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 0, 2,
+       2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+Caractérisation des classes
+Très généralement, pour comprendre les classes et les commenter, nous calculons les centres de celles-ci (valeurs moyennes pour chaque variable)
+
+iris2.assign(classe = hac3.labels_).groupby("classe").mean()
+Sepal Length	Sepal Width	Petal Length	Petal Width
+classe				
+0	6.546479	2.992958	5.267606	1.854930
+1	5.016327	3.451020	1.465306	0.244898
+2	5.530000	2.566667	3.930000	1.206667
+k
+-means
+Réalisation
+Ici, nous devons, bien évidemment, indiquer le nombre de classes que l'on souhaite.
+
+kmeans = KMeans(n_clusters = 3, n_init = 20)
+kmeans.fit(scale(iris2))
+
+KMeans
+KMeans(n_clusters=3, n_init=20)
+Informations sur la partition
+pandas.Series(kmeans.labels_).value_counts()
+0    53
+1    50
+2    47
+Name: count, dtype: int64
+Centre des classes
+On obtient les centres des classes automatiquement. Ayant utilisé les données centrées-réduites, leur analyse est simple par un lecteur avisé (valeur positive 
+→
+ supérieure à la moyenne, et inversement).
+
+kmeans.cluster_centers_
+array([[-0.05021989, -0.88337647,  0.34773781,  0.2815273 ],
+       [-1.01457897,  0.85326268, -1.30498732, -1.25489349],
+       [ 1.13597027,  0.08842168,  0.99615451,  1.01752612]])
+Mais pour présenter les classes, on va préférer recalculer ces centres sur les données originelles.
+
+iris2.assign(classe = kmeans.labels_).groupby("classe").mean()
+Sepal Length	Sepal Width	Petal Length	Petal Width
+classe				
+0	5.801887	2.673585	4.369811	1.413208
+1	5.006000	3.428000	1.462000	0.246000
+2	6.780851	3.095745	5.510638	1.972340
+Choix du nombre de classes
+inertia = []
+for k in range(1, 11):
+    kmeans = KMeans(n_clusters = k, init = "random", n_init = 20).fit(scale(iris2))
+    inertia = inertia + [kmeans.inertia_]
+rsquare = [(inertia[0] - i) / inertia[0] for i in inertia]
+criteres = pandas.DataFrame({
+    "k": range(1, 11), 
+    "inertia": inertia,
+    "rsquare": rsquare,
+    "pseudof": [(rsquare[k-1] / (k - 1)) / ((1 - rsquare[k-1]) / (150 - k)) if k > 1 else None for k in range(1, 11)]
+})
+print(criteres)
+    k     inertia   rsquare     pseudof
+0   1  600.000000  0.000000         NaN
+1   2  222.361705  0.629397  251.349339
+2   3  139.820496  0.766966  241.904402
+3   4  114.304803  0.809492  206.790665
+4   5   90.927514  0.848454  202.951525
+5   6   81.587287  0.864021  182.997703
+6   7   72.323365  0.879461  173.889767
+7   8   62.280866  0.896199  175.142341
+8   9   55.408792  0.907652  173.229188
+9  10   51.995608  0.913341  163.946787
+kmeans
+
+KMeans
+KMeans(init='random', n_clusters=10, n_init=20)
+seaborn.lineplot(data = criteres, x = "k", y = "inertia")
+plt.scatter(2, criteres.query('k == 2')["inertia"], c = "red")
+plt.scatter(3, criteres.query('k == 3')["inertia"], c = "red")
+plt.show()
+No description has been provided for this image
+seaborn.lineplot(data = criteres, x = "k", y = "rsquare")
+plt.scatter(2, criteres.query('k == 2')["rsquare"], c = "red")
+plt.scatter(3, criteres.query('k == 3')["rsquare"], c = "red")
+plt.scatter(5, criteres.query('k == 5')["rsquare"], c = "orange")
+plt.show()
+No description has been provided for this image
+seaborn.lineplot(data = criteres, x = "k", y = "pseudof")
+plt.scatter(2, criteres.query('k == 2')["pseudof"], c = "red")
+plt.scatter(3, criteres.query('k == 3')["pseudof"], c = "red")
+plt.scatter(5, criteres.query('k == 5')["pseudof"], c = "orange")
+plt.show()
+No description has been provided for this image
+
+
+## A FAIRE
+
+### Données `Wine` -- ACP
+
+Nous allons travailler sur des données concernant 3 types de vin. Elles sont disponibles sur [cette page](https://archive.ics.uci.edu/ml/datasets/wine) de l'UCI MLR. Il s'agit de 178 vins, réparties en 3 classes donc, et décrit par 13 variables quantitatives (lire la description dans le fichier `wine.names` pour plus d'informations).
+
+Le code suivant permet de charger les données, et de nommer correctement les variables.
+
+```{r}
+wine = read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/wine/wine.data", col_names = FALSE)
+names(wine) = c("class", "Alcohol", "Malic acid", "Ash", "Alcalinity of ash", "Magnesium", 
+                "Total phenols", "Flavanoids", "Nonflavanoid phenols", "Proanthocyanins", 
+                "Color intensity", "Hue", "OD280/OD315 of diluted wines", "Proline")
+datatable(wine, options = list(scrollX = TRUE))
+```
+
+- Chercher un nombre de classes intéressant, à l'aide de la CAH
+  - Récupérer la partition ainsi obtenue
+  - Caractériser celles-ci avec les centres des classes
+- Faire de même avec $k$-means, en utilisant les critères $R^2$ et $PseudoF$
+  - Récupérer la partition ainsi obtenue
+  - Caractériser celles-ci avec les centres des classes
+- Comparer les 2 partitions ainsi obtenues
+- Représenter celles-ci, chacun séparément, sur le plan factoriel de l'ACP
+
