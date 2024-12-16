@@ -5,12 +5,13 @@
 Lien vers le [cours Moodle](https://par.moodle.lecnam.net/course/view.php?id=22651)
 
 -   **Cours**
-    1.  [Statistique inférentielle](cm1--stat-inf.html)
-    2.  [Analyse de données](cm2--add.html)
-    3.  [Classification](cm3--classif.html)
+    1. [CM1 - Statistique inférentielle](cm1--stat-inf.html)
+    2. [CM2 - Analyse de données](cm2--add.html)
+    3. [CM3 - Classification](cm3--classif.html)
 -   **TD**
-    1.  [TD1 - Statistique inférentielle](td1--stat-inf.html)
-    2.  --
+    1. [TD1 - Statistique inférentielle](td1--stat-inf.html)
+    2. [TD2 - Analyse de données](td2--add.html)
+    3. [TD3 - Classification](td3--classif.html)
 -   **TP**
     1.  --
     2.  --
