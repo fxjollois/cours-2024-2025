@@ -9,7 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
 ## Classification Ascendante Hiérarchique (CAH)
 
 ### Données `iris`
@@ -22,181 +21,159 @@ library(DT)
 datatable(iris)
 ```
 
+
+### Réalisation
+
 Pour réaliser la CAH, nous utilisons la fonction `hclust()` du package `stats`, déjà présent dans R. Et comme l'ACP, la classification avec la CAH et $k$-means se réalisent uniquement que sur des variables quantitatives.
 
-iris2 = iris.drop("Species", axis = 1)
-iris2.head()
-Sepal Length	Sepal Width	Petal Length	Petal Width
-0	5.1	3.5	1.4	0.2
-1	4.9	3.0	1.4	0.2
-2	4.7	3.2	1.3	0.2
-3	4.6	3.1	1.5	0.2
-4	5.0	3.6	1.4	0.2
-Classification Ascendante Hiérarchique (CAH)
-Réalisation
-Indiquer distance_threshold = 0 et n_clusters = None va nous permettre de récupérer l'arbre complet (le dendrogramme).
+Cependant, cette fonction prend en paramètre une matrice de distance. Il faut donc la calculer à l'aide de la fonction `dist()`, qui calcule par défaut la distance euclidienne (ce qui nous convient bien). Et comme les variables ne sont pas directement comparables (certes, elles ont la même unité, mais les moyennes et écart-types sont différents), on transforme les données en normalisant les variables (avec la fonction `scale()`).
 
-hac = AgglomerativeClustering(distance_threshold = 0, n_clusters = None)
-hac.fit(scale(iris2))
+```{r}
+cah = hclust(dist(scale(iris[,-5])))
+cah
+```
 
-AgglomerativeClustering
-AgglomerativeClustering(distance_threshold=0, n_clusters=None)
-Réalisation du dendrogramme
-Création d'une fonction en se basant sur cette page (avec quelques modifications)
+Notez que, par défaut, le critère d'agrégation est le *lien complet*, que nous n'utiliserons jamais. Pour le modifier, nous utilisons le paramètre `method`, avec la valeur `"ward.D2"`, que nous utiliserons principalement (ainsi que la valeur `"single"` pour le lien simple).
 
-from scipy.cluster.hierarchy import dendrogram
 
-def plot_dendrogram(model, **kwargs):
-    # Create linkage matrix and then plot the dendrogram
+```{r}
+cah = hclust(dist(scale(iris[,-5])), method = "ward.D2")
+cah
+```
 
-    # create the counts of samples under each node
-    counts = numpy.zeros(model.children_.shape[0])
-    n_samples = len(model.labels_)
-    for i, merge in enumerate(model.children_):
-        current_count = 0
-        for child_idx in merge:
-            if child_idx < n_samples:
-                current_count += 1  # leaf node
-            else:
-                current_count += counts[child_idx - n_samples]
-        counts[i] = current_count
+### Réalisation du dendrogramme
 
-    linkage_matrix = numpy.column_stack([model.children_, model.distances_, counts]).astype(float)
+Le véritable intérêt de cette méthode est donc la représentation visuelle de l'arbre hiérarchique, appelé *dendrogramme*. Pour l'afficher, nous utilisons la fonction `plot()` sur l'objet créé.
 
-    # Plot the corresponding dendrogram
-    dendrogram(linkage_matrix, **kwargs)
-Dendrogramme
-plt.figure(figsize = (16, 8))
-plt.title("CAH (Ward)")
-plot_dendrogram(hac)
-plt.axhline(y = 20, linewidth = .5, color = "dimgray", linestyle = "--")
-plt.axhline(y = 10, linewidth = .5, color = "dimgray", linestyle = "--")
-plt.show()
-No description has been provided for this image
-Avec proposition du nombre de classes
-La méthode propose une partition en un nombre de classes choisi via un algorithme interne.
+```{r}
+plot(cah)
+```
 
-hac2 = AgglomerativeClustering()
-hac2.fit(scale(iris2))
+Lorsqu'on a beaucoup d'individus (tel que dans notre cas) et/ou que les individus n'ont pas d'identifiant spécifique, on peut moduler un peu l'usage de la fonction pour avoir un arbre plus lisible.
 
-AgglomerativeClustering
-AgglomerativeClustering()
-hac2.labels_
-array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1,
-       1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-Avec recherche du nombre de classes demandé
-Mais on peut bien évidemment choisir notre propre nombre de classes.
+> On note qu'on peut *couper* notre arbre à deux endroits différents, pour avoir 2 ou 3 classes.
 
-hac3 = AgglomerativeClustering(n_clusters = 3)
-hac3.fit(scale(iris2))
+```{r}
+par(mar = c(0, 2, 2, 0) + .1)
+plot(cah, hang = -1, labels = FALSE, ylab = "", main = "CAH avec critère de Ward")
+abline(h = 20, lty = 2, col = "gray")
+abline(h = 10, lty = 2, col = "gray")
+```
 
-AgglomerativeClustering
-AgglomerativeClustering(n_clusters=3)
-hac3.labels_
-array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1,
-       1, 1, 1, 1, 1, 1, 0, 0, 0, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 0, 2, 0,
-       2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 0, 2, 0, 0, 2,
-       2, 2, 2, 0, 2, 2, 2, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
-Caractérisation des classes
-Très généralement, pour comprendre les classes et les commenter, nous calculons les centres de celles-ci (valeurs moyennes pour chaque variable)
+### Découpage pour récupérer la partition
 
-iris2.assign(classe = hac3.labels_).groupby("classe").mean()
-Sepal Length	Sepal Width	Petal Length	Petal Width
-classe				
-0	6.546479	2.992958	5.267606	1.854930
-1	5.016327	3.451020	1.465306	0.244898
-2	5.530000	2.566667	3.930000	1.206667
-k
--means
-Réalisation
-Ici, nous devons, bien évidemment, indiquer le nombre de classes que l'on souhaite.
+La fonction `cutree()` permet de récupérer la partition obtenue après découpage en $k$ classes ($k$ étant donné en valeur du paramètre `k`).
 
-kmeans = KMeans(n_clusters = 3, n_init = 20)
-kmeans.fit(scale(iris2))
+> On obtient un vecteur de modalités correspondant à la classe, à intégrer aux données initiales pour calculer les centres des classes.
 
-KMeans
-KMeans(n_clusters=3, n_init=20)
-Informations sur la partition
-pandas.Series(kmeans.labels_).value_counts()
-0    53
-1    50
-2    47
-Name: count, dtype: int64
-Centre des classes
-On obtient les centres des classes automatiquement. Ayant utilisé les données centrées-réduites, leur analyse est simple par un lecteur avisé (valeur positive 
-→
- supérieure à la moyenne, et inversement).
+```{r}
+cah_z2 = cutree(cah, 2)
+cah_z2
+```
+Ce qu'on peut faire avec la libraire `dplyr` comme ci-dessous.
 
-kmeans.cluster_centers_
-array([[-0.05021989, -0.88337647,  0.34773781,  0.2815273 ],
-       [-1.01457897,  0.85326268, -1.30498732, -1.25489349],
-       [ 1.13597027,  0.08842168,  0.99615451,  1.01752612]])
-Mais pour présenter les classes, on va préférer recalculer ces centres sur les données originelles.
+> On a une classe de grands iris (la deuxième, avec une largeur de sépale faible), et une classe de petits iris (la première, avec au contraire de larges sépales)
 
-iris2.assign(classe = kmeans.labels_).groupby("classe").mean()
-Sepal Length	Sepal Width	Petal Length	Petal Width
-classe				
-0	5.801887	2.673585	4.369811	1.413208
-1	5.006000	3.428000	1.462000	0.246000
-2	6.780851	3.095745	5.510638	1.972340
-Choix du nombre de classes
-inertia = []
-for k in range(1, 11):
-    kmeans = KMeans(n_clusters = k, init = "random", n_init = 20).fit(scale(iris2))
-    inertia = inertia + [kmeans.inertia_]
-rsquare = [(inertia[0] - i) / inertia[0] for i in inertia]
-criteres = pandas.DataFrame({
-    "k": range(1, 11), 
-    "inertia": inertia,
-    "rsquare": rsquare,
-    "pseudof": [(rsquare[k-1] / (k - 1)) / ((1 - rsquare[k-1]) / (150 - k)) if k > 1 else None for k in range(1, 11)]
-})
-print(criteres)
-    k     inertia   rsquare     pseudof
-0   1  600.000000  0.000000         NaN
-1   2  222.361705  0.629397  251.349339
-2   3  139.820496  0.766966  241.904402
-3   4  114.304803  0.809492  206.790665
-4   5   90.927514  0.848454  202.951525
-5   6   81.587287  0.864021  182.997703
-6   7   72.323365  0.879461  173.889767
-7   8   62.280866  0.896199  175.142341
-8   9   55.408792  0.907652  173.229188
-9  10   51.995608  0.913341  163.946787
-kmeans
+```{r}
+cah_centre2 = iris[,-5] %>% mutate(classe2 = cah_z2) %>%
+  group_by(classe2) %>%
+  summarise_all(mean)
+datatable(round(cah_centre2, 2), rownames = FALSE, options = list(paging = F, searching = FALSE))
+```
 
-KMeans
-KMeans(init='random', n_clusters=10, n_init=20)
-seaborn.lineplot(data = criteres, x = "k", y = "inertia")
-plt.scatter(2, criteres.query('k == 2')["inertia"], c = "red")
-plt.scatter(3, criteres.query('k == 3')["inertia"], c = "red")
-plt.show()
-No description has been provided for this image
-seaborn.lineplot(data = criteres, x = "k", y = "rsquare")
-plt.scatter(2, criteres.query('k == 2')["rsquare"], c = "red")
-plt.scatter(3, criteres.query('k == 3')["rsquare"], c = "red")
-plt.scatter(5, criteres.query('k == 5')["rsquare"], c = "orange")
-plt.show()
-No description has been provided for this image
-seaborn.lineplot(data = criteres, x = "k", y = "pseudof")
-plt.scatter(2, criteres.query('k == 2')["pseudof"], c = "red")
-plt.scatter(3, criteres.query('k == 3')["pseudof"], c = "red")
-plt.scatter(5, criteres.query('k == 5')["pseudof"], c = "orange")
-plt.show()
-No description has been provided for this image
+On peut faire les deux mêmes opérations en une fois pour 3 classes.
 
+> On retrouve la première classe, de petits iris. C'est la deuxième qui a donc été coupé en deux, avec de très grands iris (classe 3) et des grands iris (classe 2).
+
+```{r}
+cah_z3 = cutree(cah, 3)
+cah_centre3 = iris[,-5] %>% mutate(classe3 = cah_z3) %>%
+  group_by(classe3) %>%
+  summarise_all(mean)
+datatable(round(cah_centre3, 2), rownames = FALSE, options = list(paging = F, searching = FALSE))
+```
+
+
+## $k$-means
+
+### Réalisation
+
+La fonction `kmeans()` permet de calculer une partition directement. Comme dit dans le cours, cette méthode nécessite de connaître le nombre de classes que l'on souhaite, avec le paramètre $centers$. Il faut noter que nous devons travailler sur les données normalisées.
+
+La fonction renvoie un objet complexe, contenant la partition ainsi que d'autres informations (inertie intraclasse et interclasse, centres et taille des classes entre autres).
+
+> On obtient des classes avec un nombre d'individus quasiment identiques. Et l'inertie expliquée par la partition est de presque 77%.
+
+```{r}
+km3 = kmeans(scale(iris[,-5]), centers = 3)
+km3
+```
+
+### Caractérisation des classes
+
+Comme on le voit ci-dessous, les centres des classes sont sur les données normalisées, et donc non directement exploitable.
+
+```{r}
+km3$centers
+```
+On va donc utiliser la même méthode que pour la CAH, en utilisant ici le sous-objet  `cluster`.
+
+> On retrouve quasiment les mêmes classes. Attention cependant, puisque l'algorithme a une initialisation aléatoire, l'ordre des classes peut changer d'une exécution à l'autre.
+
+```{r}
+km3_centres = iris[,-5] %>% mutate(classe3 = km3$cluster) %>%
+  group_by(classe3) %>%
+  summarise_all(mean)
+datatable(round(km3_centres, 2), rownames = FALSE, options = list(paging = F, searching = FALSE))
+```
+
+### Recherche du nombre de classes
+
+Ici, nous allons exécuter un petit algorithme, pour chercher le nombre de classes. 
+
+1. On créé d'abord un data.frame vide dans lequel nous mettrons les résultats ;
+2. Ensuite, pour un nombre de classes compris entre 1 et 10, on lance $k$-means (on force 30 essais différents pour obtenir le meilleur résultat possible pour chaque valeur de `k`) ;
+3. Enfin, on calcule les valeurs de $R^2$, puis de $PseudoF$ ;
+4. La dernière ligne permet de transformer la valeur infinie (noté `Inf`, dû à la division par zéro) de $PsudoF$ pour 1 classe par une donnée manquante `NA`.
+
+```{r}
+res = data.frame(nbclust = NA, I = NA, W = NA, B = NA)
+for (k in 1:10) {
+  km = kmeans(scale(iris[,-5]), centers = k, nstart = 30)
+  res[k,] = c(k, km$totss, km$tot.withinss, km$betweenss)
+}
+res = res %>% 
+  mutate(r2 = B / I) %>%
+  mutate(psf = (r2 / (nbclust - 1)) / ((1 - r2) / (nrow(iris) - nbclust))) %>%
+  mutate_all(~ ifelse(is.infinite(.x), NA, .x))
+datatable(round(res, 2), rownames = FALSE, options = list(paging = F, searching = FALSE))
+```
+
+Ce data.frame nous permet de représenter l'évolution des critères en fonction du nombre de classes.
+
+> On remarque deux points d'inflexion important pour $R^2$, pour 2 et 3 classes. Un dernier point éventuellement intéressant est à noter pour 5 classes.
+
+```{r}
+ggplot(res, aes(nbclust, r2)) +
+  geom_line() +
+  scale_x_continuous(breaks = 1:10) +
+  labs(x = "Nombre de classes", y = "R^2") +
+  theme_minimal()
+```
+
+Si on regarde l'évolution du $PseudoF$, en regardant le max, on note que ce critère nous conduit à choisir plutôt deux classes.
+
+```{r, warning=FALSE}
+ggplot(res, aes(nbclust, psf)) +
+  geom_line() +
+  scale_x_continuous(breaks = 1:10) +
+  labs(x = "Nombre de classes", y = "R^2") +
+  theme_minimal()
+```
 
 ## A FAIRE
 
-### Données `Wine` -- ACP
+### Données `Wine`
 
 Nous allons travailler sur des données concernant 3 types de vin. Elles sont disponibles sur [cette page](https://archive.ics.uci.edu/ml/datasets/wine) de l'UCI MLR. Il s'agit de 178 vins, réparties en 3 classes donc, et décrit par 13 variables quantitatives (lire la description dans le fichier `wine.names` pour plus d'informations).
 
