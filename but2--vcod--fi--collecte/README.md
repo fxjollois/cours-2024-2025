@@ -21,3 +21,5 @@
 - TP à rendre : [Complétion de la base SIRENE avec coordonnées GPS](https://moodle.u-paris.fr/mod/assign/view.php?id=1280998)
 
 - [Requêtage sur une API (Open Data Soft)](seance2)
+
+- [Web-scraping avec Python](seance3)

@@ -1,4 +1,4 @@
-# Web-scraping avec Python
+# Séance 3 : Web-scraping avec Python
 
 - Inspiré par cette page : <https://outscraper.com/how-to-scrape-google-maps-with-python-and-selenium/>
 - Installation à faire auparavant :
