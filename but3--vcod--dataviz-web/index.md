@@ -25,3 +25,9 @@
 - Séance 6 : Introduction à `streamlit`
     - [Tutoriel de création d'une première application](seance6-streamlit-intro)
     - [Demande](seance6-demande)
+
+- Séance 7 : Compléments à `streamlit`
+    - [Génération de cate avec `leaflet` dans `streamlit`](seance7-leaflet)
+    - [Demande](seance7-demande)
+    
+    
