@@ -122,7 +122,7 @@ driver.close()
 
 ## A FAIRE
 
-A partir du fichier <StockEtablissement_utf8_1000__complété.csv> sur les 1000 premiers établissements, dans lequel nous avons ajouté les coordonnées géographiques, vous devez chercher, pour chaque établissement, s'il existe un site web et récupérer l'adresse. Toutes les URL seront au final stockées dans une nouvelle variable, `website`, ajouté à toutes les autres informations.
+A partir du fichier [StockEtablissement_utf8_1000__complété.csv](StockEtablissement_utf8_1000__complété.csv) sur les 1000 premiers établissements, dans lequel nous avons ajouté les coordonnées géographiques, vous devez chercher, pour chaque établissement, s'il existe un site web et récupérer l'adresse. Toutes les URL seront au final stockées dans une nouvelle variable, `website`, ajouté à toutes les autres informations.
 
 
 ```python
