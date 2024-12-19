@@ -128,7 +128,7 @@ A partir du fichier [StockEtablissement_utf8_1000__complété.csv](StockEtabliss
 ```python
 import pandas
 
-df = pandas.read_csv("StockEtablissement_utf8_1000__complété.csv", nrows = 1000)
+df = pandas.read_csv("StockEtablissement_utf8_1000__complété.csv")
 df
 ```
 
