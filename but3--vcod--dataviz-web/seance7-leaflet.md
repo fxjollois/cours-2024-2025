@@ -55,7 +55,7 @@ folium.Marker([48.841983, 2.267919], popup = "IUT Paris-Rives de Seine", tooltip
 
 ## Ajout de beaucoup de marqueurs
 
-**Attention**, dans la suite, nous travaillons sur des [restaurants new-yorkais]("restaurants_ok.csv") (fichier à télécharger et à placer dans le répertoire de l'application). Nous devons changer le centre de la carte, ainsi que le zoom pour voir plus large.
+**Attention**, dans la suite, nous travaillons sur des [restaurants new-yorkais](restaurants_ok.csv) (fichier à télécharger et à placer dans le répertoire de l'application). Nous devons changer le centre de la carte, ainsi que le zoom pour voir plus large.
 
 ```python
 centre = [40.7,-73.95]
@@ -90,7 +90,7 @@ FastMarkerCluster(data = list(zip(df.lat, df.lng))).add_to(m)
 
 ## Ajout de polygones
 
-Pour faire des cartes choroplèthes comme nous allons le voir plus loin, il est nécessaire d'importer les contours des quartiers, présents dans ce [fichier GeoJSON]("new-york-city-boroughs.geojson"). Nous l'importons avec la librairie `json`. L'ajout permet juste de visualiser les polygones.
+Pour faire des cartes choroplèthes comme nous allons le voir plus loin, il est nécessaire d'importer les contours des quartiers, présents dans ce [fichier GeoJSON](new-york-city-boroughs.geojson). Nous l'importons avec la librairie `json`. L'ajout permet juste de visualiser les polygones.
 
 ```python
 import json
