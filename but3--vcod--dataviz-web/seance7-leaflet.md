@@ -1,4 +1,4 @@
-# Séance 7 - Génération de cate avec `leaflet` dans `streamlit`
+# Séance 7 - Génération de cartes avec `leaflet` dans `streamlit`
 
 Nous allons voir ici l'utilisation de la librairie [`folium`](https://python-visualization.github.io/folium/latest/), qui permet de générer en python des cartes [`leaflet`](https://leafletjs.com), librairie Javascript probablement la plus utilisée pour créer des cartes dans une application web.
 
