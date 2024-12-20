@@ -27,7 +27,7 @@
     - [Demande](seance6-demande)
 
 - Séance 7 : Compléments à `streamlit`
-    - [Génération de cate avec `leaflet` dans `streamlit`](seance7-leaflet)
+    - [Génération de cartes avec `leaflet` dans `streamlit`](seance7-leaflet)
     - [Demande](seance7-demande)
     
     
