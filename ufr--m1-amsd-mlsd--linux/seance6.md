@@ -4,7 +4,7 @@
 
 ### Projet *Tableaux de bord temps réel*
 
-**DEADLINE** : **31 DECEMBRE 2024 23h59**
+**DEADLINE** : **15 JANVIER 2025 23h59** (*NOUVELLE DATE*)
 
 **RENDU** : <https://cloud.parisdescartes.fr/index.php/s/SjeGEL5LH5ZSdWa>
 
