@@ -1,6 +1,6 @@
 # Outils de surveillance et analyses statistiques
 
-## Cadre technique génie de l'environnement marin - 3ème année - INTECHMER
+## Cadre Technique Génie de l'Environnement Marin - 3ème année - INTECHMER
 
 Lien vers le [cours Moodle](https://par.moodle.lecnam.net/course/view.php?id=22651)
 
@@ -13,9 +13,9 @@ Lien vers le [cours Moodle](https://par.moodle.lecnam.net/course/view.php?id=226
     2. [TD2 - Analyse de données](td2--add.html)
     3. [TD3 - Classification](td3--classif.html)
 -   **TP**
-    1.  --
-    2.  --
-    3.  --
+    1.  [TP1 - Données Adult](tp1--adult.html)
+    2.  [TP2 - Données CSP 1968 vs 2014](tp2--CSP-1968vs2014.html)
+    3.  [TP3 - Données Wine](tp3--wine.html)
     4.  --
     5.  --
 
@@ -32,11 +32,12 @@ Organisation :
 - CM 1h30  -> Proba, loi et Test
 - CM 2h    -> ACP et AFC
 - CM 1h30  -> CAH et k-means
-- TD 3h    -> Tests
-- TD 1h30  -> ??
-- TP 3h    -> R - stats desc et normalité/chi2 univarié
-- TP 3h    -> T-test/wilcoxon - ANOVA/Kruskal-Wallis
-- TP 3h    -> ACP / AFC
-- TP 3h    -> k-means / CAH
+- TD 1h30  -> Tests sur R (normalité, chisq, t.test/wilcox, cor.test)
+- TD 1h30  -> ACP et AFC sur R
+- TD 1h30  -> k-means sur R
+- TP 3h    -> jeu de données "simple" avec une variable cible binaire idéalement
+- TP 3h    -> jeu plus complexe & introduction ANOVA/Kruskall-Wallis
+- TP 3h    -> 
+- TP 3h    -> 
 - TP 3h    -> Récap' global
 -->
