@@ -1,5 +1,5 @@
 ---
-title: "Applications sur données réelles - WINE - TP 3"
+title: "Applications sur données réelles - WINE - TP 2"
 author: "Outils de surveillance et analyses statistiques"
 date: "INTECHMER - CT3 GEM"
 output: html_document
@@ -25,11 +25,14 @@ names(wine) = c("class", "Alcohol", "Malic acid", "Ash", "Alcalinity of ash", "M
 datatable(wine, options = list(scrollX = TRUE))
 ```
 
+Comme pour le TP précédent, rédiger votre travail dans un fichier Rmarkdown.
 
+## A faire
 
 Vous devez donc réaliser les étapes suivantes :
 
 1. Décrire les données
+1. Ne conserver que les variables quantitatives (donc mettre de côté la variable `class`)
 2. Réaliser une ACP centrée ou normée (choix à justifier)
     - Produire les graphiques nécessaires à l'interprétation
     - Identifier les classes sur le plan factoriel

@@ -18,6 +18,11 @@
 - Tout sur Excel
 - TCD avec moyenne, écart-type et nombre en modifiant la structure pour séance 7 et 8
 - ATTENTION séance 5 avec le +/- 2 écart-type pouvant être incompréhensible après pour les étudiants.
+- Seance 6 : ne mettre que des écart-types
+
+## INTECHMER
+
+- données AirNormand pour le TP1 et le TP2 ?
 
 ## BUT SD Paris
 
