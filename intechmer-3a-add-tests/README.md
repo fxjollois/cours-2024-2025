@@ -15,8 +15,8 @@ Lien vers le [cours Moodle](https://par.moodle.lecnam.net/course/view.php?id=226
 -   **TP**
     1.  [TP1 - Données Adult](tp1--adult.html)
       - Correction : [html produit](tp1--correction.html) et [fichier Rmd](tp1--correction.Rmd)
-    2.  [TP2 - Données CSP 1968 vs 2014](tp2--CSP-1968vs2014.html)
-    3.  [TP3 - Données Wine](tp3--wine.html)
+    2.  [TP2 - Données Wine](tp2--wine.html)
+    3. --
     4.  --
     5.  --
 
