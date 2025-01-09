@@ -1,6 +1,6 @@
 # Outils de surveillance et analyses statistiques
 
-## Cadre Technique Génie de l'Environnement Marin - 3ème année - INTECHMER
+### Cadre Technique Génie de l'Environnement Marin - 3ème année - INTECHMER
 
 Lien vers le [cours Moodle](https://par.moodle.lecnam.net/course/view.php?id=22651)
 

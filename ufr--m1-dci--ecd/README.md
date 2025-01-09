@@ -1,6 +1,6 @@
 # Extraction de connaissances à partir de données structurées et non structurées
 
-## Master Informatique - Parcours DCI (Données, Connaissances, Intelligence)
+### M1 Informatique - Parcours DCI (Données, Connaissances, Intelligence)
 
 1. [Introduction à Python](seance1-intro-python)
     - [correction](seance1-correction.html)

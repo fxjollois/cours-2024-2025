@@ -1,6 +1,6 @@
 # Statistiques
 
-## BUT2 TC - IUT de Cherbourg
+### BUT2 TC - IUT de Cherbourg
 
 - Séance 1 - Statistique Univariée : [cours](seance1--stat-uni) - [tp](seance1--demande)
 

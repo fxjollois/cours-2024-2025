@@ -1,6 +1,6 @@
 # Initiation à la Statistique
 
-## Cadre Technique Génie de l'Environnement Marin / autre - 2ème année - INTECHMER
+### Cadre Technique Génie de l'Environnement Marin / autre - 2ème année - INTECHMER
 
 <!--
 Organisation prévue
