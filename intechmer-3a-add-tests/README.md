@@ -13,11 +13,11 @@ Lien vers le [cours Moodle](https://par.moodle.lecnam.net/course/view.php?id=226
     2. [TD2 - Analyse de données](td2--add.html)
     3. [TD3 - Classification](td3--classif.html)
 -   **TP**
-    1.  [TP1 - Données Adult](tp1--adult.html)
+    1. [TP1 - Données Adult](tp1--adult.html)
       - Correction : [html produit](tp1--correction.html) et [fichier Rmd](tp1--correction.Rmd)
-    2.  [TP2 - Données Wine](tp2--wine.html)
+    2. [TP2 - Données Wine](tp2--wine.html)
       - Correction : [html produit](tp2--correction.html) et [fichier Rmd](tp2--correction.Rmd)
-    3. --
+    3. [TP3 -- Données ](tp3--planctons.html)
     4.  --
     5.  --
 
