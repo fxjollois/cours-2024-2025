@@ -17,7 +17,7 @@ Lien vers le [cours Moodle](https://par.moodle.lecnam.net/course/view.php?id=226
       - Correction : [html produit](tp1--correction.html) et [fichier Rmd](tp1--correction.Rmd)
     2. [TP2 - Données Wine](tp2--wine.html)
       - Correction : [html produit](tp2--correction.html) et [fichier Rmd](tp2--correction.Rmd)
-    3. [TP3 -- Données ](tp3--planctons.html)
+    3. [TP3 -- Données Planctons](tp3--planctons.html)
     4.  --
     5.  --
 
