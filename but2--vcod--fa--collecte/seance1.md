@@ -146,3 +146,7 @@ pandas.read_csv("export_for_search_results.csv")
 ## A FAIRE
 
 Ecrire le programme permettant de compléter le fichier complet de la base SIRENE. En sortie, on feut un fichier `csv` avec l'ensemble des informations présentes dans le fichier original, avec en plus les coordonnées (latitude et longitude).
+
+<div style="margin: 0 auto;">
+<img src="https://docs.google.com/drawings/d/e/2PACX-1vQ8w8RBK_hPrfGlrYncI9SkreCQUxWx6OMZkeWuX-tGpRGGU3sItjdJMa3350BJ7248evxh6-g8ZQd3/pub?w=1308&amp;h=717">
+</div>
