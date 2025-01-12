@@ -13,8 +13,6 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Nous disposons de données de concentrations de planctons dans l'océan, provenant d'une étude [1] de 2008 à 2019, entre 0 et 500m de profondeur. Les données sont disponibles sur le site [SEANOE](https://www.seanoe.org/data/00846/95809/).
 
-- Panaïotis, T., Babin, M., Biard, T., Carlotti, F., Coppola, L., Guidi, L., Hauss, H., Karp-Boss, L., Kiko, R., Lombard, F., McDonnell, A. M. P., Picheral, M., Rogge, A., Waite, A. M., Stemmann, L., & Irisson, J.-O. (2023). Three major mesoplanktonic communities resolved by in situ imaging in the upper 500 m of the global ocean. *Global Ecology and Biogeography*, 32, 1991–2005. <https://doi.org/10.1111/geb.13741>
-
 Voici le jeu de données une fois importé :
 
 ```{r immport, warning=FALSE}
@@ -22,7 +20,8 @@ library(readr)
 library(DT)
 
 data = read_csv("103673.csv", show_col_types = FALSE)
-datatable(data)
+datatable(data, options = list(scrollX = TRUE, dom = 'tp')) %>%
+  formatRound(c(8:58), digits = 3)  
 ```
 
 Dans ces variables, nous avons différents types de variables :
@@ -63,3 +62,8 @@ Nous souhaitons donc étudier les concentrations de planctons pour avoir des pro
     - Représenter les variables supplémentaires
 8. Représenter la partition sur une carte
 
+Dans l'article initial [1], la partition est recherchée sur les cinq premiers facteurs de l'ACP. L'idée n'est pas nouvelle et elle est couramment mise en oeuvre. L'idée derrière est de supprimer le *bruit* éventuel présent dans les données. Essayez de comparer vos résultats avec leurs résultats.
+
+## Bibliographie
+
+1. Panaïotis, T., Babin, M., Biard, T., Carlotti, F., Coppola, L., Guidi, L., Hauss, H., Karp-Boss, L., Kiko, R., Lombard, F., McDonnell, A. M. P., Picheral, M., Rogge, A., Waite, A. M., Stemmann, L., & Irisson, J.-O. (2023). Three major mesoplanktonic communities resolved by in situ imaging in the upper 500 m of the global ocean. *Global Ecology and Biogeography*, 32, 1991–2005. <https://doi.org/10.1111/geb.13741>
