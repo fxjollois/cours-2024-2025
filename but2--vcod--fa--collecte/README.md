@@ -24,6 +24,7 @@ Base SIRENE à compléter par
 ## Séances
 
 - [Premiers éléments de collecte de données sur le web](seance1)
+- [Compléments sur les API](seance2)
 
 <!--
 - TP à rendre : [Complétion de la base SIRENE avec coordonnées GPS](https://moodle.u-paris.fr/mod/assign/view.php?id=1280998)
