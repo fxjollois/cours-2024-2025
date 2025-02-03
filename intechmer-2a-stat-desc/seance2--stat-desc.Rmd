@@ -1,5 +1,5 @@
 ---
-title: "Statistique Univarié"
+title: "Statistique descriptive"
 author: "Traitement des données"
 date: "INTECHMER - CT2 GEM/PVRM"
 output: 
@@ -97,9 +97,15 @@ Exemple : montant payé par table
 x = data$total_bill
 tib = tibble(
   Statistique = c("Moyenne", "Ecart-Type", "Variance", "Médiane", "Minimum", "Maximum"),
-  Valeur = sapply(c(mean, sd, var, median, min, max), function(f) { f(x, na.rm = TRUE) })
+  "Valeur Stat" = sapply(c(mean, sd, var, median, min, max), function(f) { f(x, na.rm = TRUE) })
 )
-kable(tib, digits = 2) %>%
+
+q = c(.01, .05, .1, .9, .95, .99)
+tib2 = tibble(
+  Quantile = paste(q * 100, "%"),
+  "Valeur Quantile" = sapply(q, quantile, x = x)
+)
+kable(tib %>% bind_cols(tib2), digits = 2) %>%
   kable_styling(position = "center")
 ```
 
@@ -195,9 +201,13 @@ quantile(data$total_bill, c(.01, .05, .10, .90, .95, .99)) # Quantiles usuels
 
 ## Variable quantitative - description numérique avec R
 
+`summary()` applicable à plusieurs variables en même temps (intéressant dans une phase d'analyse rapide)
+
 ```{r uni-qt-num-summary-df, echo = TRUE}
 data %>% select(total_bill, tip, size) %>% summary()
 ```
+
+Moyenne calculable sur plusieurs variables en même temps
 
 ```{r uni-qt-num-summarise, echo = TRUE}
 data %>% select(total_bill, tip, size) %>% 
@@ -364,11 +374,11 @@ ggplot(data, aes(x = day)) +
 ## Variable qualitative - diagramme en barres empilées avec R
 
 - Empilement intéressant (surtout quand on va comparer)
+- Noter la fonction `fct_relevel()` pour changer l'ordre d'affichage des modalités
 
 ```{r uni-ql-bar-stack, echo = TRUE}
-ggplot(data, aes(x = "", fill = day)) +
-  geom_bar() +
-  scale_fill_discrete(limits = c("Thur", "Fri", "Sat", "Sun"))
+ggplot(data, aes(x = "", fill = fct_relevel(day, c("Thur", "Fri", "Sat", "Sun")))) +
+  geom_bar()
 ```
 
 ---
@@ -392,17 +402,17 @@ class: middle, center, inverse
 
 ## Quantitative vs quantitative
   
-- Covariance
+### Covariance
 $$
   cov(x,y) = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x}) (y_i - \bar{y})
 $$
-  - Problème : non bornée et donc non exploitable
+- Problème : non bornée et donc non exploitable
 
-- Coefficient de corrélation linéaire (de *Pearson*)
+### Coefficient de corrélation linéaire (de *Pearson*)
 $$
   \rho(x,y) = \frac{cov(x,y)}{\sigma^2(x) \sigma^2(y)}
 $$
-  - Covariance des variables normalisées
+- Covariance des variables normalisées
 - Valeurs comprises entre -1 et 1
   - $0$ : pas de lien linéaire (autre type de lien possible)
   - $1$ : lien positif fort (si $x$ augmente, $y$ augmente)
@@ -436,6 +446,7 @@ kable(tib, digits = 2) %>%
 ## Quantitative vs quantitative
 
 ### Représentation graphique 
+
 Nuage de points
 
 ```{r qtqt-graph}
@@ -486,6 +497,32 @@ ggplot(b, aes(x, y)) +
   theme(text = element_text(size = 25))
 ```
 
+
+---
+
+## Quantitative vs quantitative - description numérique avec R
+
+```{r bi-qtqt-num-cov, echo=TRUE}
+cov(data$total_bill, data$tip)
+```
+
+```{r bi-qtqt-num-corr, echo=TRUE}
+cor(data$total_bill, data$tip)
+```
+
+```{r bi-qtqt-num-corr-df, echo=TRUE}
+cor(data %>% select(total_bill, tip, size))
+```
+---
+
+## Quantitative vs quantitative - nuage de points avec R
+
+```{r bi-qtqt-scatter, echo=TRUE}
+ggplot(data, aes(x = total_bill, y = tip)) +
+  geom_point()
+```
+
+
 ---
 class: middle, center, inverse
 
@@ -495,35 +532,43 @@ class: middle, center, inverse
 
 ## Qualitative vs qualitative
 
-- Table de contingence
-  - Croisement des 2 ensembles de modalités, avec le nombre d'individus ayant chaque couple de modalités
-- $n_{ij}$ : Nombre d'observations ayant la modalité $i$ pour $x$ et $j$ pour $y$
-  - $n_{i.}$ : Effectif marginal (nombre d'observations ayant la modalité $i$ pour $x$)
-- $n_{.j}$ : Effectif marginal (nombre d'observations ayant la modalité $j$ pour $y$)
+### Table de contingence
 
-|      | 1 | \ldots | $j$ | \ldots | $\ell$ | Total |
-|------|---|--------|-----|--------|--------|-------|
-|    1 |
-|\ldots|
-| $i$  |   |        | $n_{ij}$ |   |        | $n_{i.}$ |
-|\ldots|
-| $k$  |
-|Total |   |        | $n_{.j}$ |   |        | $n_{..}=n$ |
+- Croisement des 2 ensembles de modalités, avec le nombre d'individus ayant chaque couple de modalités
+- $n_{ij}$ : Nombre d'observations ayant la modalité $i$ pour $x$ et $j$ pour $y$  
+- $n_{i.}$ : Effectif marginal (nombre d'observations ayant la modalité $i$ pour $x$)
+- $n_{.j}$ : Effectif marginal (nombre d'observations ayant la modalité $j$ pour $y$)
+- $n_{..}$ : Effectif total
+
+
+```{r}
+m = matrix("", 6, 6)
+rownames(m) = c(1, "...", "i", "...", "k", "Total")
+colnames(m) = c(1, "...", "j", "...", "l", "Total")
+m[3,3] = "n_ij"
+m[3,6] = "n_i."
+m[6,3] = "n_.j"
+m[6,6] = "n_.."
+datatable(m, options = list(dom = '', ordering = FALSE)) %>%
+  formatStyle(6, backgroundColor = "lightblue") %>%
+  formatStyle(0, backgroundColor = styleRow(6, "lightblue"), target = "row") %>%
+  formatStyle(0, backgroundColor = styleRow(1:5, "lightgray"))
+```
 
 ---
 
 ## Qualitative vs qualitative
 
-- Profils lignes et colonnes
-  - Distribution d'une variable conditionnellement aux modalités de l'autre
+### Profils lignes et colonnes
+- Distribution d'une variable conditionnellement aux modalités de l'autre
   
-- Profil ligne
-  - Pour une ligne $i$ : $\frac{n_{ij}}{n_{i.}}$
-  - Somme des valeurs en lignes = 100%
+### Profil ligne
+- Pour une ligne $i$ : $\frac{n_{ij}}{n_{i.}}$
+- Somme des valeurs en lignes = 100%
 
--Profil colonne
-  - Pour une colonne $j$ : $\frac{n_{ij}}{n_{.j}}$
-  - Somme des valeurs en colonnes = 100%
+### Profil colonne
+- Pour une colonne $j$ : $\frac{n_{ij}}{n_{.j}}$
+- Somme des valeurs en colonnes = 100%
 
 ---
 
@@ -535,7 +580,7 @@ Exemple : Jour de la semaine et Présence de fumeur
 
 ```{r qlql-num}
 mat = table(data$day, data$smoker)
-tib = tibble(as.data.frame.matrix(mat) %>% rownames_to_column("color"))
+tib = tibble(as.data.frame.matrix(mat) %>% rownames_to_column("day"))
 kable(tib) %>%
   kable_styling(position = "center")
 ```
@@ -571,7 +616,7 @@ Profils colonnes ici (sommes en colonnes = 100%)
 
 ```{r qlql-num-2}
 matcol = prop.table(mat, margin = 2)
-tib = tibble(as.data.frame.matrix(matcol) %>% rownames_to_column("color"))
+tib = tibble(as.data.frame.matrix(matcol) %>% rownames_to_column("day"))
 kable(tib, digits = 2) %>%
   kable_styling(position = "center")
 ```
@@ -601,7 +646,7 @@ Profils lignes ici (sommes en lignes = 100%)
 
 ```{r qlql-num-3}
 matlig = prop.table(mat, margin = 1)
-tib = tibble(as.data.frame.matrix(matlig) %>% rownames_to_column("color"))
+tib = tibble(as.data.frame.matrix(matlig) %>% rownames_to_column("day"))
 kable(tib, digits = 2) %>%
   kable_styling(position = "center")
 ```
@@ -620,6 +665,72 @@ ggplot(data, aes(day, fill = smoker)) +
   scale_fill_brewer(palette = "Dark2") +
   theme_minimal() +
   theme(text = element_text(size = 25))
+```
+
+---
+
+## Qualitative vs qualitative - description numérique avec R
+
+Table de contingence 
+
+```{r bi-qlql-num, echo=TRUE}
+table(data$day, data$smoker)
+```
+
+Fréquence globale
+
+```{r bi-qlql-num-prop, echo=TRUE}
+prop.table(table(data$day, data$smoker))
+```
+
+---
+
+## Qualitative vs qualitative - description numérique avec R
+
+Profils lignes
+
+```{r bi-qlql-num-row, echo=TRUE}
+prop.table(table(data$day, data$smoker), margin = 1)
+```
+
+Profils colonnes
+
+```{r bi-qlql-num-col, echo=TRUE}
+prop.table(table(data$day, data$smoker), margin = 2)
+```
+
+---
+
+## Qualitative vs qualitative - diagramme en barres avec R
+
+Empilées par défaut, mais pas avec une somme à 100%
+
+```{r bi-qlql-bar, echo=TRUE}
+ggplot(data, aes(x = day, fill = smoker)) +
+  geom_bar()
+```
+
+---
+
+## Qualitative vs qualitative - diagramme en barres avec R
+
+On peut les séparer, mais attention si une des modalités est beaucoup trop présente (risque d'avoir un graphique illisible)
+
+```{r bi-qlql-dodge, echo=TRUE}
+ggplot(data, aes(x = day, fill = smoker)) +
+  geom_bar(position = "dodge")
+```
+
+---
+
+## Qualitative vs qualitative - diagramme en barres avec R
+
+- Empilées avec une somme à 100% (donc avec des vrais profils)
+- `x` et `fill` à inverser si on veut voir les autres profils
+
+```{r bi-qlql-profil, echo=TRUE}
+ggplot(data, aes(x = day, fill = smoker)) +
+  geom_bar(position = "fill")
 ```
 
 
@@ -678,7 +789,55 @@ ggplot(data, aes(day, total_bill, fill = day)) +
   theme(text = element_text(size = 25))
 ```
 
+---
 
+## Qualitative vs quantitative - description numérique avec R
+
+```{r bi-qlqt-num, echo=TRUE}
+data %>%
+  group_by(day) %>%
+  summarise(Moyenne = mean(total_bill), EcartType = sd(total_bill))
+```
+
+---
+
+## Qualitative vs quantitative - densité avec R
+
+```{r bi-qlqt-densite, echo=TRUE}
+ggplot(data, aes(x = total_bill, color = day)) +
+  geom_density()
+```
+
+---
+
+## Qualitative vs quantitative - boîtes à moustaches avec R
+
+Inversion de `x` et `y` possible
+
+```{r bi-qlqt-box, echo=TRUE}
+ggplot(data, aes(x = total_bill, y = day)) +
+  geom_boxplot()
+```
+
+---
+class: middle, center, inverse
+
+## Quelques compléments
+
+---
+
+## Personnalisation des graphiques possible dans `ggplot()`
+
+```{r ggplot-theme, echo=TRUE}
+ggplot(data, aes(x = total_bill, 
+                 y = fct_relevel(day, c("Thur", "Fri", "Sat", "Sun")), 
+                 fill = fct_relevel(day, c("Thur", "Fri", "Sat", "Sun")))) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("orchid", "orange", "steelblue", "limegreen")) +
+  scale_y_discrete(limits = rev) +
+  theme_minimal() + # d'autres thèmes existent
+  labs(x = "Montant facture", y = "", fill = "Jour de la\nsemaine")
+```
 
 
 ---
@@ -690,12 +849,13 @@ ggplot(data, aes(day, total_bill, fill = day)) +
 - Courant de transformer une variable **quantitative** en variable **qualitative ordinale**
 - Ex : Catégorie d'âge, Nombre d'enfants du foyer, ...
 
-- Différents problèmes se posent
 - Combien de modalités (*intervalles* ici) ? 
   - Taille identique des intervalles ou variable (*amplitude*) ?
   - Seuils des intervalles ?
-  
-  
+
+- *Plus simple* Transformer en variable binaire : présence / absence
+  - peut-être *trop* simple
+
 ---
 
 ## Transformation de variable
@@ -711,27 +871,19 @@ $$
   x_{norm} = \frac{x - \bar{x}}{\sigma^2}
 $$
 
+
 ---
 
-## Deuxième problème : Extrapoler à partir de données
+## Transformation de variable
 
-On parle alors de **statistique inférentielle**
-
-### Cadre
-
-- Données issues d'un échantillon d'une population
-- Modèle probabiliste sur la population 
-- Méthodes d'échantillonnage pour choisir au mieux l'échantillon
-
-### Objectifs 
-
-- Etendre les conclusions faites sur l'échantillon à toute la population
-- Valider des hypothèses faites sur la population en analysant l'échantillon
-
-### Outils
-
-- Estimation : approximer des paramètres de la population
-- Test : valider les hypothèses
-- Modélisation : rechercher des liens entre variables
-
-
+### Beaucoup d'autres envisageables
+  
+- Division par le total ou par le maximum
+- Normalisation pour que la somme en ligne soit égale à 1
+- Utiliser les rangs
+- Transformation de Hellinger 
+$$
+y\prime_i^j = \sqrt{\frac{y_i^j}{\sum_k y_i^k}}
+$$
+- Calcul de $\log(x)$ voire $\log(1+x)$ (si valeur 0 présente par exemple)
+- Plusieurs autres possibles...

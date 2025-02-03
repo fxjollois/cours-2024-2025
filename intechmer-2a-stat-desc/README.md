@@ -3,6 +3,7 @@
 ### Cadre Technique Génie de l'Environnement Marin (GEM) / Production et Valorisation des Ressources Marines (PVRM) - 2ème année - INTECHMER
 
 - [CM1 - Introduction à la Statistique](seance1--intro-stat.html)
+- [CM2 - Statistique descriptive](seance1--stat-desc.html)
 
 <!--
 mon titre : Initiation à la Statistique
