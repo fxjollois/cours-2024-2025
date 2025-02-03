@@ -30,4 +30,7 @@
     - [Génération de cartes avec `leaflet` dans `streamlit`](seance7-leaflet)
     - [Demande](seance7-demande)
     
-    
+- Séance 8 (sur Moodle) :
+    - [Groupe 33](https://moodle.u-paris.fr/mod/assign/view.php?id=1337104)
+    - [Groupe 34](https://moodle.u-paris.fr/mod/assign/view.php?id=1339426)
+ 
