@@ -1,0 +1,114 @@
+---
+title: "TP 3 - correction"
+author: "Outils de surveillance et analyses statistiques"
+date: "INTECHMER - CT3 GEM"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Données Planctons
+
+```{r immport, warning=FALSE}
+library(readr)
+library(DT)
+library(tidyverse)
+library(maps)
+library(ggplot2)
+
+data = read_csv("103673.csv", show_col_types = FALSE)
+```
+
+On peut représenter les points de collecte de données sur une carte à l'aide du code suivant :
+
+```{r map1, warning=FALSE}
+ggplot() +
+  geom_polygon(data = map_data("world"), 
+               aes(x = long, y = lat, group = group),
+               fill = "lightgray") + 
+  geom_point(data = data, aes(x = lon, y = lat), size = 1) +
+  theme_minimal()
+```
+
+
+## Décrire les données, en particulier de concentrations
+
+On remarque que les concentrations sont très proches de 0, avec beaucoup de valeurs *aberrantes*/*outliers*. Il faut donc envisager de faire une transformation sur celles-ci pour pouvoir les étudier. Plusieurs possibilités :
+
+- Transformer en variable binaire : présence / absence
+- Faire des intervalles : aucun / peu / ... / beaucoup
+- Opérer une transformation mathématique :
+  - Division par le total ou par le maximum
+  - Normalisation pour que la somme en ligne soit égale à 1
+  - Utiliser les rangs
+  - Standardisation des variables
+  - Transformation de Hellinger 
+  
+$$
+  y'_i^j = \sqrt{\frac{y_i^j}{\sum_k y_i^k}}
+$$
+  
+  
+  
+
+```{r desc-conc}
+data %>%
+  select(Acantharea:Trichodesmium) %>%
+  pivot_longer(everything()) %>%
+  ggplot(aes(x = value)) +
+  geom_boxplot() +
+  facet_wrap(~name, scales = "free", ncol = 5) +
+  theme_minimal()
+```
+
+## Effectuer une transformation de Hellinger sur les données de concentrations 
+
+On utilise donc la fonction `decostand()` du package `vegan`.
+
+```{r hellinger}
+library(vegan)
+
+data_hellinger = decostand(data %>% select(Acantharea:Trichodesmium), method = "hellinger")
+```
+
+```{r}
+data_hellinger %>%
+  pivot_longer(everything()) %>%
+  ggplot(aes(x = value)) +
+  geom_boxplot() +
+  facet_wrap(~name, scales = "free", ncol = 5) +
+  theme_minimal()
+```
+
+## Faire quelques traitements sur les variables explicatives
+
+1. Remplacer les données manquantes par la valeur moyenne de la variable
+2. Transformer les variables `bulk_conc` et `snow_conc` en calculant $\log(1+x)$ (car valeurs parfois égales à 0)
+3. Normaliser toutes les variables
+
+Ces trois opérations sont réalisables en un code
+
+```{r}
+data_sup = data %>%
+  select(temp:kd490) %>%
+  replace_na(as.list(colMeans(.,na.rm=T))) %>%            # étape 1
+  mutate_at(vars(snow_conc, bulk_conc), list(log1p)) %>%  # étape 2
+  transmute_all(list(scale))                              # étape 3
+```
+
+## Réaliser une ACP sur les concentrations
+
+En ajoutant les variables explicatives en variables supplémentaires (cf paramètre `quanti.sup` dans la fonction `PCA()`)
+
+## Rechercher un nombre de classes avec une CAH (en utilisant la distance euclidienne et la méthode de *Ward*) 
+
+## Rechercher la partition optimale à l'aide de $k$-means
+
+## Décrire les classes à partir des données de concentrations
+
+- Représenter la partition sur le plan factoriel
+- Représenter les variables supplémentaires
+
+## Représenter la partition sur une carte
