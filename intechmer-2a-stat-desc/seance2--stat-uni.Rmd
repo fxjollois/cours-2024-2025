@@ -12,15 +12,10 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, fig.align='center', fig.height=4, 
                       message = FALSE, warning = FALSE)
+library(knitr)
+library(kableExtra)
 ```
 
-
----
-class: center, middle, inverse
-
-## Décrire les données
-
----
 
 ## Premier problème : décrire les données
 
@@ -37,6 +32,23 @@ On parle de **Statistique descriptive** ou **exploratoire**
 - Description numérique (moyenne, occurrences, corrélation...)
 - Description graphique (histogramme, diagramme en barres, nuage de points...)
 
+---
+## Données exemple - `tips`
+
+```{r tips-import, echo = TRUE}
+library(tidyverse)
+data = read_delim("tips.csv", delim = ",")
+```
+
+```{r tips-show}
+library(DT)
+datatable(data, options = list(dom = 'p'))
+```
+
+---
+class: center, middle, inverse
+
+## Variable quantitative
 
 ---
 
@@ -47,11 +59,13 @@ $$
   \bar{x} = \frac{1}{n} \sum_{i=1}^n x_i
 $$
   
-- Variance (et écart-type $\sigma(x)$)
+- Variance 
 $$
   \sigma^2(x) = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2
 $$
-  
+- Ecart-type $\sigma(x) = \sqrt{\sigma^2(x)}$
+
+
 ---
 
 ## Variable quantitative
@@ -129,6 +143,114 @@ ggplot(data, aes(total_bill, "")) +
   theme(text = element_text(size = 25))
 ```
 
+---
+
+## Variable quantitative - description numérique avec R
+
+```{r uni-qt-mean, echo = TRUE}
+mean(data$total_bill) # Moyenne
+```
+
+```{r uni-qt-var, echo = TRUE}
+var(data$total_bill) # Variance
+```
+
+```{r uni-qt-sd, echo = TRUE}
+sd(data$total_bill) # Ecart-type
+```
+
+```{r uni-qt-min, echo = TRUE}
+min(data$total_bill) # Minimum
+```
+
+```{r uni-qt-max, echo = TRUE}
+max(data$total_bill) # Maximum
+```
+
+---
+
+## Variable quantitative - description numérique avec R
+
+```{r uni-qt-range, echo = TRUE}
+range(data$total_bill) # Min et Max en même temps
+```
+
+```{r uni-qt-median, echo = TRUE}
+median(data$total_bill) # Médiane
+```
+
+```{r uni-qt-summary, echo = TRUE}
+summary(data$total_bill) # Plusieurs choses en même temps
+```
+
+```{r uni-qt-q1q3, echo = TRUE}
+quantile(data$total_bill, c(.25, .75)) # Q1 et Q3
+```
+
+```{r uni-qt-quantile, echo = TRUE}
+quantile(data$total_bill, c(.01, .05, .10, .90, .95, .99)) # Quantiles usuels
+```
+
+---
+
+## Variable quantitative - description numérique avec R
+
+```{r uni-qt-num-summary-df, echo = TRUE}
+data %>% select(total_bill, tip, size) %>% summary()
+```
+
+```{r uni-qt-num-summarise, echo = TRUE}
+data %>% select(total_bill, tip, size) %>% 
+  summarise_all(mean)
+```
+
+---
+
+## Variable quantitative -- histogramme avec R
+
+```{r uni-qt-hist-base, echo = TRUE}
+ggplot(data, aes(x = total_bill)) +
+  geom_histogram()
+```
+
+---
+
+## Variable quantitative -- histogramme avec R
+
+- Trop (ou pas assez) d'intervalles peut biaiser l'analyse
+- Modification avec le paramètre `bins`
+
+```{r uni-qt-hist-bins, echo = TRUE}
+ggplot(data, aes(x = total_bill)) +
+  geom_histogram(bins = 10)
+```
+
+---
+
+## Variable quantitative -- histogramme avec R
+
+- Densité estimée par noyau
+- Intéressant car permet de plus facilement voir la tendance globale
+
+```{r uni-qt-density, echo = TRUE}
+ggplot(data, aes(x = total_bill)) +
+  geom_density()
+```
+
+
+---
+
+## Variable quantitative -- boîte à moustaches avec R
+
+```{r uni-qt-boxplot, echo = TRUE}
+ggplot(data, aes(x = total_bill)) +
+  geom_boxplot()
+```
+
+---
+class: middle, center, inverse
+
+## Variable qualitative
 
 ---
 
@@ -187,9 +309,84 @@ Diagramme en barres
 ```{r ql-graph-bar}
 ggplot(data, aes(day, fill = day)) +
   geom_bar(show.legend = FALSE) +
+  scale_x_discrete(limits = c("Thur", "Fri", "Sat", "Sun")) +
   theme_minimal() +
   theme(text = element_text(size = 25))
 ```
+
+---
+
+## Variable qualitative - description numérique avec R
+
+```{r uni-ql-count, echo = TRUE}
+data %>% group_by(day) %>% count()
+```
+
+```{r uni-ql-num-more, echo = TRUE}
+data %>% group_by(day) %>% count() %>% ungroup() %>% 
+  mutate(n_cum = cumsum(n), freq = n / sum(n), freq_cum = n_cum / sum(n))
+```
+
+---
+
+## Variable qualitative - diagramme en barres avec R
+
+```{r uni-ql-bar, echo = TRUE}
+ggplot(data, aes(x = day)) +
+  geom_bar()
+```
+
+---
+
+## Variable qualitative - diagramme en barres avec R
+
+- Si beaucoup de modalités ou noms des modalités longs, intéressant en mode horizontale
+
+```{r uni-ql-bar-horiz, echo = TRUE}
+ggplot(data, aes(y = day)) +
+  geom_bar()
+```
+
+---
+
+## Variable qualitative - diagramme en barres avec R
+
+- Modification de l'ordre des modalités possible
+
+```{r uni-ql-bar-ordre, echo = TRUE}
+ggplot(data, aes(x = day)) +
+  geom_bar() +
+  scale_x_discrete(limits = c("Thur", "Fri", "Sat", "Sun"))
+```
+
+---
+
+## Variable qualitative - diagramme en barres empilées avec R
+
+- Empilement intéressant (surtout quand on va comparer)
+
+```{r uni-ql-bar-stack, echo = TRUE}
+ggplot(data, aes(x = "", fill = day)) +
+  geom_bar() +
+  scale_fill_discrete(limits = c("Thur", "Fri", "Sat", "Sun"))
+```
+
+---
+
+## Variable qualitative - diagramme circulaire avec R
+
+- **ATTENTION** : à ne pas utiliser avec variable ordinale et avec trop de modalités
+
+```{r uni-ql-bar-pie, echo = TRUE}
+ggplot(data, aes(x = "", fill = sex)) +
+  geom_bar(width = 1) +
+  coord_polar(theta = "y")
+```
+
+---
+class: middle, center, inverse
+
+## Lien entre deux variables quantitatives
 
 ---
 
@@ -288,6 +485,11 @@ ggplot(b, aes(x, y)) +
   theme_minimal() +
   theme(text = element_text(size = 25))
 ```
+
+---
+class: middle, center, inverse
+
+## Lien entre deux variables qualitatives
 
 ---
 
@@ -420,6 +622,11 @@ ggplot(data, aes(day, fill = smoker)) +
   theme(text = element_text(size = 25))
 ```
 
+
+---
+class: middle, center, inverse
+
+## Lien entre une variable quantitative et une variable qualitative
 
 ---
 

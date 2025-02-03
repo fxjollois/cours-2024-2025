@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Données Planctons
 
-Nous disposons de données de concentrations de planctons dans l'océan, provenant d'une étude [1] de 2008 à 2019, entre 0 et 500m de profondeur. Les données sont disponibles sur le site [SEANOE](https://www.seanoe.org/data/00846/95809/).
+Nous disposons de données de concentrations de planctons dans l'océan, provenant d'une étude [1] de 2008 à 2019, entre 0 et 500m de profondeur. Les données sont disponibles sur le site [SEANOE](https://www.seanoe.org/data/00846/95809/) ou en téléchargeant [ce fichier](103673.csv)
 
 Voici le jeu de données une fois importé :
 
