@@ -17,7 +17,7 @@ Vous devez rendre les éléments suivants :
 - Rapport présentant votre code, les choix et les difficultés rencontrées ;
 - Code Python (soit sous la forme d'un *notebook* `.ipynb`, soit sous la forme d'un script classique `.py`).
 
-Rendu sur ce lien : <https://moodle.u-paris.fr/mod/assign/view.php?id=1303723>
+Rendu sur ce lien : <https://moodle.u-paris.fr/mod/assign/view.php?id=1349215>
 
 ## Contraintes
 
