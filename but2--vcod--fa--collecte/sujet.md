@@ -4,7 +4,7 @@ L'[APUR](https://www.apur.org/) (Atelier parisien d'urbanisme) documente et anal
 
 Une des questions récentes est la digitalisation de ces commerces, en particulier suite à la crise sanitaire du Covid. Dans ce cadre, une étude intéressante est de chercher si ces commerces ont un site web, et s'ils laissent la possibilité de commander via un intermédiaire ou de se faire livrer (UberEats, Deliveroo, ... par exemple pour les commerces de bouches).
 
-A partir des données des commerces parisiens présentes dans [ce fichier](https://1drv.ms/x/c/ca369afbc2299304/EUHdbhlbJZ9AggnIqZ64x9cBDLW2F7rHqNWOqZVB_2Dbbw?e=jaMJ81), vous compléterez la table avec les informations suivantes, à l'aide des outils vus en cours :
+A partir des données des commerces parisiens présentes dans [ce fichier](https://1drv.ms/x/c/ca369afbc2299304/EUHdbhlbJZ9AggnIqZ64x9cBlcZF3VREdaDcEaYRVdgqdw?e=nWTlMe), vous compléterez la table avec les informations suivantes, à l'aide des outils vus en cours :
 
 - Coordonnées géographiques (GPS) : latitude et longitude
 - Site web du commerce (s'il y a)
