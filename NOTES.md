@@ -28,6 +28,8 @@
 
 ### Collecte de données
 
+- Utiliser **webdriver.Edge** !!
+
 ### Programmation web pour la visualisation
 
 - streamlit ou pas ? javascript ou pas ?
