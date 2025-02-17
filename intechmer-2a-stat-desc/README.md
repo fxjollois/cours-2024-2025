@@ -5,7 +5,7 @@
 - [CM1 - Introduction à la Statistique](seance1--intro-stat.html)
 - [CM2 - Statistique descriptive](seance1--stat-desc.html)
 
-- [TD1 - Manipulation de données](td1-manip.html)
+- [TD1 - Manipulation de données](td1--manip.html)
 
 
 <!--
