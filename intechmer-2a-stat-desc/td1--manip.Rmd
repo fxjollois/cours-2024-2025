@@ -2,7 +2,11 @@
 title: "Manipulation de données - TD 1"
 author: "Traitement des données"
 date: "INTECHMER - CT2 GEM/PVRM"
-output: html_document
+output:
+    html_document:
+        toc: true
+        toc_float: true
+        toc_depth: 3
 ---
 
 ```{r setup, include=FALSE}
