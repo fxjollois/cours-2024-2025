@@ -6,13 +6,15 @@
 - [CM2 - Statistique descriptive](seance1--stat-desc.html)
 
 - [TD1 - Manipulation de données](td1--manip.html)
+- [TD2 - Visualisation de données](td2--visualisation.html)
 
 
 <!--
 Se baser sur :
 https://fxjollois.github.io/cours-2018-2019/stid-2afa--prog-r/
+-->
 
-
+<!--
 mon titre : Initiation à la Statistique
 fiche originale :
 Traitement de données
