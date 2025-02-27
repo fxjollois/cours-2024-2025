@@ -1,6 +1,6 @@
 # Extraction de connaissances à partir de données structurées et non structurées
 
-## Master Informatique - Parcours DCI (Données, Connaissances, Intelligence)
+### M1 Informatique - Parcours DCI (Données, Connaissances, Intelligence)
 
 1. [Introduction à Python](seance1-intro-python)
     - [correction](seance1-correction.html)
@@ -32,11 +32,17 @@
 
 9. [Autres méthodes](seance9-autres-methodes.html)
 
+10. <span id = "final">En attente</span>
+
+<script>
+    const date = new Date();
+    if (date.toJSON().slice(0, 10) == "2025-01-17" & date.toJSON().slice(11, 13) >= 13) { 
+        document.getElementById("final").innerHTML = "<a href='seance-finale--tpnote2.html'>TP noté 2</a>";
+    }
+</script>
+
 
 <!--
-
-
-
 - Nouveau programme :
     1. Intro Python
     2. Manipulation "à la SQL" et visualisation de données (univarié et bivarié)
@@ -49,9 +55,6 @@
     9. DBSCAN, SOM, MDS et autre ?
     10. Application sur données réelles 3
     11. [TP noté Evaluation finale]
-
-
-
 -->
 
 <!--
