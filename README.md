@@ -10,6 +10,7 @@ Ce site regroupe l'ensemble des documents que j'utilise dans mes cours.
 
 - **BUT SD 3ème année - Parcours VCOD** :
     - [Programmation web pour la visualisation](but3--vcod--dataviz-web)
+    - [SAE Finale - Outils Décisionnels](but3--vcod--fa--sae-finale)
 
 - **DU Analyste Data Science** :
     - [Python et MongoDB](du-ads--python-mongo)
