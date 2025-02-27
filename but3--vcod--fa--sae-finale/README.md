@@ -33,7 +33,7 @@ Vous devez rendre un fichier compressé, avec les noms des étudiants du groupe 
 
 Rendu sur ce lien :
 
-<https://cloud.parisdescartes.fr/index.php/s/NC4QzJJjeYLxGsQ>
+<https://moodle.u-paris.fr/mod/assign/view.php?id=1099540&forceview=1>
 
 <!--
 Idée de sujet :
