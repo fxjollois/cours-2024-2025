@@ -8,6 +8,16 @@
 - [TD1 - Manipulation de données](td1--manip.html)
 - [TD2 - Visualisation de données](td2--visualisation.html)
 
+- [TP1 - Compléments](tp1-complements.html)
+
+
+<!--
+TP à prévoir
+- 7 mars (une étude stat complète)
+- 10 mars (Rmarkdown et plus) 
+- 17 mars (sur données réelles)
+- ??? (20 mars à reporter)
+-->
 
 <!--
 Se baser sur :
