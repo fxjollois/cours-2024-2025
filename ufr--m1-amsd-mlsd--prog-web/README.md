@@ -11,5 +11,6 @@
 <!--    - [correction](seance-widgets-correction) ([fichier R directement](seance-widgets-correction.R)) -->
 
 - Séance 2
-
+    - [Shiny sous Python](seance-shiny-python)
+    - [Demande à réaliser](demande)
 
