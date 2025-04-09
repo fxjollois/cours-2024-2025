@@ -3,9 +3,9 @@
 
 ## Rendu
 
-Espace de dépôt du travail (notebook `ipynb` - avec votre nom dans le nom du fichier) [ **DEADLINE LE 31 MAI - 23h59** ]:
+Envoi par mail du travail (notebook `ipynb` - avec **votre nom dans le nom du fichier**) [ **DEADLINE LE 30 AVRIL - 23h59** ] (remplacer le `[at]` par @ et supprimer les espaces bien évidemment) : 
 
-<https://cloud.parisdescartes.fr/index.php/s/Qdq7nibJq9bmZQw>
+    francois - xavier . jollois [at] u-paris.fr
 
 2 parties :
 
