@@ -29,6 +29,13 @@
 ### Collecte de données
 
 - Utiliser **webdriver.Edge** !!
+- Tester le téléchargement de données climatiques mensuelles :
+    - Source des données : https://meteo.data.gouv.fr/datasets/donnees-climatologiques-de-base-mensuelles/
+    - Récupérer le contenu de ce fichier : https://www.data.gouv.fr/api/1/datasets/donnees-climatologiques-de-base-mensuelles/
+        - on a une liste de tout ce qu'il a comme fichier
+    - Chercher dans le champs `resources` les éléments du tableau pour lesquels `title` est égal à "MENS_departement_XX_periode_1950-2023"
+        - en reamplacant XX par un numéro de département (mais on veut tous les départements)
+    - Récupérer le lien de téléchargement (dans `latest`, mais on l'a aussi en `parquet`)
 
 ### Programmation web pour la visualisation
 
